@@ -33,4 +33,4 @@ y entrar a http://localhost:8765.
 npm run apk
 ```
 
-Queda en `android/app/build/outputs/apk/debug/app-debug.apk`. Solo hace falta si cambia el código, no para eventos nuevos.
+Queda en `dist/eventos-velez.apk`. Solo hace falta si cambia el código, no para eventos nuevos.

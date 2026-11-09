@@ -16,4 +16,4 @@ npm install
 npm run apk
 ```
 
-La APK queda en `android/app/build/outputs/apk/debug/app-debug.apk`.
+La APK queda en `dist/eventos-velez.apk`.

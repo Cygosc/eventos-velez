@@ -6,7 +6,7 @@
   "scripts": {
     "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('www/vendor/images',{recursive:true});for(const f of ['leaflet.js','leaflet.css'])fs.copyFileSync('node_modules/leaflet/dist/'+f,'www/vendor/'+f);for(const f of fs.readdirSync('node_modules/leaflet/dist/images'))fs.copyFileSync('node_modules/leaflet/dist/images/'+f,'www/vendor/images/'+f)\"",
     "sync": "npm run vendor && npx cap sync android",
-    "apk": "npm run sync && cd android && gradlew.bat assembleDebug"
+    "apk": "npm run sync && node scripts/build-apk.js"
   },
   "dependencies": {
     "@capacitor/android": "^7.6.10",
