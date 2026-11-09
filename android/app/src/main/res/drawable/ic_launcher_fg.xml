@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <!-- Pin de mapa blanco con una "V" azul -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M54,28c-11,0 -20,9 -20,20c0,15 20,34 20,34s20,-19 20,-34c0,-11 -9,-20 -20,-20z"/>
+    <path android:fillColor="#0A5AA6"
+        android:pathData="M45,38h6l3,11l3,-11h6l-6,18h-6z"/>
+</vector>

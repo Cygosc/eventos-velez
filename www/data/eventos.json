@@ -1,0 +1,25 @@
+{
+  "actualizado": "2026-11-09",
+  "eventos": [
+    {
+      "id": "qlokura-2026-11-12",
+      "titulo": "Q'Lokura en Vélez",
+      "tipo": "recital",
+      "inicio": "2026-11-12T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://indiehoy.com/eventos/",
+      "notas": "Aparece en una sola agenda; falta confirmación oficial."
+    },
+    {
+      "id": "romeo-royce-2026-11-14",
+      "titulo": "Romeo Santos y Prince Royce",
+      "tipo": "recital",
+      "inicio": "2026-11-14T20:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.quehacemos.com.ar/venues/estadio-velez-sarsfield",
+      "notas": "Entradas agotadas. Las fuentes dicen 19:00 o 20:00."
+    }
+  ]
+}

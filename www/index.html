@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eventos en Vélez</title>
+  <link rel="stylesheet" href="vendor/leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>¿Hay algo en Vélez?</h1>
+    <div id="estado" class="estado">Buscando eventos…</div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="acciones">
+        <button id="btn-casa">📍 Marcar mi casa</button>
+        <button id="btn-avisos">🔔 Activar avisos</button>
+      </div>
+      <div id="info-casa" class="info-casa"></div>
+      <h2>Próximos eventos</h2>
+      <ul id="lista" class="lista"></ul>
+      <p class="nota">
+        Partidos: se actualizan solos desde ESPN. Recitales: los revisa una tarea programada dos veces por semana.
+        Cortes: según el último operativo publicado por la Ciudad para un recital; en partidos son una estimación.
+      </p>
+      <p id="actualizado" class="nota"></p>
+    </section>
+
+    <section class="mapa-wrap">
+      <div id="mapa"></div>
+      <div id="detalle" class="detalle"></div>
+    </section>
+  </main>
+
+  <script src="vendor/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

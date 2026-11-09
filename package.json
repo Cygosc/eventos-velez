@@ -1,0 +1,20 @@
+{
+  "name": "eventos-velez",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Avisos de eventos y cortes de calle alrededor del Estadio José Amalfitani (Vélez)",
+  "scripts": {
+    "vendor": "node -e \"const fs=require('fs');fs.mkdirSync('www/vendor/images',{recursive:true});for(const f of ['leaflet.js','leaflet.css'])fs.copyFileSync('node_modules/leaflet/dist/'+f,'www/vendor/'+f);for(const f of fs.readdirSync('node_modules/leaflet/dist/images'))fs.copyFileSync('node_modules/leaflet/dist/images/'+f,'www/vendor/images/'+f)\"",
+    "sync": "npm run vendor && npx cap sync android",
+    "apk": "npm run sync && cd android && gradlew.bat assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.6.10",
+    "@capacitor/core": "^7.6.10",
+    "@capacitor/local-notifications": "^7.0.7",
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.6.10"
+  }
+}
