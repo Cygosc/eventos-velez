@@ -1,15 +1,15 @@
 {
-  "actualizado": "2026-11-09",
+  "actualizado": "2026-11-10",
   "eventos": [
     {
       "id": "qlokura-2026-11-12",
       "titulo": "Q'Lokura en Vélez",
       "tipo": "recital",
-      "inicio": "2026-11-12T21:00:00-03:00",
+      "inicio": "2026-11-12T20:00:00-03:00",
       "horaConfirmada": false,
-      "confirmado": false,
-      "fuente": "https://indiehoy.com/eventos/",
-      "notas": "Aparece en una sola agenda; falta confirmación oficial."
+      "confirmado": true,
+      "fuente": "https://www.quehacemos.com.ar/venues/estadio-velez-sarsfield",
+      "notas": "Figura en Quehacemos (20:00) e Indie Hoy. Hora no oficial."
     },
     {
       "id": "romeo-royce-2026-11-14",
@@ -19,7 +19,17 @@
       "horaConfirmada": false,
       "confirmado": true,
       "fuente": "https://www.quehacemos.com.ar/venues/estadio-velez-sarsfield",
-      "notas": "Entradas agotadas. Las fuentes dicen 19:00 o 20:00."
+      "notas": "Entradas agotadas. Las fuentes dan distintos horarios (20:00 o 21:00)."
+    },
+    {
+      "id": "dante-gebel-2026-12-18",
+      "titulo": "Dante Gebel",
+      "tipo": "otro",
+      "inicio": "2026-12-18T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://www.quehacemos.com.ar/venues/estadio-velez-sarsfield",
+      "notas": "Evento del predicador Dante Gebel. Aparece en una sola agenda; falta confirmación oficial."
     }
   ]
 }
