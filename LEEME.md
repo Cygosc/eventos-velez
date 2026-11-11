@@ -15,7 +15,11 @@ Sin internet, la app usa la última copia que descargó.
 - **Radio:** mostrar solo lo que pasa a 1, 3 o 6 km de tu casa, o en toda CABA.
 - **Tipos:** partidos, recitales, marchas, cortes y obras, otros eventos. Tocá cada uno para ocultarlo o mostrarlo.
 
-Los avisos se programan solo para los eventos que se ven con los filtros elegidos.
+- **📡 Dónde estoy** (botón arriba a la derecha del mapa): muestra tu ubicación y los cortes cercanos. La primera vez el celular pide permiso de ubicación.
+- **🔎 Buscar una dirección:** escribí "calle número" o una esquina ("Corrientes y Callao"). Si hay varias coincidencias, elegí la correcta de la lista.
+- Con "Dónde estoy" o una dirección, la lista y el radio se calculan desde ese punto. Tocá ✕ para volver a tu casa.
+
+Los avisos se programan solo para los eventos que se ven con los filtros elegidos, siempre en relación con tu casa (no con tu ubicación ni con una dirección buscada).
 
 ## Avisos en el celular
 
