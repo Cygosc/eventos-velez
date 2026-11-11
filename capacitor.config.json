@@ -1,6 +1,6 @@
 {
   "appId": "ar.cygosc.eventosvelez",
-  "appName": "Eventos Vélez",
+  "appName": "Cortes CABA",
   "webDir": "www",
   "plugins": {
     "LocalNotifications": {

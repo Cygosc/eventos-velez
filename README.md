@@ -1,13 +1,16 @@
-# ¿Hay algo en Vélez?
+# ¿Qué se corta en CABA?
 
-App (web + Android) que avisa de los eventos en el Estadio José Amalfitani (Vélez Sarsfield, Liniers)
-y muestra en un mapa las calles que se cortan y en qué horario.
+App (web + Android) que avisa de los eventos que cortan calles en la Ciudad de Buenos Aires
+(partidos, recitales, marchas, obras y cortes programados) y los muestra en un mapa con sus horarios.
 
-- **Partidos:** se leen de la API pública de ESPN.
-- **Recitales y otros eventos:** [`www/data/eventos.json`](www/data/eventos.json), actualizado por una tarea programada.
-- **Cortes de calle:** [`www/data/cortes.json`](www/data/cortes.json), según el operativo publicado por el Gobierno de la Ciudad. Geometría © OpenStreetMap.
+- **Partidos:** los de local de los equipos porteños se leen de la API pública de ESPN.
+- **Recitales, marchas y cortes programados:** [`www/data/eventos-caba.json`](www/data/eventos-caba.json), actualizado por una tarea programada.
+- **Lugares:** [`www/data/lugares.json`](www/data/lugares.json): estadios, arenas, predios y plazas, con el perímetro de calles que los rodean (© OpenStreetMap). Se regenera con `python scripts/lugares.py`.
+- **Calles oficiales de un operativo:** `python scripts/tramos.py entrada.json` convierte "Calle X entre A y B" en tramos para el mapa.
 
 La app descarga estos JSON desde este repositorio cada vez que se abre.
+
+`www/data/eventos.json` y `www/data/cortes.json` son de la versión 1 (solo Vélez) y se mantienen para no romperla.
 
 ## Compilar la APK
 

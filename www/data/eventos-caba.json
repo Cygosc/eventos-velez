@@ -1,0 +1,439 @@
+{
+  "actualizado": "2026-11-10",
+  "eventos": [
+    {
+      "id": "papa-recoleta-2026-11-07",
+      "titulo": "Visita del papa León XIV: perímetro de la Nunciatura",
+      "tipo": "corte",
+      "ubicacion": {
+        "nombre": "Nunciatura Apostólica (Av. Alvear 1637)",
+        "barrio": "Recoleta",
+        "lat": -34.5892,
+        "lon": -58.3878
+      },
+      "inicio": "2026-11-07T12:00:00-03:00",
+      "fin": "2026-11-11T17:00:00-03:00",
+      "horaConfirmada": true,
+      "confirmado": true,
+      "fuente": "https://www.lanacion.com.ar/sociedad/mapa-de-cortes-en-caba-por-la-visita-del-papa-como-es-el-tramite-para-circular-dentro-del-vallado-nid03112026/",
+      "notas": "Restricción vehicular total en la zona entre Av. Alvear, Cerrito, Av. del Libertador y Av. Callao, hasta la tarde del miércoles 11 (hora exacta sin confirmar). Ingreso y egreso solo por Alvear y Callao y Alvear y Libertad. Vecinos: DNI con domicilio o QR (formulariosgcba.gob.ar).",
+      "tramos": [
+        {
+          "calle": "Av. Alvear",
+          "tramo": "entre Cerrito y Av. Callao",
+          "tipo": "total",
+          "coords": [
+            [
+              -34.591496,
+              -58.383153
+            ],
+            [
+              -34.591453,
+              -58.383237
+            ],
+            [
+              -34.591409,
+              -58.383321
+            ],
+            [
+              -34.591297,
+              -58.383525
+            ],
+            [
+              -34.591083,
+              -58.383889
+            ],
+            [
+              -34.590877,
+              -58.384233
+            ],
+            [
+              -34.590827,
+              -58.384309
+            ],
+            [
+              -34.590473,
+              -58.384842
+            ],
+            [
+              -34.59043,
+              -58.384906
+            ],
+            [
+              -34.589813,
+              -58.38587
+            ],
+            [
+              -34.589779,
+              -58.385922
+            ],
+            [
+              -34.58972,
+              -58.386011
+            ],
+            [
+              -34.589129,
+              -58.386913
+            ],
+            [
+              -34.589062,
+              -58.387003
+            ],
+            [
+              -34.589001,
+              -58.387104
+            ],
+            [
+              -34.588744,
+              -58.387495
+            ],
+            [
+              -34.588596,
+              -58.387723
+            ],
+            [
+              -34.588409,
+              -58.388011
+            ],
+            [
+              -34.588329,
+              -58.388135
+            ]
+          ]
+        },
+        {
+          "calle": "Cerrito",
+          "tramo": "entre Av. Alvear y Av. del Libertador",
+          "tipo": "total",
+          "coords": [
+            [
+              -34.591496,
+              -58.383153
+            ],
+            [
+              -34.591358,
+              -58.383133
+            ],
+            [
+              -34.590852,
+              -58.383032
+            ],
+            [
+              -34.590675,
+              -58.382974
+            ],
+            [
+              -34.590477,
+              -58.382893
+            ],
+            [
+              -34.590165,
+              -58.38275
+            ],
+            [
+              -34.590099,
+              -58.38272
+            ],
+            [
+              -34.589996,
+              -58.382657
+            ],
+            [
+              -34.589485,
+              -58.382383
+            ],
+            [
+              -34.589359,
+              -58.382271
+            ],
+            [
+              -34.589248,
+              -58.382201
+            ],
+            [
+              -34.589088,
+              -58.382104
+            ],
+            [
+              -34.588736,
+              -58.38189
+            ]
+          ]
+        },
+        {
+          "calle": "Av. del Libertador",
+          "tramo": "entre Cerrito y Av. Callao",
+          "tipo": "total",
+          "coords": [
+            [
+              -34.588736,
+              -58.38189
+            ],
+            [
+              -34.588304,
+              -58.382694
+            ],
+            [
+              -34.588271,
+              -58.382755
+            ],
+            [
+              -34.588217,
+              -58.382855
+            ],
+            [
+              -34.588115,
+              -58.383039
+            ],
+            [
+              -34.588031,
+              -58.383192
+            ],
+            [
+              -34.588016,
+              -58.383221
+            ],
+            [
+              -34.587974,
+              -58.383296
+            ],
+            [
+              -34.587706,
+              -58.383776
+            ],
+            [
+              -34.587666,
+              -58.38385
+            ],
+            [
+              -34.587034,
+              -58.385021
+            ],
+            [
+              -34.586986,
+              -58.385111
+            ],
+            [
+              -34.586965,
+              -58.385149
+            ],
+            [
+              -34.586935,
+              -58.385203
+            ],
+            [
+              -34.586879,
+              -58.385302
+            ],
+            [
+              -34.586836,
+              -58.38538
+            ],
+            [
+              -34.586782,
+              -58.385477
+            ],
+            [
+              -34.586654,
+              -58.385711
+            ],
+            [
+              -34.586585,
+              -58.38584
+            ]
+          ]
+        },
+        {
+          "calle": "Av. Callao",
+          "tramo": "entre Av. del Libertador y Av. Alvear",
+          "tipo": "total",
+          "coords": [
+            [
+              -34.586585,
+              -58.38584
+            ],
+            [
+              -34.586726,
+              -58.386029
+            ],
+            [
+              -34.587044,
+              -58.386445
+            ],
+            [
+              -34.587469,
+              -58.387
+            ],
+            [
+              -34.587543,
+              -58.387096
+            ],
+            [
+              -34.587588,
+              -58.387157
+            ],
+            [
+              -34.588071,
+              -58.387802
+            ],
+            [
+              -34.588252,
+              -58.388036
+            ],
+            [
+              -34.588329,
+              -58.388135
+            ]
+          ]
+        },
+        {
+          "calle": "Rodríguez Peña",
+          "tramo": "100 m entre Quintana y Alvear (restricciones)",
+          "tipo": "parcial",
+          "coords": [
+            [
+              -34.589966,
+              -58.38792
+            ],
+            [
+              -34.589913,
+              -58.387869
+            ],
+            [
+              -34.589773,
+              -58.387733
+            ],
+            [
+              -34.589126,
+              -58.387074
+            ],
+            [
+              -34.589062,
+              -58.387003
+            ]
+          ]
+        },
+        {
+          "calle": "Montevideo",
+          "tramo": "100 m entre Quintana y Alvear (restricciones)",
+          "tipo": "parcial",
+          "coords": [
+            [
+              -34.590737,
+              -58.386929
+            ],
+            [
+              -34.590689,
+              -58.386877
+            ],
+            [
+              -34.589814,
+              -58.385962
+            ],
+            [
+              -34.589779,
+              -58.385922
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "qlokura-2026-11-12",
+      "titulo": "Q'Lokura",
+      "tipo": "recital",
+      "lugar": "velez",
+      "inicio": "2026-11-12T20:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.quehacemos.com.ar/venues/estadio-velez-sarsfield",
+      "notas": "Figura en Quehacemos (20:00) e Indie Hoy. Hora no oficial."
+    },
+    {
+      "id": "maria-becerra-2026-11-13",
+      "titulo": "María Becerra",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-11-13T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://misconciertos.com.ar/conciertos",
+      "notas": "Primera de varias fechas en noviembre."
+    },
+    {
+      "id": "romeo-royce-2026-11-14",
+      "titulo": "Romeo Santos y Prince Royce",
+      "tipo": "recital",
+      "lugar": "velez",
+      "inicio": "2026-11-14T20:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.quehacemos.com.ar/venues/estadio-velez-sarsfield",
+      "notas": "Entradas agotadas. Las fuentes dicen 19:00 o 20:00."
+    },
+    {
+      "id": "eros-ramazzotti-2026-11-28",
+      "titulo": "Eros Ramazzotti",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-11-28T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.timeout.com/es/buenos-aires/recitales-imperdibles-musica-shows"
+    },
+    {
+      "id": "ed-sheeran-2026-11-29",
+      "titulo": "Ed Sheeran",
+      "tipo": "recital",
+      "lugar": "huracan",
+      "inicio": "2026-11-29T20:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.eldestapeweb.com/cultura/recitales-conciertos-noviembre-2026-artistas-bandas-musica-tocan-argentina-20261110105510",
+      "notas": "LOOP Tour."
+    },
+    {
+      "id": "omar-courtz-2026-11-30",
+      "titulo": "Omar Courtz",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-11-30T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://misconciertos.com.ar/conciertos",
+      "notas": "Tiene más fechas en diciembre."
+    },
+    {
+      "id": "deep-purple-2026-12-10",
+      "titulo": "Deep Purple",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-12-10T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.timeout.com/es/buenos-aires/recitales-imperdibles-musica-shows"
+    },
+    {
+      "id": "mana-2026-12-10",
+      "titulo": "Maná",
+      "tipo": "recital",
+      "lugar": "river",
+      "inicio": "2026-12-10T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://www.timeout.com/es/buenos-aires/recitales-imperdibles-musica-shows",
+      "notas": "Vivir Sin Aire Tour. Una agenda dice 11 de diciembre: fecha a confirmar."
+    },
+    {
+      "id": "dante-gebel-2026-12-18",
+      "titulo": "Dante Gebel",
+      "tipo": "evento",
+      "lugar": "velez",
+      "inicio": "2026-12-18T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://www.quehacemos.com.ar/venues/estadio-velez-sarsfield",
+      "notas": "Evento del predicador Dante Gebel. Aparece en una sola agenda; falta confirmación oficial."
+    }
+  ]
+}

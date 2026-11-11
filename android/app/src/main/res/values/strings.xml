@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Eventos Vélez</string>
-    <string name="title_activity_main">Eventos Vélez</string>
+    <string name="app_name">Cortes CABA</string>
+    <string name="title_activity_main">Cortes CABA</string>
     <string name="package_name">ar.cygosc.eventosvelez</string>
     <string name="custom_url_scheme">ar.cygosc.eventosvelez</string>
 </resources>

@@ -1,44 +1,37 @@
-// ---------- Configuración ----------
-const ESTADIO = { lat: -34.63535, lon: -58.52069, nombre: "Estadio José Amalfitani" };
-const VELEZ_ESPN_ID = "21";
-// Torneos donde Vélez puede jugar de local. Si alguno falla, se ignora.
-const LIGAS_ESPN = ["arg.1", "arg.copa", "conmebol.libertadores", "conmebol.sudamericana"];
+// ===================== Configuración =====================
+const CABA = { lat: -34.6118, lon: -58.4173 };
+// Torneos donde pueden jugar de local los equipos porteños. Si alguno falla, se ignora.
+const LIGAS_ESPN = ["arg.1", "arg.2", "arg.copa", "conmebol.libertadores", "conmebol.sudamericana"];
 const DIAS_A_MOSTRAR = 60;
-// Datos publicados en GitHub (los actualiza la tarea programada). Si no hay internet se usa la última copia guardada.
+// Datos publicados en GitHub (los actualiza la tarea programada). Sin internet se usa la última copia guardada.
 const DATOS_URL = "https://raw.githubusercontent.com/Cygosc/eventos-velez/main/www/data/";
-const HORAS_AVISO = 36; // avisar si un evento empieza dentro de este plazo
 
-// ---------- Utilidades ----------
+const TIPOS = {
+  partido: { icono: "⚽", nombre: "Partidos", color: "#0a5aa6" },
+  recital: { icono: "🎤", nombre: "Recitales", color: "#8e44ad" },
+  marcha: { icono: "📣", nombre: "Marchas", color: "#c0392b" },
+  corte: { icono: "🚧", nombre: "Cortes y obras", color: "#e67e22" },
+  evento: { icono: "📌", nombre: "Otros eventos", color: "#16a085" },
+};
+
+// ===================== Utilidades =====================
 const $ = (s) => document.querySelector(s);
 const guardar = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} };
 const leer = (k, def) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch { return def; } };
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
-const fmtDia = new Intl.DateTimeFormat("es-AR", { weekday: "long", day: "numeric", month: "long", timeZone: "America/Argentina/Buenos_Aires" });
-const fmtHora = new Intl.DateTimeFormat("es-AR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Argentina/Buenos_Aires" });
-const fmtCorto = new Intl.DateTimeFormat("es-AR", { weekday: "short", day: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "America/Argentina/Buenos_Aires" });
+const TZ = "America/Argentina/Buenos_Aires";
+const fmtDia = new Intl.DateTimeFormat("es-AR", { weekday: "long", day: "numeric", month: "long", timeZone: TZ });
+const fmtHora = new Intl.DateTimeFormat("es-AR", { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: TZ });
+const fmtCorto = new Intl.DateTimeFormat("es-AR", { weekday: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: TZ });
 
-// Medianoche de Buenos Aires para una fecha dada (Argentina no tiene horario de verano: UTC-3 fijo).
+// Medianoche de Buenos Aires (UTC-3 fijo, sin horario de verano).
 function inicioDiaBA(fecha) {
   const ba = new Date(fecha.getTime() - 3 * 3600e3);
   return new Date(Date.UTC(ba.getUTCFullYear(), ba.getUTCMonth(), ba.getUTCDate()) + 3 * 3600e3);
 }
 const horas = (n) => n * 3600e3;
 
-// Ventana de cortes por defecto según el tipo de evento.
-function ventanaCortes(ev) {
-  if (ev.cortes) return { desde: new Date(ev.cortes.desde), hasta: new Date(ev.cortes.hasta), estimado: false };
-  const dia = inicioDiaBA(ev.inicio);
-  if (ev.tipo === "recital") {
-    // Operativos publicados por la Ciudad: 13:00 del día del show hasta las 04:00 del día siguiente.
-    return { desde: new Date(dia.getTime() + horas(13)), hasta: new Date(dia.getTime() + horas(28)), estimado: false };
-  }
-  if (!ev.horaConfirmada) {
-    return { desde: new Date(dia.getTime() + horas(10)), hasta: new Date(dia.getTime() + horas(24)), estimado: true };
-  }
-  return { desde: new Date(ev.inicio.getTime() - horas(3)), hasta: new Date(ev.inicio.getTime() + horas(2.5)), estimado: true };
-}
-
-// Distancia en metros (aproximación plana, suficiente a escala barrio).
 function metros(a, b) {
   return Math.hypot((a[0] - b[0]) * 111000, (a[1] - b[1]) * 92000);
 }
@@ -49,9 +42,13 @@ function distPuntoTramo(p, a, b) {
   const t = Math.max(0, Math.min(1, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy || 1)));
   return Math.hypot(px - (ax + t * dx), py - (ay + t * dy));
 }
-function corteMasCercano(p) {
+function corteMasCercano(p, tramos) {
   let mejor = null;
-  for (const c of window.CORTES_VELEZ) {
+  for (const c of tramos) {
+    if (c.coords.length === 1) {
+      const d = metros(p, c.coords[0]);
+      if (!mejor || d < mejor.d) mejor = { d, corte: c };
+    }
     for (let i = 1; i < c.coords.length; i++) {
       const d = distPuntoTramo(p, c.coords[i - 1], c.coords[i]);
       if (!mejor || d < mejor.d) mejor = { d, corte: c };
@@ -60,7 +57,9 @@ function corteMasCercano(p) {
   return mejor;
 }
 
-// ---------- Datos ----------
+// ===================== Datos =====================
+let LUGARES = {};
+
 // Orden: GitHub (lo más nuevo) → copia guardada en el dispositivo → copia incluida en la app.
 async function traerJSON(nombre) {
   try {
@@ -78,131 +77,245 @@ async function traerJSON(nombre) {
 }
 
 async function cargarDatos() {
-  const [ev, co] = await Promise.all([traerJSON("eventos.json"), traerJSON("cortes.json")]);
-  window.EVENTOS_MANUALES = ev.datos.eventos || [];
-  window.CORTES_VELEZ = co.datos.cortes || [];
-  const txt = { internet: "actualizados", guardado: "sin conexión, copia guardada", incluido: "sin conexión, datos de fábrica" };
-  $("#actualizado").textContent = `Recitales revisados el ${ev.datos.actualizado || "?"} (${txt[ev.origen]}).`;
+  const [ev, lu] = await Promise.all([traerJSON("eventos-caba.json"), traerJSON("lugares.json")]);
+  LUGARES = Object.fromEntries((lu.datos.lugares || []).map((l) => [l.id, l]));
+  const txt = { internet: "actualizado", guardado: "sin conexión, copia guardada", incluido: "sin conexión, datos de fábrica" };
+  $("#actualizado").textContent = `Eventos revisados el ${ev.datos.actualizado || "?"} (${txt[ev.origen]}).`;
+  return ev.datos.eventos || [];
 }
 
 async function traerPartidos() {
-  const resultados = await Promise.allSettled(LIGAS_ESPN.map(async (liga) => {
-    const url = `https://site.api.espn.com/apis/site/v2/sports/soccer/${liga}/teams/${VELEZ_ESPN_ID}/schedule?fixture=true`;
-    const r = await fetch(url);
-    if (!r.ok) throw new Error(r.status);
-    const d = await r.json();
-    return (d.events || []).flatMap((e) => {
-      const comp = e.competitions?.[0];
-      const local = comp?.competitors?.find((c) => c.homeAway === "home");
-      const visita = comp?.competitors?.find((c) => c.homeAway === "away");
-      if (!local || local.team?.id !== VELEZ_ESPN_ID || comp.neutralSite) return [];
-      return [{
-        id: "espn-" + e.id,
-        titulo: `Vélez vs ${visita?.team?.shortDisplayName?.trim() || visita?.team?.displayName || "rival a definir"}`,
-        tipo: "partido",
-        inicio: e.date,
-        horaConfirmada: e.timeValid !== false,
-        confirmado: true,
-        fuente: "https://www.espn.com.ar/futbol/equipo/calendario/_/id/21/velez-sarsfield",
-        notas: e.seasonType?.name || d.season?.displayName || "",
-      }];
-    });
-  }));
-  const ok = resultados.filter((r) => r.status === "fulfilled");
-  if (!ok.length) {
+  const equipos = {};
+  for (const l of Object.values(LUGARES)) for (const id of l.equiposEspn || []) equipos[id] = l.id;
+  const pedidos = [];
+  for (const liga of LIGAS_ESPN) {
+    for (const id of Object.keys(equipos)) {
+      pedidos.push(fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/${liga}/teams/${id}/schedule?fixture=true`)
+        .then((r) => (r.ok ? r.json() : { events: [] }))
+        .then((d) => ({ d, id }))
+        .catch(() => null));
+    }
+  }
+  const res = (await Promise.all(pedidos)).filter(Boolean);
+  if (!res.length) {
     const cache = leer("partidos", null);
     return { partidos: cache?.partidos || [], error: true, cacheFecha: cache?.fecha };
   }
-  const partidos = ok.flatMap((r) => r.value);
+  const vistos = new Set();
+  const partidos = [];
+  for (const { d, id } of res) {
+    for (const e of d.events || []) {
+      const comp = e.competitions?.[0];
+      const local = comp?.competitors?.find((c) => c.homeAway === "home");
+      const visita = comp?.competitors?.find((c) => c.homeAway === "away");
+      if (!local || local.team?.id !== id || comp.neutralSite || vistos.has(e.id)) continue;
+      vistos.add(e.id);
+      const nombre = (t) => t?.team?.shortDisplayName?.trim() || t?.team?.displayName || "a definir";
+      partidos.push({
+        id: "espn-" + e.id,
+        titulo: `${nombre(local)} vs ${nombre(visita)}`,
+        tipo: "partido",
+        lugar: equipos[id],
+        inicio: e.date,
+        horaConfirmada: e.timeValid !== false,
+        confirmado: true,
+        fuente: `https://www.espn.com.ar/futbol/partido/_/juegoId/${e.id}`,
+        notas: e.seasonType?.name || "",
+      });
+    }
+  }
   guardar("partidos", { partidos, fecha: new Date().toISOString() });
   return { partidos, error: false };
 }
 
+// Ventana de cortes por defecto según el tipo de evento y el lugar.
+function ventanaCortes(ev, lugar) {
+  if (ev.cortes?.desde) return { desde: new Date(ev.cortes.desde), hasta: new Date(ev.cortes.hasta), estimado: false };
+  const dia = inicioDiaBA(ev.inicio);
+  const fin = ev.fin ? new Date(ev.fin) : null;
+  const grande = !lugar || ["estadio", "predio"].includes(lugar.tipo);
+  switch (ev.tipo) {
+    case "recital":
+    case "evento":
+      // 13:00 a 04:00 es el horario que publica la Ciudad para los recitales en Vélez; en otros lugares es una estimación.
+      if (grande) return { desde: new Date(dia.getTime() + horas(13)), hasta: new Date(dia.getTime() + horas(28)), estimado: !(ev.tipo === "recital" && lugar?.id === "velez") };
+      return { desde: new Date(ev.inicio - horas(3)), hasta: fin || new Date(+ev.inicio + horas(4)), estimado: true };
+    case "partido":
+      if (!ev.horaConfirmada) return { desde: new Date(dia.getTime() + horas(10)), hasta: new Date(dia.getTime() + horas(24)), estimado: true };
+      return { desde: new Date(ev.inicio - horas(3)), hasta: new Date(+ev.inicio + horas(2.5)), estimado: true };
+    case "marcha":
+      return { desde: new Date(ev.inicio - horas(1)), hasta: fin || new Date(+ev.inicio + horas(5)), estimado: !fin };
+    case "corte":
+      return { desde: ev.inicio, hasta: fin || new Date(+ev.inicio + horas(12)), estimado: !fin };
+    default:
+      return { desde: new Date(ev.inicio - horas(3)), hasta: fin || new Date(+ev.inicio + horas(5)), estimado: true };
+  }
+}
+
 function normalizar(ev) {
   const e = { ...ev, inicio: new Date(ev.inicio) };
-  e.ventana = ventanaCortes(e);
+  e.tipo = TIPOS[e.tipo] ? e.tipo : "evento";
+  e.lugarObj = e.lugar ? LUGARES[e.lugar] : null;
+  // Tramos: los del evento (operativo publicado) o el perímetro del lugar.
+  e.tramos = e.tramos?.length ? e.tramos : e.lugarObj?.cortes || [];
+  e.tramosOficiales = !!ev.tramos?.length || (e.lugarObj && !String(e.lugarObj.cortesFuente || "").startsWith("Estimado"));
+  // Punto de referencia del evento.
+  if (e.ubicacion) e.punto = [e.ubicacion.lat, e.ubicacion.lon];
+  else if (e.lugarObj) e.punto = [e.lugarObj.lat, e.lugarObj.lon];
+  else if (e.tramos.length) e.punto = e.tramos[0].coords[0];
+  e.donde = e.ubicacion?.nombre || e.lugarObj?.nombre || "";
+  e.barrio = e.ubicacion?.barrio || e.lugarObj?.barrio || "";
+  e.ventana = ventanaCortes(e, e.lugarObj);
   return e;
 }
 
-// ---------- Mapa ----------
-const mapa = L.map("mapa", { zoomControl: true }).setView([ESTADIO.lat, ESTADIO.lon], 16);
+// Distancia de mi casa al evento: al tramo cortado más cercano, o al lugar.
+function distanciaACasa(ev, casa) {
+  if (!casa) return null;
+  if (ev.tramos.length) return corteMasCercano(casa, ev.tramos).d;
+  return ev.punto ? metros(casa, ev.punto) : null;
+}
+
+// ===================== Mapa =====================
+const mapa = L.map("mapa", { zoomControl: true }).setView([CABA.lat, CABA.lon], 12);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(mapa);
 
-L.marker([ESTADIO.lat, ESTADIO.lon], { title: ESTADIO.nombre })
-  .addTo(mapa)
-  .bindPopup(`<b>${ESTADIO.nombre}</b><br>Av. Juan B. Justo 9200, Liniers`);
-
+const capaMarcadores = L.layerGroup().addTo(mapa);
 const capaCortes = L.layerGroup().addTo(mapa);
-let marcadorCasa = null;
+let marcadorCasa = null, circuloRadio = null;
 
 const leyenda = L.control({ position: "bottomleft" });
 leyenda.onAdd = () => {
   const div = L.DomUtil.create("div", "leyenda");
   div.innerHTML =
     '<div><i style="border-top:5px solid #d7263d"></i>Calle cerrada</div>' +
-    '<div><i style="border-top:4px dashed #f08a24"></i>Corte parcial (un carril)</div>';
+    '<div><i style="border-top:4px dashed #f08a24"></i>Corte parcial</div>' +
+    '<div><i style="border-top:4px dotted #d7263d"></i>Estimado (alrededor del lugar)</div>';
   return div;
 };
 leyenda.addTo(mapa);
 
-function dibujarCortes(ev) {
-  capaCortes.clearLayers();
-  const opacidad = ev?.ventana?.estimado ? 0.6 : 0.9;
-  for (const c of window.CORTES_VELEZ) {
-    const total = c.tipo === "total";
-    L.polyline(c.coords, {
-      color: total ? "#d7263d" : "#f08a24",
-      weight: total ? 7 : 5,
-      opacity: opacidad,
-      dashArray: total ? null : "8 8",
-    })
-      .bindTooltip(`<b>${c.calle}</b><br>${c.tramo}`, { sticky: true })
-      .addTo(capaCortes);
+function iconoEvento(ev, sel) {
+  const t = TIPOS[ev.tipo];
+  return L.divIcon({
+    className: "pin-evento",
+    html: `<div class="pin ${sel ? "sel" : ""}" style="background:${t.color}">${t.icono}</div>`,
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
+  });
+}
+
+function dibujarMarcadores(eventos) {
+  capaMarcadores.clearLayers();
+  for (const ev of eventos) {
+    if (!ev.punto) continue;
+    L.marker(ev.punto, { icon: iconoEvento(ev, ev === seleccionado), zIndexOffset: ev === seleccionado ? 1000 : 0 })
+      .bindTooltip(`${esc(ev.titulo)}<br>${fmtCorto.format(ev.inicio)}`)
+      .on("click", () => seleccionar(ev, true))
+      .addTo(capaMarcadores);
   }
 }
 
-// ---------- Mi casa ----------
+function dibujarCortes(ev, centrar) {
+  capaCortes.clearLayers();
+  if (!ev) return;
+  const capas = [];
+  for (const c of ev.tramos) {
+    const total = c.tipo === "total";
+    const estimado = c.tipo === "estimado";
+    const l = L.polyline(c.coords, {
+      color: total || estimado ? "#d7263d" : "#f08a24",
+      weight: total ? 7 : 5,
+      opacity: estimado ? 0.75 : 0.9,
+      dashArray: total ? null : estimado ? "2 8" : "8 8",
+      lineCap: estimado ? "round" : "butt",
+    }).bindTooltip(`<b>${esc(c.calle)}</b><br>${esc(c.tramo)}`, { sticky: true });
+    l.addTo(capaCortes);
+    capas.push(l);
+  }
+  if (centrar) {
+    if (capas.length) mapa.fitBounds(L.featureGroup(capas).getBounds().pad(0.4), { maxZoom: 16 });
+    else if (ev.punto) mapa.setView(ev.punto, 15);
+  }
+}
+
+// ===================== Mi casa y radio =====================
 let modoCasa = false;
 $("#btn-casa").addEventListener("click", () => {
   modoCasa = !modoCasa;
   $("#btn-casa").classList.toggle("activo", modoCasa);
-  $("#btn-casa").textContent = modoCasa ? "Tocá tu casa en el mapa…" : "📍 Marcar mi casa";
+  $("#btn-casa").textContent = modoCasa ? "Tocá tu casa en el mapa…" : leer("casa", null) ? "📍 Cambiar mi casa" : "📍 Marcar mi casa";
   mapa.getContainer().style.cursor = modoCasa ? "crosshair" : "";
 });
 mapa.on("click", (e) => {
   if (!modoCasa) return;
   modoCasa = false;
   $("#btn-casa").classList.remove("activo");
-  $("#btn-casa").textContent = "📍 Cambiar mi casa";
   mapa.getContainer().style.cursor = "";
   guardar("casa", [e.latlng.lat, e.latlng.lng]);
-  mostrarCasa();
+  if (leer("radio", null) === null) { guardar("radio", 3000); $("#radio").value = "3000"; }
+  refrescar();
 });
 
-function mostrarCasa() {
+function radioActual() {
+  return leer("casa", null) ? Number(leer("radio", 3000)) : 0;
+}
+$("#radio").addEventListener("change", (e) => {
+  guardar("radio", Number(e.target.value));
+  refrescar();
+});
+
+function mostrarCasa(eventos) {
   const casa = leer("casa", null);
   const info = $("#info-casa");
-  if (!casa) { info.textContent = "Marcá tu casa para saber si te afectan los cortes."; return; }
+  const sel = $("#radio");
+  sel.disabled = !casa;
+  sel.value = String(radioActual());
+  if (marcadorCasa) { marcadorCasa.remove(); marcadorCasa = null; }
+  if (circuloRadio) { circuloRadio.remove(); circuloRadio = null; }
+  if (!casa) {
+    info.classList.remove("afectada");
+    info.textContent = "Marcá tu casa para ver solo lo que pasa cerca y saber si te afectan los cortes.";
+    return;
+  }
   $("#btn-casa").textContent = "📍 Cambiar mi casa";
-  if (marcadorCasa) marcadorCasa.remove();
   marcadorCasa = L.circleMarker(casa, { radius: 9, color: "#0a5aa6", fillColor: "#3d8ee0", fillOpacity: 1, weight: 3 })
     .addTo(mapa).bindTooltip("Mi casa");
-  const dEstadio = Math.round(metros(casa, [ESTADIO.lat, ESTADIO.lon]));
-  const cerca = corteMasCercano(casa);
-  const dCorte = Math.round(cerca.d);
-  info.classList.toggle("afectada", dCorte < 150);
-  info.innerHTML = `Tu casa está a <b>${dEstadio} m</b> del estadio. ` +
-    (dCorte < 150
-      ? `Hay un corte a <b>${dCorte} m</b> (${cerca.corte.calle}): en días de evento vas a tener la calle cortada o muy cerca.`
-      : `El corte más cercano está a ${dCorte} m (${cerca.corte.calle}).`);
+  const r = radioActual();
+  if (r) circuloRadio = L.circle(casa, { radius: r, color: "#0a5aa6", weight: 1, fillOpacity: 0.04, interactive: false }).addTo(mapa);
+  const cerca = eventos.filter((e) => e.dist !== null && e.dist < 300);
+  info.classList.toggle("afectada", cerca.length > 0);
+  info.innerHTML = cerca.length
+    ? `🚧 ${cerca.length === 1 ? "Un evento corta" : cerca.length + " eventos cortan"} calles a menos de 300 m de tu casa: ` +
+      cerca.map((e) => `<b>${esc(e.titulo)}</b> (${fmtCorto.format(e.ventana.desde)})`).join(", ") + "."
+    : "Ningún evento próximo corta calles a menos de 300 m de tu casa.";
 }
 
-// ---------- Avisos ----------
-// En la APK se usan notificaciones nativas programadas (llegan aunque la app esté cerrada).
-// En el navegador se usa la Notification API (solo con la página abierta).
+// ===================== Filtros por tipo =====================
+function tiposActivos() {
+  return leer("tipos", Object.keys(TIPOS));
+}
+function dibujarFiltros() {
+  const activos = tiposActivos();
+  $("#tipos").innerHTML = Object.entries(TIPOS)
+    .map(([k, t]) => `<button data-tipo="${k}" class="chip-filtro ${activos.includes(k) ? "activo" : ""}">${t.icono} ${t.nombre}</button>`)
+    .join("");
+  $("#tipos").querySelectorAll("button").forEach((b) =>
+    b.addEventListener("click", () => {
+      const a = new Set(tiposActivos());
+      a.has(b.dataset.tipo) ? a.delete(b.dataset.tipo) : a.add(b.dataset.tipo);
+      guardar("tipos", [...a]);
+      dibujarFiltros();
+      refrescar();
+    }));
+}
+
+// ===================== Avisos =====================
+// En la APK: notificaciones nativas programadas (llegan aunque la app esté cerrada).
+// En el navegador: Notification API (solo con la página abierta).
 const LN = window.Capacitor?.isNativePlatform?.() ? window.Capacitor.Plugins.LocalNotifications : null;
 
 async function permisoAvisos() {
@@ -210,7 +323,6 @@ async function permisoAvisos() {
   if (!("Notification" in window)) return "no";
   return Notification.permission;
 }
-
 async function actualizarBotonAvisos() {
   const b = $("#btn-avisos");
   const p = await permisoAvisos();
@@ -224,14 +336,18 @@ $("#btn-avisos").addEventListener("click", async () => {
   if (LN) await LN.requestPermissions();
   else if ("Notification" in window) await Notification.requestPermission();
   await actualizarBotonAvisos();
-  avisar(window.__eventos || []);
+  avisar(visibles);
 });
 
-// Id numérico estable para cada aviso (las notificaciones nativas necesitan un entero).
 function idAviso(texto) {
   let h = 0;
   for (const ch of texto) h = (h * 31 + ch.charCodeAt(0)) | 0;
   return Math.abs(h) % 2000000000;
+}
+function textoAviso(ev) {
+  const v = ev.ventana;
+  const lugar = ev.donde ? ` (${ev.donde})` : "";
+  return `${fmtDia.format(ev.inicio)}${lugar}. Cortes ${fmtCorto.format(v.desde)} a ${fmtCorto.format(v.hasta)}${v.estimado ? " (estimado)" : ""}.`;
 }
 
 async function programarAvisosNativos(eventos) {
@@ -242,15 +358,16 @@ async function programarAvisosNativos(eventos) {
   const lista = [];
   for (const ev of eventos) {
     const v = ev.ventana;
-    const cuerpo = `${fmtDia.format(ev.inicio)}. Cortes desde ${fmtCorto.format(v.desde)} hasta ${fmtCorto.format(v.hasta)}${v.estimado ? " (estimado)" : ""}.`;
-    // Aviso el día anterior a las 20:00 y otro 2 horas antes de que empiecen los cortes.
+    // El día anterior a las 20:00 y 2 horas antes de que empiecen los cortes.
     const diaAntes = new Date(inicioDiaBA(v.desde).getTime() - horas(4));
-    for (const [cuando, titulo] of [[diaAntes, `Mañana: ${ev.titulo} en Vélez`], [new Date(v.desde - horas(2)), `Hoy cortan calles: ${ev.titulo}`]]) {
+    for (const [cuando, titulo] of [[diaAntes, `Mañana: ${ev.titulo}`], [new Date(v.desde - horas(2)), `Hoy cortan calles: ${ev.titulo}`]]) {
       if (cuando.getTime() <= ahora) continue;
-      lista.push({ id: idAviso(ev.id + cuando.toISOString()), title: titulo, body: cuerpo, schedule: { at: cuando, allowWhileIdle: true } });
+      lista.push({ id: idAviso(ev.id + cuando.toISOString()), title: titulo, body: textoAviso(ev), schedule: { at: cuando, allowWhileIdle: true } });
     }
   }
-  if (lista.length) await LN.schedule({ notifications: lista });
+  // Android limita la cantidad de alarmas por app: se programan las 40 más próximas.
+  lista.sort((a, b) => a.schedule.at - b.schedule.at);
+  if (lista.length) await LN.schedule({ notifications: lista.slice(0, 40) });
 }
 
 function avisar(eventos) {
@@ -260,109 +377,127 @@ function avisar(eventos) {
   const ahora = Date.now();
   for (const ev of eventos) {
     const falta = ev.ventana.desde - ahora;
-    if (falta > horas(HORAS_AVISO) || ev.ventana.hasta < ahora || yaAvisados.includes(ev.id)) continue;
-    new Notification(`Evento en Vélez: ${ev.titulo}`, {
-      body: `${fmtDia.format(ev.inicio)}. Cortes desde ${fmtCorto.format(ev.ventana.desde)} hasta ${fmtCorto.format(ev.ventana.hasta)}.`,
-      tag: ev.id,
-    });
+    if (falta > horas(36) || ev.ventana.hasta < ahora || yaAvisados.includes(ev.id)) continue;
+    new Notification(`${TIPOS[ev.tipo].icono} ${ev.titulo}`, { body: textoAviso(ev), tag: ev.id });
     yaAvisados.push(ev.id);
   }
-  guardar("avisados", yaAvisados.slice(-50));
+  guardar("avisados", yaAvisados.slice(-100));
 }
 
-// ---------- Render ----------
-let seleccionado = null;
+// ===================== Render =====================
+let todos = [], visibles = [], seleccionado = null, estadoCarga = {};
 
 function textoVentana(ev) {
   const v = ev.ventana;
   return `${v.estimado ? "Cortes estimados" : "Cortes"}: ${fmtCorto.format(v.desde)} → ${fmtCorto.format(v.hasta)}`;
 }
-
-function seleccionar(ev) {
-  seleccionado = ev;
-  document.querySelectorAll(".evento").forEach((li) => li.classList.toggle("sel", li.dataset.id === ev?.id));
-  dibujarCortes(ev);
-  const det = $("#detalle");
-  if (!ev) {
-    det.innerHTML = "<b>Mapa de cortes del último operativo publicado.</b> No hay eventos próximos cargados.";
-    return;
-  }
-  const totales = window.CORTES_VELEZ.filter((c) => c.tipo === "total");
-  const parciales = window.CORTES_VELEZ.filter((c) => c.tipo !== "total");
-  det.innerHTML = `
-    <b>${ev.titulo}</b> — ${fmtDia.format(ev.inicio)}, ${ev.horaConfirmada ? fmtHora.format(ev.inicio) + " h" : "hora a confirmar"}<br>
-    ${textoVentana(ev)}
-    ${ev.ventana.estimado ? "<br><i>La Ciudad no publica los cortes de los partidos; el horario y el mapa son una estimación basada en los recitales.</i>" : ""}
-    <ul>${totales.map((c) => `<li><b>${c.calle}</b> ${c.tramo}</li>`).join("")}
-        ${parciales.map((c) => `<li>${c.calle}: ${c.tramo}</li>`).join("")}
-        <li>Subidas y bajadas de la Au. Perito Moreno en Barragán: cerradas</li></ul>
-    ${ev.notas ? `<div>${ev.notas}</div>` : ""}
-    <a href="${ev.fuente}" target="_blank" rel="noopener">Ver fuente</a>`;
+function textoDist(d) {
+  if (d === null || d === undefined) return "";
+  return d < 1000 ? `${Math.round(d / 10) * 10} m` : `${(d / 1000).toFixed(1).replace(".", ",")} km`;
 }
 
-function render(eventos, errorPartidos, cacheFecha) {
+function seleccionar(ev, centrar) {
+  seleccionado = ev;
+  document.querySelectorAll(".evento").forEach((li) => li.classList.toggle("sel", li.dataset.id === ev?.id));
+  dibujarMarcadores(visibles);
+  dibujarCortes(ev, centrar);
+  const det = $("#detalle");
+  if (!ev) { det.innerHTML = "No hay eventos para mostrar con estos filtros."; return; }
+  const oficiales = ev.tramos.filter((c) => c.tipo !== "estimado");
+  const estimados = ev.tramos.filter((c) => c.tipo === "estimado");
+  const callesEst = [...new Set(estimados.map((c) => c.calle))];
+  det.innerHTML = `
+    <b>${TIPOS[ev.tipo].icono} ${esc(ev.titulo)}</b><br>
+    ${ev.donde ? esc(ev.donde) + (ev.barrio ? ` · ${esc(ev.barrio)}` : "") + "<br>" : ""}
+    ${fmtDia.format(ev.inicio)}, ${ev.horaConfirmada ? fmtHora.format(ev.inicio) + " h" : "hora a confirmar"}<br>
+    ${textoVentana(ev)}
+    ${ev.dist !== null ? `<br>A ${textoDist(ev.dist)} de tu casa.` : ""}
+    ${oficiales.length ? `<ul>${oficiales.map((c) => `<li><b>${esc(c.calle)}</b> ${esc(c.tramo)}${c.tipo === "parcial" ? " (parcial)" : ""}</li>`).join("")}</ul>` : ""}
+    ${callesEst.length ? `<p class="estimado">Calles que probablemente se corten (alrededor del lugar): ${callesEst.map(esc).join(", ")}.</p>` : ""}
+    ${!ev.tramos.length ? "<p class='estimado'>Todavía no hay calles publicadas para este evento.</p>" : ""}
+    ${ev.notas ? `<div>${esc(ev.notas)}</div>` : ""}
+    ${ev.fuente ? `<a href="${esc(ev.fuente)}" target="_blank" rel="noopener">Ver fuente</a>` : ""}`;
+}
+
+function refrescar() {
+  const casa = leer("casa", null);
+  const radio = radioActual();
+  const tipos = tiposActivos();
+  for (const e of todos) e.dist = distanciaACasa(e, casa);
+  visibles = todos.filter((e) => tipos.includes(e.tipo) && (!radio || (e.dist !== null && e.dist <= radio)));
+  mostrarCasa(visibles);
+
   const lista = $("#lista");
   lista.innerHTML = "";
-  if (!eventos.length) lista.innerHTML = '<li class="vacio">No hay eventos en los próximos días.</li>';
-  for (const ev of eventos) {
+  $("#cuantos").textContent = `(${visibles.length})`;
+  if (!visibles.length) lista.innerHTML = `<li class="vacio">No hay eventos ${radio ? "cerca de tu casa" : ""} en los próximos días.</li>`;
+  for (const ev of visibles) {
     const li = document.createElement("li");
-    li.className = `evento ${ev.tipo}`;
+    li.className = "evento";
+    li.style.borderLeftColor = TIPOS[ev.tipo].color;
     li.dataset.id = ev.id;
-    const icono = ev.tipo === "partido" ? "⚽" : ev.tipo === "recital" ? "🎤" : "📌";
     li.innerHTML = `
-      <div class="t">${icono} ${ev.titulo}
+      <div class="t">${TIPOS[ev.tipo].icono} ${esc(ev.titulo)}
         ${ev.confirmado === false ? '<span class="chip warn">a confirmar</span>' : ""}
         ${!ev.horaConfirmada ? '<span class="chip">hora a definir</span>' : ""}</div>
-      <div class="f">${fmtDia.format(ev.inicio)}${ev.horaConfirmada ? " · " + fmtHora.format(ev.inicio) + " h" : ""}</div>
+      <div class="f">${fmtDia.format(ev.inicio)}${ev.horaConfirmada ? " · " + fmtHora.format(ev.inicio) + " h" : ""}
+        ${ev.donde ? " · " + esc(ev.donde) : ""}${ev.dist !== null ? ` · <b>${textoDist(ev.dist)}</b>` : ""}</div>
       <div class="c">${textoVentana(ev)}</div>`;
-    li.addEventListener("click", () => seleccionar(ev));
+    li.addEventListener("click", () => {
+      seleccionar(ev, true);
+      // En el celular el mapa está arriba de la lista: subir para verlo.
+      if (window.innerWidth <= 820) $(".mapa-wrap").scrollIntoView({ behavior: "smooth" });
+    });
     lista.appendChild(li);
   }
-  if (errorPartidos) {
+  if (estadoCarga.error) {
     const li = document.createElement("li");
     li.className = "vacio";
-    li.textContent = cacheFecha
-      ? `No se pudo actualizar el fixture; se muestran los partidos guardados el ${fmtCorto.format(new Date(cacheFecha))}.`
-      : "No se pudo consultar el fixture de Vélez (¿sin internet?).";
+    li.textContent = estadoCarga.cacheFecha
+      ? `No se pudo actualizar el fixture; se muestran los partidos guardados el ${fmtCorto.format(new Date(estadoCarga.cacheFecha))}.`
+      : "No se pudo consultar el fixture (¿sin internet?).";
     lista.appendChild(li);
   }
 
-  // Estado arriba de todo
+  // Estado general
   const estado = $("#estado");
   const ahora = Date.now();
-  const activo = eventos.find((e) => e.ventana.desde <= ahora && e.ventana.hasta >= ahora);
-  const proximo = eventos.find((e) => e.ventana.desde > ahora);
+  const activos = visibles.filter((e) => e.ventana.desde <= ahora && e.ventana.hasta >= ahora);
+  const proximo = visibles.find((e) => e.ventana.desde > ahora);
+  const zona = radio ? "cerca de tu casa" : "en CABA";
   estado.className = "estado";
-  if (activo) {
+  if (activos.length) {
     estado.classList.add("alerta");
-    estado.textContent = `🚧 Ahora: ${activo.titulo}. Calles cortadas hasta ${fmtCorto.format(activo.ventana.hasta)}.`;
+    estado.textContent = `🚧 Ahora ${zona}: ${activos.map((e) => e.titulo).join(" · ")}`;
   } else if (proximo && proximo.ventana.desde - ahora < horas(48)) {
     estado.classList.add("pronto");
     estado.textContent = `⚠️ ${proximo.titulo}: cortes desde ${fmtCorto.format(proximo.ventana.desde)}.`;
   } else if (proximo) {
     estado.classList.add("tranqui");
-    estado.textContent = `✅ Sin cortes por ahora. Próximo: ${proximo.titulo}, ${fmtDia.format(proximo.inicio)}.`;
+    estado.textContent = `✅ Sin cortes ${zona} por ahora. Próximo: ${proximo.titulo}, ${fmtDia.format(proximo.inicio)}.`;
   } else {
     estado.classList.add("tranqui");
-    estado.textContent = "✅ No hay eventos cargados en los próximos días.";
+    estado.textContent = `✅ No hay eventos cargados ${zona} en los próximos días.`;
   }
 
-  seleccionar(activo || eventos[0] || null);
+  const sigue = seleccionado && visibles.find((e) => e.id === seleccionado.id);
+  seleccionar(sigue || activos[0] || visibles[0] || null, false);
+  avisar(visibles);
 }
 
 async function iniciar() {
   actualizarBotonAvisos();
-  const [{ partidos, error, cacheFecha }] = await Promise.all([traerPartidos(), cargarDatos()]);
-  mostrarCasa();
+  dibujarFiltros();
+  const manuales = await cargarDatos();
+  const { partidos, error, cacheFecha } = await traerPartidos();
+  estadoCarga = { error, cacheFecha };
   const ahora = Date.now();
   const limite = ahora + horas(24 * DIAS_A_MOSTRAR);
-  const eventos = [...(window.EVENTOS_MANUALES || []), ...partidos]
+  todos = [...manuales, ...partidos]
     .map(normalizar)
     .filter((e) => e.ventana.hasta >= ahora && e.inicio.getTime() <= limite)
-    .sort((a, b) => a.inicio - b.inicio);
-  window.__eventos = eventos;
-  render(eventos, error, cacheFecha);
-  avisar(eventos);
+    .sort((a, b) => a.ventana.desde - b.ventana.desde);
+  refrescar();
 }
 
 iniciar();

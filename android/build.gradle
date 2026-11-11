@@ -27,3 +27,11 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+// Si EVENTOS_BUILD_DIR está definida (lo hace scripts/build-apk.js), se compila fuera del proyecto:
+// OneDrive bloquea los archivos temporales de Gradle mientras los sincroniza.
+if (System.getenv("EVENTOS_BUILD_DIR")) {
+    allprojects {
+        layout.buildDirectory = new File(System.getenv("EVENTOS_BUILD_DIR"), project.name)
+    }
+}

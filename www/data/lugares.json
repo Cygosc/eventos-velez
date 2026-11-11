@@ -1,0 +1,6588 @@
+{
+ "actualizado": "2026-11-10",
+ "lugares": [
+  {
+   "id": "velez",
+   "nombre": "Estadio José Amalfitani (Vélez)",
+   "tipo": "estadio",
+   "barrio": "Liniers",
+   "lat": -34.635404,
+   "lon": -58.520768,
+   "equiposEspn": [
+    "21"
+   ],
+   "cortes": [
+    {
+     "calle": "Av. Reservistas Argentinos",
+     "tramo": "entre vías del FFCC y Gallardo",
+     "tipo": "total",
+     "coords": [
+      [
+       -34.638177,
+       -58.521308
+      ],
+      [
+       -34.637919,
+       -58.52134
+      ],
+      [
+       -34.636225,
+       -58.521527
+      ],
+      [
+       -34.636204,
+       -58.521533
+      ],
+      [
+       -34.636189,
+       -58.521546
+      ],
+      [
+       -34.636168,
+       -58.521573
+      ],
+      [
+       -34.636154,
+       -58.52161
+      ],
+      [
+       -34.635965,
+       -58.522725
+      ],
+      [
+       -34.635934,
+       -58.522876
+      ],
+      [
+       -34.635896,
+       -58.523072
+      ],
+      [
+       -34.635738,
+       -58.524081
+      ]
+     ]
+    },
+    {
+     "calle": "Fragueiro",
+     "tramo": "entre Av. Reservistas Argentinos y Av. Juan B. Justo",
+     "tipo": "total",
+     "coords": [
+      [
+       -34.635934,
+       -58.522876
+      ],
+      [
+       -34.635723,
+       -58.523079
+      ],
+      [
+       -34.634808,
+       -58.523967
+      ],
+      [
+       -34.634611,
+       -58.524144
+      ],
+      [
+       -34.634454,
+       -58.524259
+      ]
+     ]
+    },
+    {
+     "calle": "Barragán",
+     "tramo": "entre Av. Álvarez Jonte y Av. Juan B. Justo",
+     "tipo": "total",
+     "coords": [
+      [
+       -34.635213,
+       -58.522329
+      ],
+      [
+       -34.634355,
+       -58.523131
+      ],
+      [
+       -34.634317,
+       -58.523147
+      ],
+      [
+       -34.634183,
+       -58.523154
+      ]
+     ]
+    },
+    {
+     "calle": "Barragán",
+     "tramo": "entre Av. Reservistas Argentinos y Av. Rivadavia",
+     "tipo": "total",
+     "coords": [
+      [
+       -34.635934,
+       -58.522876
+      ],
+      [
+       -34.635989,
+       -58.522872
+      ],
+      [
+       -34.636098,
+       -58.522862
+      ],
+      [
+       -34.636217,
+       -58.522849
+      ],
+      [
+       -34.636504,
+       -58.52281
+      ],
+      [
+       -34.637017,
+       -58.522764
+      ],
+      [
+       -34.637138,
+       -58.522757
+      ],
+      [
+       -34.637261,
+       -58.522743
+      ],
+      [
+       -34.638018,
+       -58.522651
+      ],
+      [
+       -34.638382,
+       -58.522616
+      ],
+      [
+       -34.638405,
+       -58.522613
+      ],
+      [
+       -34.638443,
+       -58.52261
+      ],
+      [
+       -34.63849,
+       -58.522605
+      ],
+      [
+       -34.638531,
+       -58.522602
+      ],
+      [
+       -34.638613,
+       -58.522594
+      ],
+      [
+       -34.638655,
+       -58.52259
+      ],
+      [
+       -34.638852,
+       -58.522566
+      ]
+     ]
+    },
+    {
+     "calle": "Av. Álvarez Jonte",
+     "tramo": "entre Av. Reservistas Argentinos y Av. Juan B. Justo",
+     "tipo": "total",
+     "coords": [
+      [
+       -34.635934,
+       -58.522876
+      ],
+      [
+       -34.63588,
+       -58.522868
+      ],
+      [
+       -34.635811,
+       -58.522836
+      ],
+      [
+       -34.635776,
+       -58.522813
+      ],
+      [
+       -34.635693,
+       -58.522749
+      ],
+      [
+       -34.635213,
+       -58.522329
+      ],
+      [
+       -34.63433,
+       -58.52158
+      ],
+      [
+       -34.634085,
+       -58.521331
+      ],
+      [
+       -34.634048,
+       -58.521304
+      ],
+      [
+       -34.634015,
+       -58.521284
+      ],
+      [
+       -34.633935,
+       -58.521261
+      ],
+      [
+       -34.633824,
+       -58.521253
+      ]
+     ]
+    },
+    {
+     "calle": "Francisco de Viedma",
+     "tramo": "entre Reservistas Argentinos y Barragán",
+     "tipo": "total",
+     "coords": [
+      [
+       -34.637919,
+       -58.52134
+      ],
+      [
+       -34.638018,
+       -58.522651
+      ]
+     ]
+    },
+    {
+     "calle": "Av. Reservistas Argentinos",
+     "tramo": "un carril entre Álvarez Jonte y F. de Viedma",
+     "tipo": "parcial",
+     "coords": [
+      [
+       -34.635934,
+       -58.522876
+      ],
+      [
+       -34.635965,
+       -58.522725
+      ],
+      [
+       -34.636154,
+       -58.52161
+      ],
+      [
+       -34.636168,
+       -58.521573
+      ],
+      [
+       -34.636189,
+       -58.521546
+      ],
+      [
+       -34.636204,
+       -58.521533
+      ],
+      [
+       -34.636225,
+       -58.521527
+      ],
+      [
+       -34.637919,
+       -58.52134
+      ]
+     ]
+    },
+    {
+     "calle": "Av. Juan B. Justo",
+     "tramo": "corte parcial entre Álvarez Jonte y Miranda",
+     "tipo": "parcial",
+     "coords": [
+      [
+       -34.63322,
+       -58.520288
+      ],
+      [
+       -34.633204,
+       -58.520195
+      ],
+      [
+       -34.633196,
+       -58.520101
+      ],
+      [
+       -34.633195,
+       -58.520007
+      ],
+      [
+       -34.633202,
+       -58.51991
+      ],
+      [
+       -34.633206,
+       -58.51983
+      ],
+      [
+       -34.633203,
+       -58.519606
+      ],
+      [
+       -34.63319,
+       -58.519472
+      ],
+      [
+       -34.63313,
+       -58.519168
+      ],
+      [
+       -34.633075,
+       -58.518926
+      ],
+      [
+       -34.633061,
+       -58.518789
+      ],
+      [
+       -34.63305,
+       -58.518467
+      ],
+      [
+       -34.633037,
+       -58.518172
+      ],
+      [
+       -34.633036,
+       -58.518002
+      ],
+      [
+       -34.633038,
+       -58.517889
+      ],
+      [
+       -34.633101,
+       -58.517605
+      ],
+      [
+       -34.633085,
+       -58.517154
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Gobierno de la Ciudad, operativo recital Chayanne 13/03/2026; geometria OpenStreetMap"
+  },
+  {
+   "id": "river",
+   "nombre": "Estadio Más Monumental (River)",
+   "tipo": "estadio",
+   "barrio": "Núñez",
+   "lat": -34.545236,
+   "lon": -58.449509,
+   "equiposEspn": [
+    "16"
+   ],
+   "cortes": [
+    {
+     "calle": "Avenida Guillermo Udaondo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.544479,
+       -58.45071
+      ],
+      [
+       -34.544585,
+       -58.450787
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Guillermo Udaondo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.543765,
+       -58.450286
+      ],
+      [
+       -34.544119,
+       -58.450559
+      ],
+      [
+       -34.544308,
+       -58.450669
+      ],
+      [
+       -34.544479,
+       -58.45071
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Guillermo Udaondo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.543735,
+       -58.449981
+      ],
+      [
+       -34.544203,
+       -58.450358
+      ],
+      [
+       -34.544486,
+       -58.450654
+      ],
+      [
+       -34.544585,
+       -58.450787
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Guillermo Udaondo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.544042,
+       -58.450374
+      ],
+      [
+       -34.544479,
+       -58.45071
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Guillermo Udaondo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.544585,
+       -58.450787
+      ],
+      [
+       -34.545012,
+       -58.451121
+      ],
+      [
+       -34.545082,
+       -58.451175
+      ],
+      [
+       -34.54511,
+       -58.451197
+      ],
+      [
+       -34.54514,
+       -58.451222
+      ],
+      [
+       -34.545461,
+       -58.451472
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Figueroa Alcorta",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.546566,
+       -58.450339
+      ],
+      [
+       -34.546528,
+       -58.450595
+      ],
+      [
+       -34.546459,
+       -58.451058
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Figueroa Alcorta",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.546799,
+       -58.448781
+      ],
+      [
+       -34.546785,
+       -58.448874
+      ],
+      [
+       -34.546704,
+       -58.449407
+      ],
+      [
+       -34.546679,
+       -58.449568
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Figueroa Alcorta",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.546679,
+       -58.449568
+      ],
+      [
+       -34.546658,
+       -58.449718
+      ],
+      [
+       -34.546566,
+       -58.450339
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "boca",
+   "nombre": "Estadio Alberto J. Armando (La Bombonera)",
+   "tipo": "estadio",
+   "barrio": "La Boca",
+   "lat": -34.635679,
+   "lon": -58.364873,
+   "equiposEspn": [
+    "5"
+   ],
+   "cortes": [
+    {
+     "calle": "Brandsen",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.636209,
+       -58.363617
+      ],
+      [
+       -34.636247,
+       -58.363712
+      ],
+      [
+       -34.636645,
+       -58.364689
+      ],
+      [
+       -34.636694,
+       -58.364809
+      ],
+      [
+       -34.636741,
+       -58.364922
+      ],
+      [
+       -34.636766,
+       -58.364988
+      ],
+      [
+       -34.636778,
+       -58.365029
+      ],
+      [
+       -34.636787,
+       -58.365051
+      ],
+      [
+       -34.636796,
+       -58.365082
+      ],
+      [
+       -34.636819,
+       -58.365178
+      ],
+      [
+       -34.636833,
+       -58.365265
+      ],
+      [
+       -34.636879,
+       -58.365566
+      ]
+     ]
+    },
+    {
+     "calle": "Del Valle Iberlucea",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.634624,
+       -58.36468
+      ],
+      [
+       -34.635425,
+       -58.364183
+      ],
+      [
+       -34.636247,
+       -58.363712
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "sanlorenzo",
+   "nombre": "Estadio Pedro Bidegain (San Lorenzo)",
+   "tipo": "estadio",
+   "barrio": "Bajo Flores",
+   "lat": -34.65216,
+   "lon": -58.440029,
+   "equiposEspn": [
+    "18"
+   ],
+   "cortes": [
+    {
+     "calle": "Avenida Perito Moreno",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.650699,
+       -58.439352
+      ],
+      [
+       -34.650713,
+       -58.439651
+      ],
+      [
+       -34.650732,
+       -58.440061
+      ],
+      [
+       -34.650739,
+       -58.44022
+      ],
+      [
+       -34.65075,
+       -58.440438
+      ],
+      [
+       -34.650763,
+       -58.440726
+      ],
+      [
+       -34.650771,
+       -58.440869
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Varela",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.652958,
+       -58.441837
+      ],
+      [
+       -34.653011,
+       -58.441773
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Varela",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.653004,
+       -58.441568
+      ],
+      [
+       -34.652918,
+       -58.441669
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Varela",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.653095,
+       -58.441664
+      ],
+      [
+       -34.653149,
+       -58.4416
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Varela",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.653011,
+       -58.441773
+      ],
+      [
+       -34.653095,
+       -58.441664
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Varela",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.652918,
+       -58.441669
+      ],
+      [
+       -34.65287,
+       -58.44173
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Varela",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.653421,
+       -58.441039
+      ],
+      [
+       -34.653059,
+       -58.441499
+      ],
+      [
+       -34.653004,
+       -58.441568
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "huracan",
+   "nombre": "Estadio Tomás A. Ducó (Huracán)",
+   "tipo": "estadio",
+   "barrio": "Parque Patricios",
+   "lat": -34.643517,
+   "lon": -58.396411,
+   "equiposEspn": [
+    "10"
+   ],
+   "cortes": [
+    {
+     "calle": "Avenida Amancio Alcorta",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.643286,
+       -58.397763
+      ],
+      [
+       -34.643334,
+       -58.397855
+      ],
+      [
+       -34.643372,
+       -58.397924
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Amancio Alcorta",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.642446,
+       -58.396088
+      ],
+      [
+       -34.642535,
+       -58.396266
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Amancio Alcorta",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.642535,
+       -58.396266
+      ],
+      [
+       -34.642608,
+       -58.396405
+      ],
+      [
+       -34.6432,
+       -58.397593
+      ],
+      [
+       -34.643286,
+       -58.397763
+      ]
+     ]
+    },
+    {
+     "calle": "Luna",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.643142,
+       -58.397802
+      ],
+      [
+       -34.643286,
+       -58.397763
+      ]
+     ]
+    },
+    {
+     "calle": "Luna",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.643286,
+       -58.397763
+      ],
+      [
+       -34.643437,
+       -58.397711
+      ],
+      [
+       -34.644576,
+       -58.397264
+      ]
+     ]
+    },
+    {
+     "calle": "Luna",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.644637,
+       -58.397146
+      ],
+      [
+       -34.644576,
+       -58.397264
+      ]
+     ]
+    },
+    {
+     "calle": "Luna",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.644576,
+       -58.397264
+      ],
+      [
+       -34.644692,
+       -58.397258
+      ]
+     ]
+    },
+    {
+     "calle": "Miravé",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.644715,
+       -58.397593
+      ],
+      [
+       -34.64471,
+       -58.397581
+      ],
+      [
+       -34.644576,
+       -58.397264
+      ]
+     ]
+    },
+    {
+     "calle": "Miravé",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.644576,
+       -58.397264
+      ],
+      [
+       -34.644032,
+       -58.395997
+      ],
+      [
+       -34.643864,
+       -58.395605
+      ],
+      [
+       -34.643514,
+       -58.394787
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "argentinos",
+   "nombre": "Estadio Diego A. Maradona (Argentinos)",
+   "tipo": "estadio",
+   "barrio": "La Paternal",
+   "lat": -34.606047,
+   "lon": -58.472554,
+   "equiposEspn": [
+    "3"
+   ],
+   "cortes": [
+    {
+     "calle": "Boyacá",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.606411,
+       -58.471576
+      ],
+      [
+       -34.606301,
+       -58.471665
+      ],
+      [
+       -34.605287,
+       -58.472435
+      ]
+     ]
+    },
+    {
+     "calle": "Gavilán",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605731,
+       -58.473698
+      ],
+      [
+       -34.605756,
+       -58.47368
+      ],
+      [
+       -34.605863,
+       -58.473599
+      ]
+     ]
+    },
+    {
+     "calle": "Gavilán",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605863,
+       -58.473599
+      ],
+      [
+       -34.606881,
+       -58.472818
+      ]
+     ]
+    },
+    {
+     "calle": "Juan Agustín García",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605863,
+       -58.473599
+      ],
+      [
+       -34.605637,
+       -58.473146
+      ],
+      [
+       -34.605586,
+       -58.473042
+      ],
+      [
+       -34.605312,
+       -58.472487
+      ],
+      [
+       -34.605287,
+       -58.472435
+      ]
+     ]
+    },
+    {
+     "calle": "Juan Agustín García",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605936,
+       -58.473741
+      ],
+      [
+       -34.605863,
+       -58.473599
+      ]
+     ]
+    },
+    {
+     "calle": "Juan Agustín García",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605287,
+       -58.472435
+      ],
+      [
+       -34.605265,
+       -58.472389
+      ]
+     ]
+    },
+    {
+     "calle": "San Blas",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.606301,
+       -58.471665
+      ],
+      [
+       -34.60685,
+       -58.472764
+      ],
+      [
+       -34.606881,
+       -58.472818
+      ],
+      [
+       -34.606907,
+       -58.472874
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "barracas",
+   "nombre": "Estadio Claudio Chiqui Tapia (Barracas Central)",
+   "tipo": "estadio",
+   "barrio": "Barracas",
+   "lat": -34.647527,
+   "lon": -58.396929,
+   "equiposEspn": [
+    "10060"
+   ],
+   "cortes": [
+    {
+     "calle": "Luna",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.646885,
+       -58.396245
+      ],
+      [
+       -34.646925,
+       -58.396256
+      ],
+      [
+       -34.646979,
+       -58.396261
+      ],
+      [
+       -34.647021,
+       -58.396247
+      ],
+      [
+       -34.647741,
+       -58.395909
+      ],
+      [
+       -34.647943,
+       -58.395802
+      ]
+     ]
+    },
+    {
+     "calle": "Luna",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.647943,
+       -58.395802
+      ],
+      [
+       -34.648082,
+       -58.395735
+      ],
+      [
+       -34.648164,
+       -58.395695
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "riestra",
+   "nombre": "Estadio Guillermo Laza (Riestra)",
+   "tipo": "estadio",
+   "barrio": "Nueva Pompeya",
+   "lat": -34.6533,
+   "lon": -58.4435,
+   "equiposEspn": [
+    "17702"
+   ],
+   "cortes": [
+    {
+     "calle": "Avenida Ana María Janer",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.654403,
+       -58.443269
+      ],
+      [
+       -34.654162,
+       -58.442973
+      ],
+      [
+       -34.653866,
+       -58.442611
+      ],
+      [
+       -34.653799,
+       -58.442528
+      ],
+      [
+       -34.653206,
+       -58.441802
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Ana María Janer",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.653714,
+       -58.44262
+      ],
+      [
+       -34.653785,
+       -58.442707
+      ],
+      [
+       -34.65406,
+       -58.44304
+      ],
+      [
+       -34.65408,
+       -58.443066
+      ],
+      [
+       -34.654301,
+       -58.443336
+      ],
+      [
+       -34.654659,
+       -58.443776
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Varela",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.651919,
+       -58.443169
+      ],
+      [
+       -34.652104,
+       -58.442942
+      ],
+      [
+       -34.652162,
+       -58.442868
+      ],
+      [
+       -34.652958,
+       -58.441837
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "ferro",
+   "nombre": "Estadio Arquitecto Ricardo Etcheverri (Ferro)",
+   "tipo": "estadio",
+   "barrio": "Caballito",
+   "lat": -34.61882,
+   "lon": -58.44786,
+   "equiposEspn": [
+    "9743"
+   ],
+   "cortes": [
+    {
+     "calle": "Avellaneda",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.617875,
+       -58.448021
+      ],
+      [
+       -34.617822,
+       -58.447856
+      ],
+      [
+       -34.617712,
+       -58.447409
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Avellaneda",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.618298,
+       -58.448961
+      ],
+      [
+       -34.617875,
+       -58.448021
+      ]
+     ]
+    },
+    {
+     "calle": "Espinosa",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.617875,
+       -58.448021
+      ],
+      [
+       -34.617481,
+       -58.448246
+      ]
+     ]
+    },
+    {
+     "calle": "General Martín de Gainza",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.619245,
+       -58.446304
+      ],
+      [
+       -34.618618,
+       -58.446469
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "atlanta",
+   "nombre": "Estadio Don León Kolbowski (Atlanta)",
+   "tipo": "estadio",
+   "barrio": "Villa Crespo",
+   "lat": -34.594971,
+   "lon": -58.449092,
+   "equiposEspn": [
+    "10146"
+   ],
+   "cortes": [
+    {
+     "calle": "Humboldt",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.595892,
+       -58.449282
+      ],
+      [
+       -34.595762,
+       -58.449105
+      ],
+      [
+       -34.595018,
+       -58.448083
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "allboys",
+   "nombre": "Estadio Islas Malvinas (All Boys)",
+   "tipo": "estadio",
+   "barrio": "Floresta",
+   "lat": -34.616453,
+   "lon": -58.497818,
+   "equiposEspn": [
+    "9786"
+   ],
+   "cortes": [
+    {
+     "calle": "Chivilcoy",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.615581,
+       -58.498011
+      ],
+      [
+       -34.615638,
+       -58.497932
+      ],
+      [
+       -34.615689,
+       -58.497852
+      ],
+      [
+       -34.616451,
+       -58.496882
+      ],
+      [
+       -34.616603,
+       -58.49669
+      ]
+     ]
+    },
+    {
+     "calle": "Mercedes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.617367,
+       -58.497604
+      ],
+      [
+       -34.616756,
+       -58.498384
+      ],
+      [
+       -34.616737,
+       -58.498408
+      ],
+      [
+       -34.616619,
+       -58.49855
+      ],
+      [
+       -34.616352,
+       -58.498896
+      ],
+      [
+       -34.616229,
+       -58.499056
+      ]
+     ]
+    },
+    {
+     "calle": "Miranda",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.617367,
+       -58.497604
+      ],
+      [
+       -34.616743,
+       -58.496857
+      ],
+      [
+       -34.616603,
+       -58.49669
+      ]
+     ]
+    },
+    {
+     "calle": "Álvarez Jonte",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.615638,
+       -58.497932
+      ],
+      [
+       -34.616142,
+       -58.49889
+      ],
+      [
+       -34.616229,
+       -58.499056
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "chicago",
+   "nombre": "Estadio República de Mataderos (Nueva Chicago)",
+   "tipo": "estadio",
+   "barrio": "Mataderos",
+   "lat": -34.667969,
+   "lon": -58.499627,
+   "equiposEspn": [
+    "236"
+   ],
+   "cortes": [
+    {
+     "calle": "Avenida Coronel Cárdenas",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.66821,
+       -58.50132
+      ],
+      [
+       -34.668432,
+       -58.501173
+      ],
+      [
+       -34.668678,
+       -58.501017
+      ]
+     ]
+    },
+    {
+     "calle": "Carhué",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.668541,
+       -58.500911
+      ],
+      [
+       -34.669003,
+       -58.50032
+      ],
+      [
+       -34.669136,
+       -58.500174
+      ],
+      [
+       -34.669217,
+       -58.500084
+      ],
+      [
+       -34.669409,
+       -58.499857
+      ]
+     ]
+    },
+    {
+     "calle": "Carhué",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.668432,
+       -58.501173
+      ],
+      [
+       -34.668447,
+       -58.50104
+      ],
+      [
+       -34.668541,
+       -58.500911
+      ]
+     ]
+    },
+    {
+     "calle": "Cosquín",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.66779,
+       -58.498327
+      ],
+      [
+       -34.668077,
+       -58.497968
+      ]
+     ]
+    },
+    {
+     "calle": "Gregorio de Laferrere",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.669407,
+       -58.500308
+      ],
+      [
+       -34.669217,
+       -58.500084
+      ]
+     ]
+    },
+    {
+     "calle": "Gregorio de Laferrere",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.667619,
+       -58.49812
+      ],
+      [
+       -34.66779,
+       -58.498327
+      ]
+     ]
+    },
+    {
+     "calle": "Justo Antonio Suárez",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.666599,
+       -58.499373
+      ],
+      [
+       -34.666834,
+       -58.49966
+      ],
+      [
+       -34.666887,
+       -58.499724
+      ],
+      [
+       -34.667046,
+       -58.499919
+      ],
+      [
+       -34.667531,
+       -58.50051
+      ],
+      [
+       -34.66821,
+       -58.50132
+      ]
+     ]
+    },
+    {
+     "calle": "Yrupé",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.667981,
+       -58.497834
+      ],
+      [
+       -34.668077,
+       -58.497968
+      ],
+      [
+       -34.668811,
+       -58.499012
+      ],
+      [
+       -34.669409,
+       -58.499857
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "defensores",
+   "nombre": "Estadio Juan Pasquale (Defensores de Belgrano)",
+   "tipo": "estadio",
+   "barrio": "Núñez",
+   "lat": -34.541213,
+   "lon": -58.462033,
+   "equiposEspn": [
+    "10151"
+   ],
+   "cortes": [
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.5421,
+       -58.462624
+      ],
+      [
+       -34.541643,
+       -58.46311
+      ],
+      [
+       -34.541598,
+       -58.463162
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.541598,
+       -58.463162
+      ],
+      [
+       -34.541534,
+       -58.463236
+      ],
+      [
+       -34.541463,
+       -58.463315
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.542298,
+       -58.462408
+      ],
+      [
+       -34.5421,
+       -58.462624
+      ]
+     ]
+    },
+    {
+     "calle": "Comodoro Martín Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.541217,
+       -58.463066
+      ],
+      [
+       -34.541312,
+       -58.463202
+      ],
+      [
+       -34.541338,
+       -58.463256
+      ]
+     ]
+    },
+    {
+     "calle": "Comodoro Martín Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.541598,
+       -58.463162
+      ],
+      [
+       -34.541508,
+       -58.463089
+      ],
+      [
+       -34.541458,
+       -58.463049
+      ],
+      [
+       -34.541326,
+       -58.462941
+      ]
+     ]
+    },
+    {
+     "calle": "Comodoro Martín Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.540965,
+       -58.46278
+      ],
+      [
+       -34.541217,
+       -58.463066
+      ]
+     ]
+    },
+    {
+     "calle": "Comodoro Martín Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.541326,
+       -58.462941
+      ],
+      [
+       -34.541051,
+       -58.462672
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "movistar",
+   "nombre": "Movistar Arena",
+   "tipo": "arena",
+   "barrio": "Villa Crespo",
+   "lat": -34.5943,
+   "lon": -58.4481,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Humboldt",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.595018,
+       -58.448083
+      ],
+      [
+       -34.594422,
+       -58.447275
+      ],
+      [
+       -34.594226,
+       -58.447008
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "obras",
+   "nombre": "Estadio Obras Sanitarias",
+   "tipo": "arena",
+   "barrio": "Núñez",
+   "lat": -34.544934,
+   "lon": -58.458268,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.545376,
+       -58.458961
+      ],
+      [
+       -34.545317,
+       -58.459038
+      ],
+      [
+       -34.545102,
+       -58.459305
+      ],
+      [
+       -34.544725,
+       -58.459774
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.546051,
+       -58.458129
+      ],
+      [
+       -34.545975,
+       -58.458216
+      ],
+      [
+       -34.545426,
+       -58.4589
+      ],
+      [
+       -34.545376,
+       -58.458961
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.546336,
+       -58.457777
+      ],
+      [
+       -34.546273,
+       -58.457855
+      ],
+      [
+       -34.546051,
+       -58.458129
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.544725,
+       -58.459774
+      ],
+      [
+       -34.544618,
+       -58.459891
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Miguel B. Sánchez",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.543728,
+       -58.457835
+      ],
+      [
+       -34.54447,
+       -58.45929
+      ],
+      [
+       -34.54463,
+       -58.459596
+      ],
+      [
+       -34.544662,
+       -58.459658
+      ],
+      [
+       -34.544725,
+       -58.459774
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "lunapark",
+   "nombre": "Luna Park",
+   "tipo": "arena",
+   "barrio": "San Nicolás",
+   "lat": -34.602246,
+   "lon": -58.368732,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602956,
+       -58.369611
+      ],
+      [
+       -34.602907,
+       -58.369132
+      ],
+      [
+       -34.6029,
+       -58.369036
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.6029,
+       -58.369036
+      ],
+      [
+       -34.602891,
+       -58.368933
+      ],
+      [
+       -34.602841,
+       -58.368323
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602841,
+       -58.368323
+      ],
+      [
+       -34.602838,
+       -58.368219
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Eduardo Madero",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601575,
+       -58.368368
+      ],
+      [
+       -34.601613,
+       -58.368363
+      ],
+      [
+       -34.601737,
+       -58.368343
+      ],
+      [
+       -34.601826,
+       -58.368335
+      ],
+      [
+       -34.602043,
+       -58.36831
+      ],
+      [
+       -34.602566,
+       -58.36825
+      ],
+      [
+       -34.602686,
+       -58.368235
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Eduardo Madero",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602832,
+       -58.36813
+      ],
+      [
+       -34.602946,
+       -58.368119
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Eduardo Madero",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602686,
+       -58.368235
+      ],
+      [
+       -34.602838,
+       -58.368219
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Eduardo Madero",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601607,
+       -58.36828
+      ],
+      [
+       -34.601737,
+       -58.368261
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Eduardo Madero",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601737,
+       -58.368261
+      ],
+      [
+       -34.60182,
+       -58.368249
+      ],
+      [
+       -34.60265,
+       -58.368153
+      ],
+      [
+       -34.602675,
+       -58.36815
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Eduardo Madero",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602675,
+       -58.36815
+      ],
+      [
+       -34.602832,
+       -58.36813
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Eduardo Madero",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602838,
+       -58.368219
+      ],
+      [
+       -34.602954,
+       -58.368208
+      ]
+     ]
+    },
+    {
+     "calle": "Bouchard",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601379,
+       -58.369216
+      ],
+      [
+       -34.601671,
+       -58.369186
+      ]
+     ]
+    },
+    {
+     "calle": "Bouchard",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601807,
+       -58.369166
+      ],
+      [
+       -34.601897,
+       -58.369154
+      ],
+      [
+       -34.602802,
+       -58.369046
+      ],
+      [
+       -34.6029,
+       -58.369036
+      ]
+     ]
+    },
+    {
+     "calle": "Bouchard",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.6029,
+       -58.369036
+      ],
+      [
+       -34.602983,
+       -58.369023
+      ],
+      [
+       -34.603025,
+       -58.369017
+      ],
+      [
+       -34.603081,
+       -58.369007
+      ],
+      [
+       -34.603339,
+       -58.368973
+      ]
+     ]
+    },
+    {
+     "calle": "Bouchard",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601671,
+       -58.369186
+      ],
+      [
+       -34.601737,
+       -58.369178
+      ],
+      [
+       -34.601807,
+       -58.369166
+      ]
+     ]
+    },
+    {
+     "calle": "Lavalle",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601807,
+       -58.369166
+      ],
+      [
+       -34.601826,
+       -58.369281
+      ]
+     ]
+    },
+    {
+     "calle": "Lavalle",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601737,
+       -58.36844
+      ],
+      [
+       -34.601785,
+       -58.368917
+      ],
+      [
+       -34.601799,
+       -58.369062
+      ],
+      [
+       -34.601807,
+       -58.369166
+      ]
+     ]
+    },
+    {
+     "calle": "Lavalle",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601737,
+       -58.368343
+      ],
+      [
+       -34.601737,
+       -58.36844
+      ]
+     ]
+    },
+    {
+     "calle": "Trinidad Guevara",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602824,
+       -58.368043
+      ],
+      [
+       -34.602802,
+       -58.367752
+      ]
+     ]
+    },
+    {
+     "calle": "Trinidad Guevara",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602838,
+       -58.368219
+      ],
+      [
+       -34.602832,
+       -58.36813
+      ]
+     ]
+    },
+    {
+     "calle": "Trinidad Guevara",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602832,
+       -58.36813
+      ],
+      [
+       -34.602824,
+       -58.368043
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "hipodromo",
+   "nombre": "Hipódromo de Palermo",
+   "tipo": "predio",
+   "barrio": "Palermo",
+   "lat": -34.565888,
+   "lon": -58.42932,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Agustin Mendez",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.562975,
+       -58.425782
+      ],
+      [
+       -34.562963,
+       -58.425945
+      ],
+      [
+       -34.562939,
+       -58.426146
+      ],
+      [
+       -34.562907,
+       -58.426369
+      ],
+      [
+       -34.562878,
+       -58.426565
+      ],
+      [
+       -34.562822,
+       -58.426837
+      ],
+      [
+       -34.562768,
+       -58.42704
+      ],
+      [
+       -34.562645,
+       -58.427499
+      ],
+      [
+       -34.562488,
+       -58.428003
+      ],
+      [
+       -34.562438,
+       -58.428162
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.565529,
+       -58.433336
+      ],
+      [
+       -34.565789,
+       -58.432892
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.567474,
+       -58.430263
+      ],
+      [
+       -34.567757,
+       -58.429778
+      ],
+      [
+       -34.567968,
+       -58.429417
+      ],
+      [
+       -34.56939,
+       -58.426947
+      ],
+      [
+       -34.569494,
+       -58.426769
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.566755,
+       -58.431255
+      ],
+      [
+       -34.566855,
+       -58.431097
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.566855,
+       -58.431097
+      ],
+      [
+       -34.567153,
+       -58.430729
+      ],
+      [
+       -34.567228,
+       -58.430647
+      ],
+      [
+       -34.567387,
+       -58.430399
+      ],
+      [
+       -34.56741,
+       -58.430365
+      ],
+      [
+       -34.567474,
+       -58.430263
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.567298,
+       -58.43012
+      ],
+      [
+       -34.567242,
+       -58.43023
+      ],
+      [
+       -34.567104,
+       -58.430496
+      ],
+      [
+       -34.566992,
+       -58.430726
+      ],
+      [
+       -34.56688,
+       -58.431029
+      ],
+      [
+       -34.566855,
+       -58.431097
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Del Libertador",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.569334,
+       -58.426645
+      ],
+      [
+       -34.568559,
+       -58.427975
+      ],
+      [
+       -34.568206,
+       -58.428601
+      ],
+      [
+       -34.568076,
+       -58.428818
+      ],
+      [
+       -34.567798,
+       -58.429313
+      ],
+      [
+       -34.567298,
+       -58.43012
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "polo",
+   "nombre": "Campo Argentino de Polo",
+   "tipo": "predio",
+   "barrio": "Palermo",
+   "lat": -34.5715,
+   "lon": -58.427,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Avenida Dorrego",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.572732,
+       -58.427088
+      ],
+      [
+       -34.572798,
+       -58.427216
+      ],
+      [
+       -34.572859,
+       -58.427334
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Dorrego",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.571806,
+       -58.425404
+      ],
+      [
+       -34.571917,
+       -58.425597
+      ],
+      [
+       -34.572029,
+       -58.425789
+      ],
+      [
+       -34.572448,
+       -58.426547
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Dorrego",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.572448,
+       -58.426547
+      ],
+      [
+       -34.572732,
+       -58.427088
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "rural",
+   "nombre": "La Rural",
+   "tipo": "predio",
+   "barrio": "Palermo",
+   "lat": -34.578501,
+   "lon": -58.420886,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Avenida Cerviño",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.57625,
+       -58.419833
+      ],
+      [
+       -34.576276,
+       -58.419954
+      ],
+      [
+       -34.576285,
+       -58.420055
+      ],
+      [
+       -34.576277,
+       -58.420144
+      ],
+      [
+       -34.576257,
+       -58.420227
+      ],
+      [
+       -34.576066,
+       -58.42076
+      ],
+      [
+       -34.576037,
+       -58.42084
+      ],
+      [
+       -34.575893,
+       -58.421241
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Cerviño",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.576192,
+       -58.419624
+      ],
+      [
+       -34.576241,
+       -58.419802
+      ],
+      [
+       -34.57625,
+       -58.419833
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Cerviño",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.575823,
+       -58.421459
+      ],
+      [
+       -34.575893,
+       -58.421241
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Colombia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.577216,
+       -58.417425
+      ],
+      [
+       -34.577193,
+       -58.417452
+      ],
+      [
+       -34.57717,
+       -58.417479
+      ],
+      [
+       -34.577079,
+       -58.417569
+      ],
+      [
+       -34.576956,
+       -58.417689
+      ],
+      [
+       -34.576732,
+       -58.417877
+      ],
+      [
+       -34.576616,
+       -58.417964
+      ],
+      [
+       -34.576491,
+       -58.418051
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Colombia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.577331,
+       -58.417278
+      ],
+      [
+       -34.577216,
+       -58.417425
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580249,
+       -58.420007
+      ],
+      [
+       -34.580279,
+       -58.420037
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580864,
+       -58.420385
+      ],
+      [
+       -34.580797,
+       -58.42038
+      ],
+      [
+       -34.580732,
+       -58.420366
+      ],
+      [
+       -34.580643,
+       -58.420332
+      ],
+      [
+       -34.580552,
+       -58.420292
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580552,
+       -58.420292
+      ],
+      [
+       -34.580602,
+       -58.420348
+      ],
+      [
+       -34.580645,
+       -58.420409
+      ],
+      [
+       -34.580679,
+       -58.420475
+      ],
+      [
+       -34.580718,
+       -58.420569
+      ],
+      [
+       -34.580743,
+       -58.420666
+      ],
+      [
+       -34.580755,
+       -58.420766
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.577331,
+       -58.417278
+      ],
+      [
+       -34.577506,
+       -58.417441
+      ],
+      [
+       -34.577547,
+       -58.417479
+      ],
+      [
+       -34.577612,
+       -58.417539
+      ],
+      [
+       -34.577891,
+       -58.417799
+      ],
+      [
+       -34.578177,
+       -58.418065
+      ],
+      [
+       -34.578463,
+       -58.418332
+      ],
+      [
+       -34.57875,
+       -58.418598
+      ],
+      [
+       -34.578778,
+       -58.418625
+      ],
+      [
+       -34.578859,
+       -58.4187
+      ],
+      [
+       -34.578943,
+       -58.418779
+      ],
+      [
+       -34.579018,
+       -58.418849
+      ],
+      [
+       -34.579313,
+       -58.419123
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.579437,
+       -58.419244
+      ],
+      [
+       -34.579708,
+       -58.419497
+      ],
+      [
+       -34.580123,
+       -58.419888
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.579313,
+       -58.419123
+      ],
+      [
+       -34.579437,
+       -58.419244
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.58042,
+       -58.420167
+      ],
+      [
+       -34.580519,
+       -58.42026
+      ],
+      [
+       -34.580552,
+       -58.420292
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580123,
+       -58.419888
+      ],
+      [
+       -34.580195,
+       -58.419955
+      ],
+      [
+       -34.580249,
+       -58.420007
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580279,
+       -58.420037
+      ],
+      [
+       -34.58042,
+       -58.420167
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Santa Fe",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580713,
+       -58.42133
+      ],
+      [
+       -34.580726,
+       -58.421551
+      ],
+      [
+       -34.580728,
+       -58.421678
+      ],
+      [
+       -34.580723,
+       -58.421726
+      ],
+      [
+       -34.580701,
+       -58.421796
+      ],
+      [
+       -34.58067,
+       -58.421863
+      ],
+      [
+       -34.580526,
+       -58.422121
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Santa Fe",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.579818,
+       -58.423762
+      ],
+      [
+       -34.579842,
+       -58.42373
+      ],
+      [
+       -34.579905,
+       -58.423643
+      ],
+      [
+       -34.579963,
+       -58.423564
+      ],
+      [
+       -34.580525,
+       -58.422734
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Santa Fe",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580526,
+       -58.422121
+      ],
+      [
+       -34.580421,
+       -58.42223
+      ],
+      [
+       -34.580397,
+       -58.422261
+      ],
+      [
+       -34.580332,
+       -58.422357
+      ],
+      [
+       -34.580265,
+       -58.422458
+      ],
+      [
+       -34.579728,
+       -58.423292
+      ],
+      [
+       -34.579712,
+       -58.423318
+      ],
+      [
+       -34.579646,
+       -58.423428
+      ],
+      [
+       -34.579591,
+       -58.423518
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Santa Fe",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580592,
+       -58.422637
+      ],
+      [
+       -34.58066,
+       -58.42254
+      ],
+      [
+       -34.581057,
+       -58.421947
+      ],
+      [
+       -34.581077,
+       -58.421913
+      ],
+      [
+       -34.581146,
+       -58.421764
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Santa Fe",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580525,
+       -58.422734
+      ],
+      [
+       -34.580592,
+       -58.422637
+      ]
+     ]
+    },
+    {
+     "calle": "Beruti",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.578692,
+       -58.422669
+      ],
+      [
+       -34.57824,
+       -58.423433
+      ]
+     ]
+    },
+    {
+     "calle": "Calzada Circular Plaza Italia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580713,
+       -58.42133
+      ],
+      [
+       -34.580799,
+       -58.421485
+      ],
+      [
+       -34.58085,
+       -58.421565
+      ],
+      [
+       -34.580894,
+       -58.421625
+      ],
+      [
+       -34.580931,
+       -58.421661
+      ],
+      [
+       -34.580964,
+       -58.421684
+      ],
+      [
+       -34.580999,
+       -58.421701
+      ],
+      [
+       -34.58108,
+       -58.421734
+      ],
+      [
+       -34.581146,
+       -58.421764
+      ]
+     ]
+    },
+    {
+     "calle": "Calzada Circular Plaza Italia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580917,
+       -58.420473
+      ],
+      [
+       -34.580849,
+       -58.420579
+      ],
+      [
+       -34.580755,
+       -58.420766
+      ]
+     ]
+    },
+    {
+     "calle": "Calzada Circular Plaza Italia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580755,
+       -58.420766
+      ],
+      [
+       -34.58073,
+       -58.420876
+      ],
+      [
+       -34.580713,
+       -58.420989
+      ],
+      [
+       -34.580705,
+       -58.421103
+      ],
+      [
+       -34.580705,
+       -58.421217
+      ],
+      [
+       -34.580713,
+       -58.42133
+      ]
+     ]
+    },
+    {
+     "calle": "Darregueyra",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.579712,
+       -58.423318
+      ],
+      [
+       -34.57972,
+       -58.423435
+      ],
+      [
+       -34.579745,
+       -58.423498
+      ],
+      [
+       -34.579818,
+       -58.423572
+      ],
+      [
+       -34.579853,
+       -58.4236
+      ],
+      [
+       -34.579905,
+       -58.423643
+      ]
+     ]
+    },
+    {
+     "calle": "Darregueyra",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.579905,
+       -58.423643
+      ],
+      [
+       -34.579974,
+       -58.423703
+      ]
+     ]
+    },
+    {
+     "calle": "Fray Justo Santa María de Oro",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.575893,
+       -58.421241
+      ],
+      [
+       -34.577335,
+       -58.42262
+      ]
+     ]
+    },
+    {
+     "calle": "Fray Justo Santa María de Oro",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.575581,
+       -58.421009
+      ],
+      [
+       -34.575893,
+       -58.421241
+      ]
+     ]
+    },
+    {
+     "calle": "Fray Justo Santa María de Oro",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.577335,
+       -58.42262
+      ],
+      [
+       -34.57824,
+       -58.423433
+      ],
+      [
+       -34.578529,
+       -58.423698
+      ]
+     ]
+    },
+    {
+     "calle": "Juncal",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.577765,
+       -58.421894
+      ],
+      [
+       -34.5776,
+       -58.422167
+      ],
+      [
+       -34.577335,
+       -58.42262
+      ]
+     ]
+    },
+    {
+     "calle": "Uriarte",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580592,
+       -58.422637
+      ],
+      [
+       -34.580551,
+       -58.422588
+      ],
+      [
+       -34.580521,
+       -58.422553
+      ],
+      [
+       -34.580475,
+       -58.422498
+      ],
+      [
+       -34.580404,
+       -58.42243
+      ]
+     ]
+    },
+    {
+     "calle": "Uriarte",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580404,
+       -58.42243
+      ],
+      [
+       -34.580332,
+       -58.422357
+      ]
+     ]
+    },
+    {
+     "calle": "Uriarte",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.580659,
+       -58.422718
+      ],
+      [
+       -34.580592,
+       -58.422637
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "parqueciudad",
+   "nombre": "Parque de la Ciudad",
+   "tipo": "predio",
+   "barrio": "Villa Soldati",
+   "lat": -34.671159,
+   "lon": -58.451876,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "23 de Junio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.673687,
+       -58.454855
+      ],
+      [
+       -34.674307,
+       -58.454068
+      ],
+      [
+       -34.67434,
+       -58.454026
+      ],
+      [
+       -34.674987,
+       -58.453186
+      ],
+      [
+       -34.675495,
+       -58.452541
+      ],
+      [
+       -34.675591,
+       -58.452428
+      ],
+      [
+       -34.6761,
+       -58.451799
+      ],
+      [
+       -34.676186,
+       -58.451685
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida General Francisco Fernández de La Cruz",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.667073,
+       -58.45215
+      ],
+      [
+       -34.667208,
+       -58.4522
+      ],
+      [
+       -34.6673,
+       -58.452241
+      ],
+      [
+       -34.667426,
+       -58.452309
+      ],
+      [
+       -34.667542,
+       -58.452399
+      ],
+      [
+       -34.667637,
+       -58.452498
+      ],
+      [
+       -34.667714,
+       -58.452603
+      ],
+      [
+       -34.667801,
+       -58.452756
+      ],
+      [
+       -34.66787,
+       -58.452902
+      ],
+      [
+       -34.66811,
+       -58.453466
+      ],
+      [
+       -34.668176,
+       -58.453622
+      ],
+      [
+       -34.668257,
+       -58.453784
+      ],
+      [
+       -34.668348,
+       -58.45393
+      ],
+      [
+       -34.668453,
+       -58.454072
+      ],
+      [
+       -34.6686,
+       -58.454248
+      ],
+      [
+       -34.669009,
+       -58.454706
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida General Francisco Fernández de La Cruz",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.669447,
+       -58.454865
+      ],
+      [
+       -34.668659,
+       -58.453997
+      ],
+      [
+       -34.668549,
+       -58.453863
+      ],
+      [
+       -34.668452,
+       -58.453716
+      ],
+      [
+       -34.668393,
+       -58.453616
+      ],
+      [
+       -34.668323,
+       -58.453478
+      ],
+      [
+       -34.668259,
+       -58.453319
+      ],
+      [
+       -34.668035,
+       -58.452791
+      ],
+      [
+       -34.667994,
+       -58.4527
+      ],
+      [
+       -34.667918,
+       -58.452557
+      ],
+      [
+       -34.667828,
+       -58.452414
+      ],
+      [
+       -34.667757,
+       -58.452323
+      ],
+      [
+       -34.667655,
+       -58.452214
+      ],
+      [
+       -34.667544,
+       -58.452121
+      ],
+      [
+       -34.667411,
+       -58.452043
+      ],
+      [
+       -34.667195,
+       -58.451962
+      ],
+      [
+       -34.666977,
+       -58.451893
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida General Francisco Fernández de La Cruz",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.670488,
+       -58.45593
+      ],
+      [
+       -34.669992,
+       -58.4554
+      ],
+      [
+       -34.669549,
+       -58.454965
+      ],
+      [
+       -34.669447,
+       -58.454865
+      ]
+     ]
+    },
+    {
+     "calle": "Camino Perimetral",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.668553,
+       -58.451824
+      ],
+      [
+       -34.668326,
+       -58.451836
+      ],
+      [
+       -34.668,
+       -58.451774
+      ],
+      [
+       -34.667826,
+       -58.451714
+      ],
+      [
+       -34.667622,
+       -58.451555
+      ],
+      [
+       -34.66756,
+       -58.451498
+      ],
+      [
+       -34.667397,
+       -58.451325
+      ],
+      [
+       -34.667282,
+       -58.451162
+      ],
+      [
+       -34.667193,
+       -58.451019
+      ],
+      [
+       -34.667121,
+       -58.450897
+      ],
+      [
+       -34.66701,
+       -58.450639
+      ],
+      [
+       -34.666973,
+       -58.450428
+      ]
+     ]
+    },
+    {
+     "calle": "Camino Perimetral",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.667075,
+       -58.449183
+      ],
+      [
+       -34.667086,
+       -58.449155
+      ],
+      [
+       -34.667348,
+       -58.448709
+      ],
+      [
+       -34.667675,
+       -58.448231
+      ],
+      [
+       -34.668939,
+       -58.446504
+      ],
+      [
+       -34.669211,
+       -58.446132
+      ],
+      [
+       -34.669397,
+       -58.445991
+      ],
+      [
+       -34.669607,
+       -58.445892
+      ],
+      [
+       -34.669863,
+       -58.4458
+      ],
+      [
+       -34.669945,
+       -58.4458
+      ]
+     ]
+    },
+    {
+     "calle": "Camino Perimetral",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.672084,
+       -58.446572
+      ],
+      [
+       -34.673655,
+       -58.447323
+      ],
+      [
+       -34.673769,
+       -58.44739
+      ],
+      [
+       -34.673866,
+       -58.447468
+      ],
+      [
+       -34.67401,
+       -58.447625
+      ],
+      [
+       -34.674051,
+       -58.447669
+      ],
+      [
+       -34.674209,
+       -58.447831
+      ],
+      [
+       -34.674278,
+       -58.447915
+      ],
+      [
+       -34.674342,
+       -58.448023
+      ]
+     ]
+    },
+    {
+     "calle": "Camino Perimetral",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.675421,
+       -58.450408
+      ],
+      [
+       -34.675223,
+       -58.450551
+      ],
+      [
+       -34.6752,
+       -58.450558
+      ],
+      [
+       -34.67518,
+       -58.450554
+      ],
+      [
+       -34.675106,
+       -58.450495
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "autodromo",
+   "nombre": "Autódromo Oscar y Juan Gálvez",
+   "tipo": "predio",
+   "barrio": "Villa Riachuelo",
+   "lat": -34.691648,
+   "lon": -58.460546,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.69051,
+       -58.462019
+      ],
+      [
+       -34.691237,
+       -58.462814
+      ],
+      [
+       -34.691697,
+       -58.463316
+      ],
+      [
+       -34.691762,
+       -58.463383
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.688603,
+       -58.459979
+      ],
+      [
+       -34.689298,
+       -58.460743
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.694014,
+       -58.46544
+      ],
+      [
+       -34.693765,
+       -58.465167
+      ],
+      [
+       -34.693737,
+       -58.465137
+      ],
+      [
+       -34.692321,
+       -58.463589
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.691762,
+       -58.463383
+      ],
+      [
+       -34.691858,
+       -58.463488
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.689788,
+       -58.46126
+      ],
+      [
+       -34.690412,
+       -58.461914
+      ],
+      [
+       -34.69051,
+       -58.462019
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.689493,
+       -58.460482
+      ],
+      [
+       -34.689112,
+       -58.460074
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.692321,
+       -58.463589
+      ],
+      [
+       -34.692025,
+       -58.463287
+      ],
+      [
+       -34.691925,
+       -58.463174
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.691925,
+       -58.463174
+      ],
+      [
+       -34.691859,
+       -58.463101
+      ],
+      [
+       -34.690926,
+       -58.462054
+      ],
+      [
+       -34.690671,
+       -58.461777
+      ],
+      [
+       -34.690599,
+       -58.461714
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.689112,
+       -58.460074
+      ],
+      [
+       -34.688801,
+       -58.459745
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Coronel Roca",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.690599,
+       -58.461714
+      ],
+      [
+       -34.690572,
+       -58.461679
+      ],
+      [
+       -34.690528,
+       -58.461627
+      ],
+      [
+       -34.690068,
+       -58.461118
+      ],
+      [
+       -34.689493,
+       -58.460482
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Soldado de la Frontera",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.688603,
+       -58.459979
+      ],
+      [
+       -34.688681,
+       -58.460106
+      ],
+      [
+       -34.688721,
+       -58.460239
+      ],
+      [
+       -34.688728,
+       -58.460292
+      ],
+      [
+       -34.68873,
+       -58.460349
+      ],
+      [
+       -34.688719,
+       -58.460439
+      ]
+     ]
+    },
+    {
+     "calle": "Teniente General Eduardo Racedo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.690331,
+       -58.46209
+      ],
+      [
+       -34.69051,
+       -58.462019
+      ]
+     ]
+    },
+    {
+     "calle": "Teniente General Eduardo Racedo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.69051,
+       -58.462019
+      ],
+      [
+       -34.690537,
+       -58.461995
+      ],
+      [
+       -34.690558,
+       -58.46199
+      ]
+     ]
+    },
+    {
+     "calle": "Teniente General Eduardo Racedo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.690558,
+       -58.46199
+      ],
+      [
+       -34.690586,
+       -58.461931
+      ],
+      [
+       -34.690596,
+       -58.461895
+      ],
+      [
+       -34.690602,
+       -58.461833
+      ]
+     ]
+    },
+    {
+     "calle": "Teniente General Eduardo Racedo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.690602,
+       -58.461833
+      ],
+      [
+       -34.69061,
+       -58.461768
+      ],
+      [
+       -34.690599,
+       -58.461714
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "colon",
+   "nombre": "Teatro Colón",
+   "tipo": "teatro",
+   "barrio": "San Nicolás",
+   "lat": -34.601071,
+   "lon": -58.383304,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Arturo Toscanini",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.600778,
+       -58.382423
+      ],
+      [
+       -34.600783,
+       -58.382552
+      ],
+      [
+       -34.600805,
+       -58.3831
+      ],
+      [
+       -34.600813,
+       -58.383289
+      ],
+      [
+       -34.600832,
+       -58.38378
+      ],
+      [
+       -34.60084,
+       -58.383948
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.60021,
+       -58.382443
+      ],
+      [
+       -34.600317,
+       -58.382436
+      ],
+      [
+       -34.600423,
+       -58.382433
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601397,
+       -58.382368
+      ],
+      [
+       -34.601494,
+       -58.382359
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.600778,
+       -58.382423
+      ],
+      [
+       -34.601289,
+       -58.382385
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601289,
+       -58.382385
+      ],
+      [
+       -34.601397,
+       -58.382368
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.600423,
+       -58.382433
+      ],
+      [
+       -34.600778,
+       -58.382423
+      ]
+     ]
+    },
+    {
+     "calle": "Libertad",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601453,
+       -58.383908
+      ],
+      [
+       -34.601343,
+       -58.383913
+      ],
+      [
+       -34.60122,
+       -58.383924
+      ],
+      [
+       -34.60084,
+       -58.383948
+      ],
+      [
+       -34.600584,
+       -58.383964
+      ]
+     ]
+    },
+    {
+     "calle": "Libertad",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.600417,
+       -58.383975
+      ],
+      [
+       -34.600338,
+       -58.383978
+      ]
+     ]
+    },
+    {
+     "calle": "Libertad",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601539,
+       -58.383903
+      ],
+      [
+       -34.601453,
+       -58.383908
+      ]
+     ]
+    },
+    {
+     "calle": "Libertad",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.600584,
+       -58.383964
+      ],
+      [
+       -34.600417,
+       -58.383975
+      ]
+     ]
+    },
+    {
+     "calle": "Tucumán",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601397,
+       -58.382368
+      ],
+      [
+       -34.601402,
+       -58.382497
+      ],
+      [
+       -34.601447,
+       -58.3838
+      ],
+      [
+       -34.601453,
+       -58.383908
+      ]
+     ]
+    },
+    {
+     "calle": "Tucumán",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601497,
+       -58.384206
+      ],
+      [
+       -34.601537,
+       -58.384409
+      ]
+     ]
+    },
+    {
+     "calle": "Tucumán",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.60139,
+       -58.381975
+      ],
+      [
+       -34.601397,
+       -58.382258
+      ],
+      [
+       -34.601397,
+       -58.382368
+      ]
+     ]
+    },
+    {
+     "calle": "Tucumán",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601384,
+       -58.381821
+      ],
+      [
+       -34.60139,
+       -58.381975
+      ]
+     ]
+    },
+    {
+     "calle": "Tucumán",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.601453,
+       -58.383908
+      ],
+      [
+       -34.601468,
+       -58.384017
+      ],
+      [
+       -34.601477,
+       -58.38408
+      ],
+      [
+       -34.601489,
+       -58.384163
+      ],
+      [
+       -34.601497,
+       -58.384206
+      ]
+     ]
+    },
+    {
+     "calle": "Viamonte",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.600417,
+       -58.383975
+      ],
+      [
+       -34.600406,
+       -58.383853
+      ],
+      [
+       -34.600323,
+       -58.382525
+      ],
+      [
+       -34.600317,
+       -58.382436
+      ]
+     ]
+    },
+    {
+     "calle": "Viamonte",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.600435,
+       -58.384077
+      ],
+      [
+       -34.600417,
+       -58.383975
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "congreso",
+   "nombre": "Plaza del Congreso",
+   "tipo": "plaza",
+   "barrio": "Balvanera",
+   "lat": -34.609705,
+   "lon": -58.390442,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "10 de Diciembre de 1983",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609249,
+       -58.391315
+      ],
+      [
+       -34.609338,
+       -58.39142
+      ],
+      [
+       -34.609381,
+       -58.391457
+      ],
+      [
+       -34.609411,
+       -58.391474
+      ],
+      [
+       -34.609479,
+       -58.391503
+      ],
+      [
+       -34.609517,
+       -58.39151
+      ],
+      [
+       -34.609701,
+       -58.391497
+      ],
+      [
+       -34.609969,
+       -58.391462
+      ],
+      [
+       -34.609998,
+       -58.391449
+      ],
+      [
+       -34.610049,
+       -58.391413
+      ],
+      [
+       -34.610128,
+       -58.391344
+      ],
+      [
+       -34.610154,
+       -58.391314
+      ],
+      [
+       -34.610177,
+       -58.391266
+      ],
+      [
+       -34.610207,
+       -58.391135
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Entre Ríos",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.610348,
+       -58.391882
+      ],
+      [
+       -34.61026,
+       -58.391871
+      ],
+      [
+       -34.6102,
+       -58.391871
+      ],
+      [
+       -34.610179,
+       -58.391874
+      ],
+      [
+       -34.610033,
+       -58.39188
+      ],
+      [
+       -34.609711,
+       -58.391911
+      ],
+      [
+       -34.609625,
+       -58.39192
+      ],
+      [
+       -34.609413,
+       -58.391942
+      ],
+      [
+       -34.609359,
+       -58.391945
+      ],
+      [
+       -34.609228,
+       -58.391958
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Entre Ríos",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.610427,
+       -58.391876
+      ],
+      [
+       -34.610348,
+       -58.391882
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Hipólito Yrigoyen",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.610156,
+       -58.390422
+      ],
+      [
+       -34.610147,
+       -58.390299
+      ],
+      [
+       -34.610073,
+       -58.389179
+      ],
+      [
+       -34.610064,
+       -58.389054
+      ],
+      [
+       -34.610058,
+       -58.388963
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609068,
+       -58.388639
+      ],
+      [
+       -34.609076,
+       -58.388766
+      ],
+      [
+       -34.609088,
+       -58.389052
+      ],
+      [
+       -34.609093,
+       -58.389184
+      ],
+      [
+       -34.609102,
+       -58.389283
+      ],
+      [
+       -34.609138,
+       -58.389664
+      ],
+      [
+       -34.609149,
+       -58.389837
+      ],
+      [
+       -34.609163,
+       -58.390041
+      ],
+      [
+       -34.609166,
+       -58.390082
+      ],
+      [
+       -34.609192,
+       -58.390472
+      ],
+      [
+       -34.609198,
+       -58.39056
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609228,
+       -58.391958
+      ],
+      [
+       -34.609219,
+       -58.391997
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609198,
+       -58.39056
+      ],
+      [
+       -34.609219,
+       -58.390875
+      ],
+      [
+       -34.609249,
+       -58.391315
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609249,
+       -58.391315
+      ],
+      [
+       -34.609254,
+       -58.391412
+      ],
+      [
+       -34.609241,
+       -58.39177
+      ],
+      [
+       -34.609228,
+       -58.391958
+      ]
+     ]
+    },
+    {
+     "calle": "Hipólito Yrigoyen",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.610348,
+       -58.391882
+      ],
+      [
+       -34.610284,
+       -58.391669
+      ],
+      [
+       -34.610253,
+       -58.391489
+      ],
+      [
+       -34.610207,
+       -58.391135
+      ]
+     ]
+    },
+    {
+     "calle": "Hipólito Yrigoyen",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.610207,
+       -58.391135
+      ],
+      [
+       -34.610206,
+       -58.391056
+      ],
+      [
+       -34.610194,
+       -58.390753
+      ],
+      [
+       -34.610188,
+       -58.390668
+      ],
+      [
+       -34.610179,
+       -58.390588
+      ],
+      [
+       -34.610156,
+       -58.390422
+      ]
+     ]
+    },
+    {
+     "calle": "Hipólito Yrigoyen",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.610368,
+       -58.391979
+      ],
+      [
+       -34.610348,
+       -58.391882
+      ]
+     ]
+    },
+    {
+     "calle": "Rodríguez Peña",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.608679,
+       -58.390608
+      ],
+      [
+       -34.608934,
+       -58.390585
+      ],
+      [
+       -34.609198,
+       -58.39056
+      ]
+     ]
+    },
+    {
+     "calle": "Virrey Cevallos",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609093,
+       -58.389184
+      ],
+      [
+       -34.609218,
+       -58.389167
+      ],
+      [
+       -34.60924,
+       -58.389165
+      ],
+      [
+       -34.609967,
+       -58.389066
+      ],
+      [
+       -34.610064,
+       -58.389054
+      ]
+     ]
+    },
+    {
+     "calle": "Virrey Cevallos",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.610064,
+       -58.389054
+      ],
+      [
+       -34.610158,
+       -58.38905
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "plazamayo",
+   "nombre": "Plaza de Mayo",
+   "tipo": "plaza",
+   "barrio": "Monserrat",
+   "lat": -34.608418,
+   "lon": -58.37217,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Avenida Hipólito Yrigoyen",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609091,
+       -58.373511
+      ],
+      [
+       -34.609069,
+       -58.373464
+      ],
+      [
+       -34.60906,
+       -58.373444
+      ],
+      [
+       -34.609053,
+       -58.373424
+      ],
+      [
+       -34.609048,
+       -58.373402
+      ],
+      [
+       -34.609043,
+       -58.373378
+      ],
+      [
+       -34.609037,
+       -58.373327
+      ],
+      [
+       -34.609018,
+       -58.373148
+      ],
+      [
+       -34.609,
+       -58.372888
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Hipólito Yrigoyen",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.608855,
+       -58.370749
+      ],
+      [
+       -34.608853,
+       -58.370682
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Hipólito Yrigoyen",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609,
+       -58.372888
+      ],
+      [
+       -34.608948,
+       -58.3722
+      ],
+      [
+       -34.608943,
+       -58.372134
+      ],
+      [
+       -34.608938,
+       -58.372047
+      ],
+      [
+       -34.608934,
+       -58.371992
+      ],
+      [
+       -34.608929,
+       -58.37191
+      ],
+      [
+       -34.608919,
+       -58.371751
+      ],
+      [
+       -34.608908,
+       -58.371577
+      ],
+      [
+       -34.608899,
+       -58.371449
+      ],
+      [
+       -34.608891,
+       -58.371317
+      ],
+      [
+       -34.608868,
+       -58.371021
+      ],
+      [
+       -34.608863,
+       -58.370921
+      ],
+      [
+       -34.608855,
+       -58.370749
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.607483,
+       -58.370821
+      ],
+      [
+       -34.60766,
+       -58.370985
+      ],
+      [
+       -34.60776,
+       -58.371094
+      ],
+      [
+       -34.607786,
+       -58.371147
+      ],
+      [
+       -34.607802,
+       -58.371181
+      ],
+      [
+       -34.607819,
+       -58.371232
+      ],
+      [
+       -34.607831,
+       -58.371287
+      ],
+      [
+       -34.607841,
+       -58.37139
+      ],
+      [
+       -34.607843,
+       -58.371464
+      ],
+      [
+       -34.607851,
+       -58.37166
+      ],
+      [
+       -34.607854,
+       -58.371743
+      ],
+      [
+       -34.607856,
+       -58.3718
+      ],
+      [
+       -34.607858,
+       -58.371856
+      ],
+      [
+       -34.607862,
+       -58.371918
+      ],
+      [
+       -34.607873,
+       -58.372121
+      ],
+      [
+       -34.607876,
+       -58.372181
+      ],
+      [
+       -34.607882,
+       -58.372254
+      ],
+      [
+       -34.607912,
+       -58.372687
+      ],
+      [
+       -34.607918,
+       -58.372777
+      ],
+      [
+       -34.607933,
+       -58.372992
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Rivadavia",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.607933,
+       -58.372992
+      ],
+      [
+       -34.607978,
+       -58.373434
+      ],
+      [
+       -34.607973,
+       -58.373539
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida de Mayo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.608442,
+       -58.373436
+      ],
+      [
+       -34.608456,
+       -58.373698
+      ],
+      [
+       -34.608458,
+       -58.373723
+      ],
+      [
+       -34.608462,
+       -58.373747
+      ],
+      [
+       -34.608468,
+       -58.373768
+      ],
+      [
+       -34.608475,
+       -58.373791
+      ],
+      [
+       -34.608486,
+       -58.373819
+      ],
+      [
+       -34.608517,
+       -58.373888
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida de Mayo",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.608517,
+       -58.373888
+      ],
+      [
+       -34.608519,
+       -58.3739
+      ]
+     ]
+    },
+    {
+     "calle": "Bolívar",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.607973,
+       -58.373539
+      ],
+      [
+       -34.608036,
+       -58.373533
+      ],
+      [
+       -34.608103,
+       -58.373527
+      ],
+      [
+       -34.608278,
+       -58.373506
+      ],
+      [
+       -34.608292,
+       -58.373503
+      ],
+      [
+       -34.608305,
+       -58.373496
+      ],
+      [
+       -34.608317,
+       -58.373489
+      ],
+      [
+       -34.60833,
+       -58.373478
+      ],
+      [
+       -34.608342,
+       -58.373464
+      ],
+      [
+       -34.60836,
+       -58.373439
+      ]
+     ]
+    },
+    {
+     "calle": "Bolívar",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609091,
+       -58.373511
+      ],
+      [
+       -34.609257,
+       -58.373516
+      ],
+      [
+       -34.609354,
+       -58.373511
+      ]
+     ]
+    },
+    {
+     "calle": "Bolívar",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.608442,
+       -58.373436
+      ],
+      [
+       -34.608623,
+       -58.373427
+      ]
+     ]
+    },
+    {
+     "calle": "Bolívar",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.609091,
+       -58.373511
+      ],
+      [
+       -34.608946,
+       -58.3735
+      ],
+      [
+       -34.608625,
+       -58.373514
+      ],
+      [
+       -34.608596,
+       -58.37353
+      ],
+      [
+       -34.608575,
+       -58.373554
+      ],
+      [
+       -34.608562,
+       -58.373585
+      ],
+      [
+       -34.608558,
+       -58.373624
+      ],
+      [
+       -34.608563,
+       -58.373802
+      ],
+      [
+       -34.608517,
+       -58.373888
+      ]
+     ]
+    },
+    {
+     "calle": "Bolívar",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.60836,
+       -58.373439
+      ],
+      [
+       -34.608442,
+       -58.373436
+      ]
+     ]
+    },
+    {
+     "calle": "Bolívar",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.608623,
+       -58.373427
+      ],
+      [
+       -34.608803,
+       -58.373432
+      ],
+      [
+       -34.608904,
+       -58.373433
+      ],
+      [
+       -34.608945,
+       -58.373438
+      ],
+      [
+       -34.608964,
+       -58.373443
+      ],
+      [
+       -34.608983,
+       -58.37345
+      ],
+      [
+       -34.609005,
+       -58.37346
+      ],
+      [
+       -34.609091,
+       -58.373511
+      ]
+     ]
+    },
+    {
+     "calle": "Bolívar",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.608623,
+       -58.373427
+      ],
+      [
+       -34.608714,
+       -58.373377
+      ],
+      [
+       -34.608762,
+       -58.373342
+      ],
+      [
+       -34.608819,
+       -58.373294
+      ],
+      [
+       -34.608863,
+       -58.373246
+      ],
+      [
+       -34.608884,
+       -58.373223
+      ],
+      [
+       -34.608941,
+       -58.373121
+      ],
+      [
+       -34.608974,
+       -58.373015
+      ],
+      [
+       -34.609,
+       -58.372888
+      ]
+     ]
+    },
+    {
+     "calle": "Bolívar",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.607933,
+       -58.372992
+      ],
+      [
+       -34.607991,
+       -58.373139
+      ],
+      [
+       -34.608021,
+       -58.373188
+      ],
+      [
+       -34.60806,
+       -58.373256
+      ],
+      [
+       -34.608094,
+       -58.373299
+      ],
+      [
+       -34.608132,
+       -58.373339
+      ],
+      [
+       -34.608171,
+       -58.373372
+      ],
+      [
+       -34.608218,
+       -58.373396
+      ],
+      [
+       -34.608274,
+       -58.373418
+      ],
+      [
+       -34.60836,
+       -58.373439
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  },
+  {
+   "id": "obelisco",
+   "nombre": "Obelisco / Av. 9 de Julio",
+   "tipo": "plaza",
+   "barrio": "San Nicolás",
+   "lat": -34.603726,
+   "lon": -58.381615,
+   "equiposEspn": [],
+   "cortes": [
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.60247,
+       -58.38192
+      ],
+      [
+       -34.602554,
+       -58.381916
+      ],
+      [
+       -34.602648,
+       -58.381912
+      ],
+      [
+       -34.602712,
+       -58.381913
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603863,
+       -58.382124
+      ],
+      [
+       -34.604063,
+       -58.382044
+      ],
+      [
+       -34.604119,
+       -58.382032
+      ],
+      [
+       -34.604317,
+       -58.381967
+      ],
+      [
+       -34.604626,
+       -58.381857
+      ],
+      [
+       -34.604725,
+       -58.381823
+      ],
+      [
+       -34.604818,
+       -58.381802
+      ],
+      [
+       -34.604883,
+       -58.381792
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603982,
+       -58.381071
+      ],
+      [
+       -34.603655,
+       -58.38107
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605146,
+       -58.381299
+      ],
+      [
+       -34.605032,
+       -58.381306
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603392,
+       -58.381077
+      ],
+      [
+       -34.603295,
+       -58.381129
+      ],
+      [
+       -34.603221,
+       -58.381157
+      ],
+      [
+       -34.603155,
+       -58.381186
+      ],
+      [
+       -34.603093,
+       -58.381216
+      ],
+      [
+       -34.603017,
+       -58.381256
+      ],
+      [
+       -34.602956,
+       -58.381292
+      ],
+      [
+       -34.602879,
+       -58.381342
+      ],
+      [
+       -34.602774,
+       -58.3814
+      ],
+      [
+       -34.60268,
+       -58.381431
+      ],
+      [
+       -34.602635,
+       -58.381446
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604852,
+       -58.381306
+      ],
+      [
+       -34.604802,
+       -58.381299
+      ],
+      [
+       -34.604748,
+       -58.381286
+      ],
+      [
+       -34.604706,
+       -58.381271
+      ],
+      [
+       -34.60466,
+       -58.381254
+      ],
+      [
+       -34.604611,
+       -58.381235
+      ],
+      [
+       -34.604472,
+       -58.381174
+      ],
+      [
+       -34.604421,
+       -58.381153
+      ],
+      [
+       -34.604362,
+       -58.381133
+      ],
+      [
+       -34.604309,
+       -58.381119
+      ],
+      [
+       -34.604253,
+       -58.381107
+      ],
+      [
+       -34.604179,
+       -58.381091
+      ],
+      [
+       -34.604085,
+       -58.381085
+      ],
+      [
+       -34.604076,
+       -58.381084
+      ],
+      [
+       -34.603982,
+       -58.381071
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603655,
+       -58.38107
+      ],
+      [
+       -34.6035,
+       -58.381075
+      ],
+      [
+       -34.603392,
+       -58.381077
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603378,
+       -58.382161
+      ],
+      [
+       -34.603446,
+       -58.382158
+      ],
+      [
+       -34.603482,
+       -58.382157
+      ],
+      [
+       -34.603522,
+       -58.382154
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602543,
+       -58.381464
+      ],
+      [
+       -34.602461,
+       -58.381467
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602635,
+       -58.381446
+      ],
+      [
+       -34.602543,
+       -58.381464
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602712,
+       -58.381913
+      ],
+      [
+       -34.602827,
+       -58.381954
+      ],
+      [
+       -34.602905,
+       -58.381986
+      ],
+      [
+       -34.603051,
+       -58.382057
+      ],
+      [
+       -34.603144,
+       -58.382094
+      ],
+      [
+       -34.603378,
+       -58.382161
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603726,
+       -58.382132
+      ],
+      [
+       -34.603863,
+       -58.382124
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603522,
+       -58.382154
+      ],
+      [
+       -34.603726,
+       -58.382132
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605032,
+       -58.381306
+      ],
+      [
+       -34.604945,
+       -58.381308
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604945,
+       -58.381308
+      ],
+      [
+       -34.604852,
+       -58.381306
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.60506,
+       -58.381773
+      ],
+      [
+       -34.60522,
+       -58.381765
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida 9 de Julio",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604883,
+       -58.381792
+      ],
+      [
+       -34.604968,
+       -58.38178
+      ],
+      [
+       -34.60506,
+       -58.381773
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.60382,
+       -58.381528
+      ],
+      [
+       -34.603798,
+       -58.381394
+      ],
+      [
+       -34.603789,
+       -58.38136
+      ],
+      [
+       -34.603772,
+       -58.381293
+      ],
+      [
+       -34.603756,
+       -58.381238
+      ],
+      [
+       -34.603737,
+       -58.381193
+      ],
+      [
+       -34.603718,
+       -58.381158
+      ],
+      [
+       -34.603701,
+       -58.381132
+      ],
+      [
+       -34.603655,
+       -58.38107
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603726,
+       -58.382132
+      ],
+      [
+       -34.6038,
+       -58.38193
+      ],
+      [
+       -34.603811,
+       -58.381889
+      ],
+      [
+       -34.603821,
+       -58.38184
+      ],
+      [
+       -34.60383,
+       -58.381773
+      ],
+      [
+       -34.603832,
+       -58.381705
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603649,
+       -58.381936
+      ],
+      [
+       -34.603625,
+       -58.381853
+      ],
+      [
+       -34.603615,
+       -58.381814
+      ],
+      [
+       -34.603608,
+       -58.381767
+      ],
+      [
+       -34.603602,
+       -58.381728
+      ],
+      [
+       -34.603597,
+       -58.381674
+      ],
+      [
+       -34.603591,
+       -58.381595
+      ],
+      [
+       -34.60359,
+       -58.381541
+      ],
+      [
+       -34.60359,
+       -58.381482
+      ],
+      [
+       -34.603592,
+       -58.381421
+      ],
+      [
+       -34.603598,
+       -58.381371
+      ],
+      [
+       -34.603607,
+       -58.381296
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603832,
+       -58.381705
+      ],
+      [
+       -34.60382,
+       -58.381528
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603741,
+       -58.382395
+      ],
+      [
+       -34.603737,
+       -58.382321
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603726,
+       -58.382132
+      ],
+      [
+       -34.603649,
+       -58.381936
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603655,
+       -58.38107
+      ],
+      [
+       -34.603633,
+       -58.380587
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603607,
+       -58.381296
+      ],
+      [
+       -34.603616,
+       -58.381245
+      ],
+      [
+       -34.603628,
+       -58.381184
+      ],
+      [
+       -34.603642,
+       -58.381122
+      ],
+      [
+       -34.603655,
+       -58.38107
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Corrientes",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603737,
+       -58.382321
+      ],
+      [
+       -34.603726,
+       -58.382132
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Roque Sáenz Peña",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.60382,
+       -58.381528
+      ],
+      [
+       -34.603864,
+       -58.381387
+      ],
+      [
+       -34.603872,
+       -58.381356
+      ],
+      [
+       -34.603874,
+       -58.381348
+      ],
+      [
+       -34.603894,
+       -58.381291
+      ],
+      [
+       -34.603914,
+       -58.381231
+      ],
+      [
+       -34.603982,
+       -58.381071
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Roque Sáenz Peña",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604108,
+       -58.380828
+      ],
+      [
+       -34.604196,
+       -58.380697
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Roque Sáenz Peña",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603342,
+       -58.382507
+      ],
+      [
+       -34.603289,
+       -58.382468
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Roque Sáenz Peña",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.60315,
+       -58.382659
+      ],
+      [
+       -34.603127,
+       -58.382642
+      ],
+      [
+       -34.603236,
+       -58.382428
+      ],
+      [
+       -34.603289,
+       -58.382468
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Roque Sáenz Peña",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603289,
+       -58.382468
+      ],
+      [
+       -34.603366,
+       -58.382336
+      ],
+      [
+       -34.603488,
+       -58.382321
+      ]
+     ]
+    },
+    {
+     "calle": "Avenida Presidente Roque Sáenz Peña",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603982,
+       -58.381071
+      ],
+      [
+       -34.604108,
+       -58.380828
+      ]
+     ]
+    },
+    {
+     "calle": "Carlos Pellegrini",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604931,
+       -58.380912
+      ],
+      [
+       -34.604844,
+       -58.380918
+      ],
+      [
+       -34.604303,
+       -58.380957
+      ],
+      [
+       -34.604141,
+       -58.38098
+      ]
+     ]
+    },
+    {
+     "calle": "Carlos Pellegrini",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603392,
+       -58.381077
+      ],
+      [
+       -34.603106,
+       -58.38105
+      ],
+      [
+       -34.603063,
+       -58.38105
+      ],
+      [
+       -34.602846,
+       -58.38105
+      ],
+      [
+       -34.602775,
+       -58.381051
+      ]
+     ]
+    },
+    {
+     "calle": "Carlos Pellegrini",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602775,
+       -58.381051
+      ],
+      [
+       -34.602483,
+       -58.381054
+      ]
+     ]
+    },
+    {
+     "calle": "Carlos Pellegrini",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604141,
+       -58.38098
+      ],
+      [
+       -34.604132,
+       -58.380986
+      ],
+      [
+       -34.603982,
+       -58.381071
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602463,
+       -58.382285
+      ],
+      [
+       -34.602497,
+       -58.382283
+      ],
+      [
+       -34.602567,
+       -58.38228
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602567,
+       -58.38228
+      ],
+      [
+       -34.602641,
+       -58.382273
+      ],
+      [
+       -34.603378,
+       -58.382161
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604121,
+       -58.382154
+      ],
+      [
+       -34.604354,
+       -58.382163
+      ],
+      [
+       -34.604916,
+       -58.382144
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.603863,
+       -58.382124
+      ],
+      [
+       -34.604062,
+       -58.382146
+      ],
+      [
+       -34.604121,
+       -58.382154
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605063,
+       -58.382141
+      ],
+      [
+       -34.605118,
+       -58.382137
+      ]
+     ]
+    },
+    {
+     "calle": "Cerrito",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604916,
+       -58.382144
+      ],
+      [
+       -34.605002,
+       -58.382141
+      ],
+      [
+       -34.605063,
+       -58.382141
+      ]
+     ]
+    },
+    {
+     "calle": "Lavalle",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602543,
+       -58.381464
+      ],
+      [
+       -34.602546,
+       -58.381597
+      ],
+      [
+       -34.602547,
+       -58.381668
+      ],
+      [
+       -34.60255,
+       -58.381759
+      ],
+      [
+       -34.602554,
+       -58.381916
+      ]
+     ]
+    },
+    {
+     "calle": "Lavalle",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602554,
+       -58.381916
+      ],
+      [
+       -34.602559,
+       -58.382064
+      ],
+      [
+       -34.602567,
+       -58.38228
+      ]
+     ]
+    },
+    {
+     "calle": "Lavalle",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602504,
+       -58.381002
+      ],
+      [
+       -34.602483,
+       -58.381054
+      ]
+     ]
+    },
+    {
+     "calle": "Lavalle",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602775,
+       -58.381051
+      ],
+      [
+       -34.602689,
+       -58.38112
+      ],
+      [
+       -34.602648,
+       -58.381156
+      ],
+      [
+       -34.602617,
+       -58.381191
+      ],
+      [
+       -34.60259,
+       -58.381223
+      ],
+      [
+       -34.60257,
+       -58.381257
+      ],
+      [
+       -34.602555,
+       -58.381287
+      ],
+      [
+       -34.602545,
+       -58.381328
+      ],
+      [
+       -34.602542,
+       -58.381358
+      ]
+     ]
+    },
+    {
+     "calle": "Lavalle",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.602542,
+       -58.381358
+      ],
+      [
+       -34.602543,
+       -58.381464
+      ]
+     ]
+    },
+    {
+     "calle": "Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604931,
+       -58.380912
+      ],
+      [
+       -34.604937,
+       -58.381034
+      ],
+      [
+       -34.604942,
+       -58.381212
+      ]
+     ]
+    },
+    {
+     "calle": "Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604945,
+       -58.381308
+      ],
+      [
+       -34.604947,
+       -58.381467
+      ],
+      [
+       -34.60495,
+       -58.381557
+      ],
+      [
+       -34.604951,
+       -58.381638
+      ],
+      [
+       -34.604968,
+       -58.38178
+      ]
+     ]
+    },
+    {
+     "calle": "Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604968,
+       -58.38178
+      ],
+      [
+       -34.604994,
+       -58.382055
+      ],
+      [
+       -34.605002,
+       -58.382141
+      ]
+     ]
+    },
+    {
+     "calle": "Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.605002,
+       -58.382141
+      ],
+      [
+       -34.605007,
+       -58.382237
+      ]
+     ]
+    },
+    {
+     "calle": "Sarmiento",
+     "tramo": "perímetro del lugar",
+     "tipo": "estimado",
+     "coords": [
+      [
+       -34.604942,
+       -58.381212
+      ],
+      [
+       -34.604945,
+       -58.381308
+      ]
+     ]
+    }
+   ],
+   "cortesFuente": "Estimado: calles que rodean el lugar (OpenStreetMap)"
+  }
+ ]
+}

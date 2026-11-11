@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eventos en Vélez</title>
+  <title>Cortes en CABA</title>
   <link rel="stylesheet" href="vendor/leaflet.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>¿Hay algo en Vélez?</h1>
+    <h1>¿Qué se corta en CABA?</h1>
     <div id="estado" class="estado">Buscando eventos…</div>
   </header>
 
@@ -20,11 +20,25 @@
         <button id="btn-avisos">🔔 Activar avisos</button>
       </div>
       <div id="info-casa" class="info-casa"></div>
-      <h2>Próximos eventos</h2>
+
+      <div class="filtros">
+        <label>Mostrar
+          <select id="radio">
+            <option value="1000">a 1 km de mi casa</option>
+            <option value="3000">a 3 km de mi casa</option>
+            <option value="6000">a 6 km de mi casa</option>
+            <option value="0">en toda CABA</option>
+          </select>
+        </label>
+        <div id="tipos" class="tipos"></div>
+      </div>
+
+      <h2>Próximos eventos <span id="cuantos" class="cuantos"></span></h2>
       <ul id="lista" class="lista"></ul>
       <p class="nota">
-        Partidos: se actualizan solos desde ESPN. Recitales: los revisa una tarea programada dos veces por semana.
-        Cortes: según el último operativo publicado por la Ciudad para un recital; en partidos son una estimación.
+        Partidos: se actualizan solos desde ESPN. Recitales, marchas y cortes programados: los revisa una tarea
+        programada dos veces por semana. Las calles marcadas como "estimadas" son las que rodean el lugar; cuando la
+        Ciudad publica el operativo se dibujan las calles oficiales.
       </p>
       <p id="actualizado" class="nota"></p>
     </section>
