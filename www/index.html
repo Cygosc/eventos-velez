@@ -44,6 +44,12 @@
     </section>
 
     <section class="mapa-wrap">
+      <form id="buscador" class="buscador" autocomplete="off">
+        <input id="direccion" type="search" placeholder="Buscar una dirección (ej.: Rivadavia 5000)" aria-label="Dirección">
+        <button type="submit" aria-label="Buscar">🔎</button>
+      </form>
+      <ul id="resultados" class="resultados"></ul>
+      <div id="referencia" class="referencia" hidden></div>
       <div id="mapa"></div>
       <div id="detalle" class="detalle"></div>
     </section>

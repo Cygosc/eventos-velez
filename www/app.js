@@ -242,6 +242,122 @@ function dibujarCortes(ev, centrar) {
   }
 }
 
+// ===================== Punto de referencia: mi casa, dónde estoy o una dirección =====================
+// La casa queda guardada en el dispositivo. "Dónde estoy" y una dirección buscada son temporales:
+// cambian la lista, el radio y el mapa, pero los avisos siempre se calculan con la casa.
+let referencia = null; // { tipo: "gps" | "direccion", lat, lon, nombre, precision }
+let marcadorRef = null;
+const NOMBRE_REF = { casa: "tu casa", gps: "donde estás", direccion: "esa dirección" };
+
+function puntoActivo() {
+  if (referencia) return { tipo: referencia.tipo, punto: [referencia.lat, referencia.lon] };
+  const casa = leer("casa", null);
+  return casa ? { tipo: "casa", punto: casa } : null;
+}
+
+function fijarReferencia(ref) {
+  referencia = ref;
+  // Si estaba en "toda CABA", al elegir un punto conviene ver lo cercano.
+  if (Number(leer("radio", 3000)) === 0) guardar("radio", 1000);
+  $("#resultados").innerHTML = "";
+  const chip = $("#referencia");
+  chip.hidden = false;
+  chip.innerHTML = `${ref.tipo === "gps" ? "📡" : "🔎"} Cortes cerca de <b>${esc(ref.nombre)}</b>
+    <button type="button" id="quitar-ref" aria-label="Quitar">✕</button>`;
+  $("#quitar-ref").addEventListener("click", quitarReferencia);
+  mapa.setView([ref.lat, ref.lon], 15);
+  refrescar();
+}
+
+function quitarReferencia() {
+  referencia = null;
+  $("#referencia").hidden = true;
+  $("#direccion").value = "";
+  const casa = leer("casa", null);
+  if (casa) mapa.setView(casa, 14); else mapa.setView([CABA.lat, CABA.lon], 12);
+  refrescar();
+}
+
+// --- Dónde estoy (GPS) ---
+const GEO = window.Capacitor?.isNativePlatform?.() ? window.Capacitor.Plugins.Geolocation : null;
+
+async function obtenerPosicion() {
+  if (GEO) {
+    let p = await GEO.checkPermissions();
+    if (p.location !== "granted" && p.coarseLocation !== "granted") p = await GEO.requestPermissions();
+    if (p.location !== "granted" && p.coarseLocation !== "granted") throw new Error("permiso");
+    return GEO.getCurrentPosition({ enableHighAccuracy: true, timeout: 20000, maximumAge: 30000 });
+  }
+  if (!navigator.geolocation) throw new Error("sin gps");
+  return new Promise((ok, mal) =>
+    navigator.geolocation.getCurrentPosition(ok, (e) => mal(new Error(e.code === 1 ? "permiso" : "sin señal")),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 30000 }));
+}
+
+const controlUbicacion = L.control({ position: "topright" });
+controlUbicacion.onAdd = () => {
+  const b = L.DomUtil.create("button", "btn-ubicacion");
+  b.type = "button";
+  b.title = "Dónde estoy";
+  b.setAttribute("aria-label", "Mostrar dónde estoy");
+  b.textContent = "📡";
+  L.DomEvent.disableClickPropagation(b);
+  b.addEventListener("click", async () => {
+    b.classList.add("buscando");
+    try {
+      const pos = await obtenerPosicion();
+      fijarReferencia({ tipo: "gps", lat: pos.coords.latitude, lon: pos.coords.longitude, nombre: "donde estás", precision: pos.coords.accuracy });
+    } catch (e) {
+      alert(e.message === "permiso"
+        ? "Para ver dónde estás, permití el acceso a la ubicación en la configuración del celular."
+        : "No se pudo obtener tu ubicación. Revisá que el GPS esté activado.");
+    } finally {
+      b.classList.remove("buscando");
+    }
+  });
+  return b;
+};
+controlUbicacion.addTo(mapa);
+
+// --- Buscar una dirección (OpenStreetMap / Nominatim, limitado a CABA) ---
+const CABA_CAJA = "-58.5315,-34.5265,-58.3351,-34.7051";
+
+async function geocodificar(texto, acotado) {
+  const params = new URLSearchParams({ q: texto, format: "json", limit: "5", countrycodes: "ar", "accept-language": "es" });
+  if (acotado) { params.set("viewbox", CABA_CAJA); params.set("bounded", "1"); }
+  const r = await fetch("https://nominatim.openstreetmap.org/search?" + params);
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+function nombreCorto(r) {
+  return r.display_name.split(",").slice(0, 3).join(",").trim();
+}
+
+$("#buscador").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const texto = $("#direccion").value.trim();
+  const ul = $("#resultados");
+  if (!texto) return;
+  ul.innerHTML = '<li class="vacio">Buscando…</li>';
+  try {
+    let res = await geocodificar(texto, true);
+    if (!res.length) res = await geocodificar(texto + ", Ciudad Autónoma de Buenos Aires", false);
+    if (!res.length) { ul.innerHTML = '<li class="vacio">No encontré esa dirección. Probá con "calle número" o una esquina ("Corrientes y Callao").</li>'; return; }
+    const elegir = (r) => fijarReferencia({ tipo: "direccion", lat: Number(r.lat), lon: Number(r.lon), nombre: nombreCorto(r) });
+    if (res.length === 1) { elegir(res[0]); return; }
+    ul.innerHTML = "";
+    for (const r of res) {
+      const li = document.createElement("li");
+      li.textContent = nombreCorto(r);
+      li.addEventListener("click", () => elegir(r));
+      ul.appendChild(li);
+    }
+  } catch {
+    ul.innerHTML = '<li class="vacio">No se pudo buscar la dirección (¿sin internet?).</li>';
+  }
+});
+
 // ===================== Mi casa y radio =====================
 let modoCasa = false;
 $("#btn-casa").addEventListener("click", () => {
@@ -261,37 +377,58 @@ mapa.on("click", (e) => {
 });
 
 function radioActual() {
-  return leer("casa", null) ? Number(leer("radio", 3000)) : 0;
+  return puntoActivo() ? Number(leer("radio", 3000)) : 0;
 }
 $("#radio").addEventListener("change", (e) => {
   guardar("radio", Number(e.target.value));
   refrescar();
 });
 
-function mostrarCasa(eventos) {
+function mostrarReferencia(eventos) {
   const casa = leer("casa", null);
+  const activo = puntoActivo();
   const info = $("#info-casa");
   const sel = $("#radio");
-  sel.disabled = !casa;
+  sel.disabled = !activo;
+  sel.options[0].textContent = `a 1 km de ${NOMBRE_REF[activo?.tipo || "casa"]}`;
+  sel.options[1].textContent = `a 3 km de ${NOMBRE_REF[activo?.tipo || "casa"]}`;
+  sel.options[2].textContent = `a 6 km de ${NOMBRE_REF[activo?.tipo || "casa"]}`;
   sel.value = String(radioActual());
-  if (marcadorCasa) { marcadorCasa.remove(); marcadorCasa = null; }
-  if (circuloRadio) { circuloRadio.remove(); circuloRadio = null; }
-  if (!casa) {
+  for (const m of [marcadorCasa, circuloRadio, marcadorRef]) if (m) m.remove();
+  marcadorCasa = circuloRadio = marcadorRef = null;
+
+  if (casa) {
+    $("#btn-casa").textContent = "📍 Cambiar mi casa";
+    marcadorCasa = L.circleMarker(casa, { radius: 9, color: "#0a5aa6", fillColor: "#3d8ee0", fillOpacity: 1, weight: 3 })
+      .addTo(mapa).bindTooltip("Mi casa");
+  }
+  if (referencia) {
+    const p = [referencia.lat, referencia.lon];
+    marcadorRef = referencia.tipo === "gps"
+      ? L.layerGroup([
+          L.circle(p, { radius: Math.min(referencia.precision || 30, 300), color: "#1a73e8", weight: 1, fillOpacity: 0.12, interactive: false }),
+          L.circleMarker(p, { radius: 8, color: "#fff", fillColor: "#1a73e8", fillOpacity: 1, weight: 3 }).bindTooltip("Estás acá"),
+        ])
+      : L.marker(p, { title: referencia.nombre }).bindTooltip(esc(referencia.nombre));
+    marcadorRef.addTo(mapa);
+  }
+  const r = radioActual();
+  if (activo && r) circuloRadio = L.circle(activo.punto, { radius: r, color: "#0a5aa6", weight: 1, fillOpacity: 0.04, interactive: false }).addTo(mapa);
+
+  if (!activo) {
     info.classList.remove("afectada");
-    info.textContent = "Marcá tu casa para ver solo lo que pasa cerca y saber si te afectan los cortes.";
+    info.textContent = "Marcá tu casa, buscá una dirección o tocá 📡 en el mapa para ver lo que pasa cerca.";
     return;
   }
-  $("#btn-casa").textContent = "📍 Cambiar mi casa";
-  marcadorCasa = L.circleMarker(casa, { radius: 9, color: "#0a5aa6", fillColor: "#3d8ee0", fillOpacity: 1, weight: 3 })
-    .addTo(mapa).bindTooltip("Mi casa");
-  const r = radioActual();
-  if (r) circuloRadio = L.circle(casa, { radius: r, color: "#0a5aa6", weight: 1, fillOpacity: 0.04, interactive: false }).addTo(mapa);
+  const nombre = NOMBRE_REF[activo.tipo];
+  const ahora = Date.now();
   const cerca = eventos.filter((e) => e.dist !== null && e.dist < 300);
+  const ya = cerca.filter((e) => e.ventana.desde <= ahora);
   info.classList.toggle("afectada", cerca.length > 0);
   info.innerHTML = cerca.length
-    ? `🚧 ${cerca.length === 1 ? "Un evento corta" : cerca.length + " eventos cortan"} calles a menos de 300 m de tu casa: ` +
-      cerca.map((e) => `<b>${esc(e.titulo)}</b> (${fmtCorto.format(e.ventana.desde)})`).join(", ") + "."
-    : "Ningún evento próximo corta calles a menos de 300 m de tu casa.";
+    ? `🚧 ${ya.length ? `Ahora hay cortes a menos de 300 m de ${nombre}: ` : `${cerca.length === 1 ? "Un evento va a cortar" : cerca.length + " eventos van a cortar"} calles a menos de 300 m de ${nombre}: `}` +
+      (ya.length ? ya : cerca).map((e) => `<b>${esc(e.titulo)}</b> (${fmtCorto.format(e.ventana.desde)})`).join(", ") + "."
+    : `Ningún evento próximo corta calles a menos de 300 m de ${nombre}.`;
 }
 
 // ===================== Filtros por tipo =====================
@@ -336,7 +473,7 @@ $("#btn-avisos").addEventListener("click", async () => {
   if (LN) await LN.requestPermissions();
   else if ("Notification" in window) await Notification.requestPermission();
   await actualizarBotonAvisos();
-  avisar(visibles);
+  avisar(avisables);
 });
 
 function idAviso(texto) {
@@ -385,7 +522,7 @@ function avisar(eventos) {
 }
 
 // ===================== Render =====================
-let todos = [], visibles = [], seleccionado = null, estadoCarga = {};
+let todos = [], visibles = [], avisables = [], seleccionado = null, estadoCarga = {};
 
 function textoVentana(ev) {
   const v = ev.ventana;
@@ -411,7 +548,7 @@ function seleccionar(ev, centrar) {
     ${ev.donde ? esc(ev.donde) + (ev.barrio ? ` · ${esc(ev.barrio)}` : "") + "<br>" : ""}
     ${fmtDia.format(ev.inicio)}, ${ev.horaConfirmada ? fmtHora.format(ev.inicio) + " h" : "hora a confirmar"}<br>
     ${textoVentana(ev)}
-    ${ev.dist !== null ? `<br>A ${textoDist(ev.dist)} de tu casa.` : ""}
+    ${ev.dist !== null ? `<br>A ${textoDist(ev.dist)} de ${NOMBRE_REF[puntoActivo()?.tipo || "casa"]}.` : ""}
     ${oficiales.length ? `<ul>${oficiales.map((c) => `<li><b>${esc(c.calle)}</b> ${esc(c.tramo)}${c.tipo === "parcial" ? " (parcial)" : ""}</li>`).join("")}</ul>` : ""}
     ${callesEst.length ? `<p class="estimado">Calles que probablemente se corten (alrededor del lugar): ${callesEst.map(esc).join(", ")}.</p>` : ""}
     ${!ev.tramos.length ? "<p class='estimado'>Todavía no hay calles publicadas para este evento.</p>" : ""}
@@ -420,17 +557,28 @@ function seleccionar(ev, centrar) {
 }
 
 function refrescar() {
-  const casa = leer("casa", null);
+  const activo = puntoActivo();
   const radio = radioActual();
   const tipos = tiposActivos();
-  for (const e of todos) e.dist = distanciaACasa(e, casa);
+  const zona = radio ? `cerca de ${NOMBRE_REF[activo.tipo]}` : "en CABA";
+  for (const e of todos) e.dist = distanciaACasa(e, activo?.punto || null);
   visibles = todos.filter((e) => tipos.includes(e.tipo) && (!radio || (e.dist !== null && e.dist <= radio)));
-  mostrarCasa(visibles);
+  mostrarReferencia(visibles);
+
+  // Los avisos siempre se calculan con la casa (no con "dónde estoy" ni una dirección buscada).
+  const casa = leer("casa", null);
+  const radioCasa = casa ? Number(leer("radio", 3000)) : 0;
+  avisables = todos.filter((e) => {
+    if (!tipos.includes(e.tipo)) return false;
+    if (!radioCasa) return true;
+    const d = distanciaACasa(e, casa);
+    return d !== null && d <= radioCasa;
+  });
 
   const lista = $("#lista");
   lista.innerHTML = "";
   $("#cuantos").textContent = `(${visibles.length})`;
-  if (!visibles.length) lista.innerHTML = `<li class="vacio">No hay eventos ${radio ? "cerca de tu casa" : ""} en los próximos días.</li>`;
+  if (!visibles.length) lista.innerHTML = `<li class="vacio">No hay eventos ${zona} en los próximos días.</li>`;
   for (const ev of visibles) {
     const li = document.createElement("li");
     li.className = "evento";
@@ -464,7 +612,6 @@ function refrescar() {
   const ahora = Date.now();
   const activos = visibles.filter((e) => e.ventana.desde <= ahora && e.ventana.hasta >= ahora);
   const proximo = visibles.find((e) => e.ventana.desde > ahora);
-  const zona = radio ? "cerca de tu casa" : "en CABA";
   estado.className = "estado";
   if (activos.length) {
     estado.classList.add("alerta");
@@ -482,7 +629,7 @@ function refrescar() {
 
   const sigue = seleccionado && visibles.find((e) => e.id === seleccionado.id);
   seleccionar(sigue || activos[0] || visibles[0] || null, false);
-  avisar(visibles);
+  avisar(avisables);
 }
 
 async function iniciar() {
