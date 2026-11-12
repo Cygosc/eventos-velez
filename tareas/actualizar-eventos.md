@@ -45,8 +45,13 @@ en arena o teatro de 3 h antes a 4 h después; marcha de 1 h antes hasta `fin` (
 
 ## Pasos
 
-1. Leé `www/data/eventos-caba.json` y `www/data/lugares.json`.
-2. Buscá en la web (WebSearch en español, varias búsquedas) eventos de los próximos 60 días. Fuentes útiles:
+1. Leé `www/data/eventos-caba.json` y `www/data/lugares.json`. La fecha de hoy en Argentina se obtiene con
+   `TZ=America/Argentina/Buenos_Aires date +%F` (no uses la fecha UTC).
+2. Buscá en la web (WebSearch en español) eventos de los próximos 60 días. Hacé **al menos 10 búsquedas distintas**,
+   cubriendo por separado: recitales en estadios, Movistar Arena y otros lugares; marchas y paros de la semana;
+   cortes de tránsito y obras de la semana (buenosaires.gob.ar); carreras y maratones; ferias y eventos en la vía
+   pública; y cada evento que ya esté cargado con hora o fecha sin confirmar. Si WebFetch no puede abrir un sitio
+   (error de red), seguí con los resultados de WebSearch y anotalo en el resumen. Fuentes útiles:
    buenosaires.gob.ar (noticias "afectaciones de tránsito", sección cortes de tránsito), noticias de tránsito porteño,
    songkick, bandsintown, quehacemos.com.ar, misconciertos.com.ar, indiehoy.com/eventos,
    timeout.com/es/buenos-aires, ticketeras (allaccess, ticketek, enigma, movistararena.com.ar) y diarios
