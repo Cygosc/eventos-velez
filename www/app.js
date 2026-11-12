@@ -15,7 +15,7 @@ const ANUNCIOS = {
   bannerId: "ca-app-pub-3940256099942544/9214589741", // ID de PRUEBA de Google (banner adaptable)
 };
 // Aportes voluntarios. Vacío = no se muestra el botón. Ej.: "https://cafecito.app/tu_usuario"
-const CAFECITO_URL = "";
+const CAFECITO_URL = "https://cafecito.app/xibo3d";
 
 const TIPOS = {
   partido: { icono: "⚽", nombre: "Partidos", color: "#0a5aa6" },
