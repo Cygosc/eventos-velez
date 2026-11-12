@@ -6,6 +6,17 @@ const DIAS_A_MOSTRAR = 60;
 // Datos publicados en GitHub (los actualiza la tarea programada). Sin internet se usa la última copia guardada.
 const DATOS_URL = "https://raw.githubusercontent.com/Cygosc/eventos-velez/main/www/data/";
 
+// Publicidad: un solo banner chico fijo abajo (AdMob). Nada de anuncios a pantalla completa.
+// Mientras "prueba" sea true se usan los IDs de prueba de Google (muestran "Test Ad").
+// Para publicar: poner el ID real del bloque de anuncios, "prueba: false" y el ID de la app en
+// android/app/src/main/res/values/strings.xml (admob_app_id).
+const ANUNCIOS = {
+  prueba: true,
+  bannerId: "ca-app-pub-3940256099942544/9214589741", // ID de PRUEBA de Google (banner adaptable)
+};
+// Aportes voluntarios. Vacío = no se muestra el botón. Ej.: "https://cafecito.app/tu_usuario"
+const CAFECITO_URL = "";
+
 const TIPOS = {
   partido: { icono: "⚽", nombre: "Partidos", color: "#0a5aa6" },
   recital: { icono: "🎤", nombre: "Recitales", color: "#8e44ad" },
@@ -666,8 +677,53 @@ function refrescar() {
   avisar(avisables);
 }
 
+// ===================== Publicidad y aportes =====================
+const ADMOB = window.Capacitor?.isNativePlatform?.() ? window.Capacitor.Plugins.AdMob : null;
+let estadoBanner = "nada"; // nada | cargando | visible
+
+async function iniciarAnuncios() {
+  if (!ADMOB || estadoBanner !== "nada") return;
+  estadoBanner = "cargando";
+  try {
+    await ADMOB.initialize({ initializeForTesting: ANUNCIOS.prueba });
+    // Formulario de consentimiento de Google (solo aparece en las regiones que lo exigen).
+    try {
+      const info = await ADMOB.requestConsentInfo();
+      if (info.isConsentFormAvailable && info.status === "REQUIRED") await ADMOB.showConsentForm();
+    } catch (e) { console.warn("Consentimiento de AdMob", e); }
+    // Se deja lugar abajo para que el banner no tape la lista.
+    await ADMOB.addListener("bannerAdSizeChanged", (t) => {
+      document.body.style.paddingBottom = Math.round(t?.height || 0) + "px";
+    });
+    await ADMOB.showBanner({ adId: ANUNCIOS.bannerId, adSize: "ADAPTIVE_BANNER", position: "BOTTOM_CENTER", margin: 0, isTesting: ANUNCIOS.prueba });
+    estadoBanner = "visible";
+  } catch (e) {
+    // Sin internet al abrir, por ejemplo: se reintenta la próxima vez que se actualiza la app.
+    console.warn("AdMob", e);
+    estadoBanner = "nada";
+  }
+}
+
+// Abre un link en el navegador del teléfono (dentro de la app, un link común no sale de la app).
+function abrirAfuera(url) {
+  if (window.Capacitor?.isNativePlatform?.()) location.href = url;
+  else window.open(url, "_blank", "noopener");
+}
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a[target=_blank]");
+  if (!a || !window.Capacitor?.isNativePlatform?.()) return;
+  e.preventDefault();
+  abrirAfuera(a.href);
+});
+if (CAFECITO_URL) {
+  const b = $("#cafecito");
+  b.hidden = false;
+  b.addEventListener("click", () => abrirAfuera(CAFECITO_URL));
+}
+
 async function iniciar() {
   actualizarBotonAvisos();
+  iniciarAnuncios();
   dibujarFiltros();
   const manuales = await cargarDatos();
   const { partidos, error, cacheFecha } = await traerPartidos();

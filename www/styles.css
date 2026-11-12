@@ -98,6 +98,19 @@ button.activo { background: var(--azul); color: #fff; border-color: var(--azul);
 .chip.warn { background: #fde7c7; color: #7a4300; }
 .vacio { color: var(--muted); }
 .nota { font-size: .8rem; color: var(--muted); margin-top: 16px; }
+.cafecito {
+  display: block;
+  width: 100%;
+  margin: 4px 0 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px dashed #c8a27a;
+  background: #fff7ee;
+  color: #6b3f1d;
+  font-size: .95rem;
+}
+.cafecito[hidden] { display: none; }
+@media (prefers-color-scheme: dark) { .cafecito { background: #2b2118; color: #f1d9c0; border-color: #7a5a3c; } }
 code { font-size: .85em; }
 
 .filtros { margin-top: 14px; display: grid; gap: 8px; font-size: .9rem; }
