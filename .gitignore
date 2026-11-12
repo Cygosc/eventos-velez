@@ -5,3 +5,6 @@ android/.gradle/
 android/local.properties
 android/.idea/
 dist/
+android/app/release/
+*.jks
+*.keystore

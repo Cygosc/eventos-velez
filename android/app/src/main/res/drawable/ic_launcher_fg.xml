@@ -1,9 +1,22 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp" android:height="108dp"
-    android:viewportWidth="108" android:viewportHeight="108">
-    <!-- Pin de mapa blanco con una "V" azul -->
-    <path android:fillColor="#FFFFFF"
-        android:pathData="M54,28c-11,0 -20,9 -20,20c0,15 20,34 20,34s20,-19 20,-34c0,-11 -9,-20 -20,-20z"/>
-    <path android:fillColor="#0A5AA6"
-        android:pathData="M45,38h6l3,11l3,-11h6l-6,18h-6z"/>
+    android:viewportWidth="100" android:viewportHeight="100">
+    <!-- Pin blanco con una valla de corte (mismo dibujo que tools/store/arte.html), dentro de la zona segura -->
+    <group android:scaleX="0.66" android:scaleY="0.66" android:translateX="17" android:translateY="17">
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M50,14c-14.4,0 -26,11.3 -26,25.4C24,58.5 50,86 50,86s26,-27.5 26,-46.6C76,25.3 64.4,14 50,14z"/>
+        <group>
+            <clip-path android:pathData="M33.5,31h33a2.5,2.5 0,0 1,2.5 2.5v11a2.5,2.5 0,0 1,-2.5 2.5h-33a2.5,2.5 0,0 1,-2.5 -2.5v-11a2.5,2.5 0,0 1,2.5 -2.5z"/>
+            <path android:fillColor="#D7263D" android:pathData="M22,47l9,-16h5l-9,16z"/>
+            <path android:fillColor="#D7263D" android:pathData="M31,47l9,-16h5l-9,16z"/>
+            <path android:fillColor="#D7263D" android:pathData="M40,47l9,-16h5l-9,16z"/>
+            <path android:fillColor="#D7263D" android:pathData="M49,47l9,-16h5l-9,16z"/>
+            <path android:fillColor="#D7263D" android:pathData="M58,47l9,-16h5l-9,16z"/>
+            <path android:fillColor="#D7263D" android:pathData="M67,47l9,-16h5l-9,16z"/>
+        </group>
+        <path android:strokeColor="#D7263D" android:strokeWidth="2"
+            android:pathData="M33.5,31h33a2.5,2.5 0,0 1,2.5 2.5v11a2.5,2.5 0,0 1,-2.5 2.5h-33a2.5,2.5 0,0 1,-2.5 -2.5v-11a2.5,2.5 0,0 1,2.5 -2.5z"/>
+        <path android:fillColor="#5D6B7E" android:pathData="M35,47h4v9h-4z"/>
+        <path android:fillColor="#5D6B7E" android:pathData="M61,47h4v9h-4z"/>
+    </group>
 </vector>

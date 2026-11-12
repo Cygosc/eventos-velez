@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Arte de Cortes CABA</title>
+<!--
+  Arte para la Play Store y el ícono de la app. Lo usa tools/store/arte.mjs, que abre esta página en Edge sin
+  ventana y saca capturas. Parámetros: ?que=icono&tam=512 | ?que=destacado | ?que=splash&ancho=..&alto=..
+-->
+<style>
+  html, body { margin: 0; padding: 0; overflow: hidden; font-family: "Segoe UI", Roboto, system-ui, sans-serif; }
+  .icono { display: block; }
+  .destacado {
+    width: 1024px; height: 500px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #0a5aa6 0%, #08467f 100%);
+    color: #fff;
+  }
+  .destacado svg.calles { position: absolute; inset: 0; opacity: .22; }
+  .destacado .texto { position: absolute; left: 330px; top: 120px; right: 40px; }
+  .destacado h1 { font-size: 78px; margin: 0; line-height: 1; letter-spacing: -1px; }
+  .destacado p { font-size: 32px; margin: 22px 0 0; line-height: 1.25; opacity: .95; }
+  .destacado .pin { position: absolute; left: 60px; top: 90px; }
+  .splash { display: flex; align-items: center; justify-content: center; background: #0a5aa6; }
+</style>
+</head>
+<body>
+<script>
+const q = new URLSearchParams(location.search);
+
+// Pin blanco con una valla de corte (franjas rojas y blancas). viewBox 0 0 100 100.
+function pin(fondo) {
+  return `
+  <defs>
+    <clipPath id="valla"><rect x="31" y="31" width="38" height="16" rx="2.5"/></clipPath>
+  </defs>
+  ${fondo ? `<rect width="100" height="100" fill="#0a5aa6"/>` : ""}
+  <path d="M50 14c-14.4 0-26 11.3-26 25.4C24 58.5 50 86 50 86s26-27.5 26-46.6C76 25.3 64.4 14 50 14z" fill="#fff"/>
+  <g clip-path="url(#valla)">
+    <rect x="31" y="31" width="38" height="16" fill="#fff"/>
+    ${[0, 1, 2, 3, 4, 5].map((i) => `<path d="M${22 + i * 9} 47l9-16h5l-9 16z" fill="#d7263d"/>`).join("")}
+  </g>
+  <rect x="31" y="31" width="38" height="16" rx="2.5" fill="none" stroke="#d7263d" stroke-width="2"/>
+  <rect x="35" y="47" width="4" height="9" fill="#5d6b7e"/>
+  <rect x="61" y="47" width="4" height="9" fill="#5d6b7e"/>`;
+}
+
+const que = q.get("que") || "icono";
+if (que === "icono") {
+  const t = Number(q.get("tam") || 512);
+  document.body.innerHTML = `<svg class="icono" width="${t}" height="${t}" viewBox="0 0 100 100">${pin(true)}</svg>`;
+} else if (que === "destacado") {
+  // Cuadrícula de calles de fondo
+  let calles = "";
+  for (let i = -10; i < 30; i++) calles += `<line x1="${i * 60}" y1="-50" x2="${i * 60 + 300}" y2="560" stroke="#fff" stroke-width="${i % 4 ? 3 : 9}"/>`;
+  for (let j = -2; j < 12; j++) calles += `<line x1="-50" y1="${j * 55}" x2="1100" y2="${j * 55 - 160}" stroke="#fff" stroke-width="${j % 3 ? 3 : 9}"/>`;
+  document.body.innerHTML = `
+    <div class="destacado">
+      <svg class="calles" width="1024" height="500">${calles}</svg>
+      <svg class="pin" width="250" height="250" viewBox="0 0 100 100">${pin(false)}</svg>
+      <div class="texto">
+        <h1>Cortes CABA</h1>
+        <p>Partidos, recitales, marchas y obras que cortan calles en la Ciudad, en un mapa.</p>
+      </div>
+    </div>`;
+} else if (que === "splash") {
+  const w = Number(q.get("ancho")), h = Number(q.get("alto"));
+  const t = Math.round(Math.min(w, h) * 0.45);
+  document.body.innerHTML = `<div class="splash" style="width:${w}px;height:${h}px">
+    <svg width="${t}" height="${t}" viewBox="0 0 100 100">${pin(false)}</svg></div>`;
+}
+</script>
+</body>
+</html>

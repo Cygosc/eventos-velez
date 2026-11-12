@@ -1,5 +1,5 @@
 {
-  "appId": "ar.cygosc.eventosvelez",
+  "appId": "ar.cygosc.cortescaba",
   "appName": "Cortes CABA",
   "webDir": "www",
   "plugins": {
@@ -9,6 +9,7 @@
     }
   },
   "android": {
-    "adjustMarginsForEdgeToEdge": "force"
+    "adjustMarginsForEdgeToEdge": "force",
+    "appendUserAgent": "CortesCABA/1.0 (+https://github.com/Cygosc/eventos-velez)"
   }
 }
