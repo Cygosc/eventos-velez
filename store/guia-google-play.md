@@ -255,24 +255,7 @@ poder publicarla para todos.
    💡 Si no tocás este botón, los cambios quedan guardados pero nadie los revisa. La primera revisión puede tardar de
    unas horas a 7 días.
 6. Cuando esté aprobada, en la pista → **Testers** → copiá el **link para unirse (Android)** y mandáselo a los testers
-   junto con este texto:
-
-```
-¡Gracias por probar Cortes CABA! 🚧
-
-1. Abrí este link desde el celular (con el mismo Gmail que me pasaste) y tocá "Aceptar invitación": <LINK>
-2. Instalala desde Play Store y dejala instalada al menos 14 días (es un requisito de Google).
-
-Qué probar:
-• Mirá los eventos de la lista y tocá uno: el mapa muestra las calles que se cortan.
-• 📍 Marcá tu casa y elegí el radio: la lista muestra solo lo que pasa cerca.
-• 📡 Tocá el botón del mapa para ver los cortes donde estás.
-• 🔎 Buscá una dirección o una esquina ("Corrientes y Callao").
-• Mantené presionado el mapa en cualquier zona.
-• 🔔 Activá los avisos.
-
-Si algo falla o se ve raro, mandame una captura. ¡Gracias!
-```
+   con el mensaje de [mensaje-testers.md](mensaje-testers.md) (tiene versión completa, corta y un recordatorio para el día 7).
 
 💡 Los 12 testers tienen que **aceptar la invitación e instalarla**, y no salirse de la prueba durante los 14 días.
 Conviene invitar a 15 o más por si alguno se olvida.
