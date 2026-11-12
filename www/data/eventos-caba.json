@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-10",
+  "actualizado": "2026-11-11",
   "eventos": [
     {
       "id": "papa-recoleta-2026-11-07",
@@ -339,6 +339,368 @@
       ]
     },
     {
+      "id": "desmonte-papa-libertador-2026-11-11",
+      "titulo": "Desmonte del operativo papal: cortes en Av. del Libertador",
+      "tipo": "corte",
+      "ubicacion": {
+        "nombre": "Av. del Libertador entre Olleros y Ugarteche",
+        "barrio": "Palermo",
+        "lat": -34.5715,
+        "lon": -58.4205
+      },
+      "inicio": "2026-11-11T00:00:00-03:00",
+      "fin": "2026-11-14T23:59:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://mdzol.com/sociedad/2026/10/22/el-mapa-de-los-cortes-por-la-visita-del-papa-leon-xiv-que-calles-de-caba-estaran-cerradas-y-desde-cu-1990104.html",
+      "notas": "Según MDZ, cortes totales progresivos en Av. del Libertador entre Olleros y Ugarteche por el desmonte de las estructuras de la visita papal, hasta el sábado 14. Horarios exactos sin confirmar; nota publicada antes de la visita.",
+      "tramos": [
+        {
+          "calle": "Av. del Libertador",
+          "tramo": "Desmonte del operativo de la visita papal",
+          "tipo": "total",
+          "coords": [
+            [
+              -34.563671,
+              -58.436447
+            ],
+            [
+              -34.563729,
+              -58.436356
+            ],
+            [
+              -34.563833,
+              -58.436186
+            ],
+            [
+              -34.564191,
+              -58.435586
+            ],
+            [
+              -34.564245,
+              -58.435491
+            ],
+            [
+              -34.56429,
+              -58.435415
+            ],
+            [
+              -34.564818,
+              -58.434532
+            ],
+            [
+              -34.564882,
+              -58.434427
+            ],
+            [
+              -34.565004,
+              -58.43422
+            ],
+            [
+              -34.565529,
+              -58.433336
+            ],
+            [
+              -34.565789,
+              -58.432892
+            ],
+            [
+              -34.566045,
+              -58.43246
+            ],
+            [
+              -34.566166,
+              -58.43226
+            ],
+            [
+              -34.566221,
+              -58.432165
+            ],
+            [
+              -34.566284,
+              -58.432056
+            ],
+            [
+              -34.566364,
+              -58.431921
+            ],
+            [
+              -34.566441,
+              -58.431787
+            ],
+            [
+              -34.566755,
+              -58.431255
+            ],
+            [
+              -34.566855,
+              -58.431097
+            ],
+            [
+              -34.56688,
+              -58.431029
+            ],
+            [
+              -34.566992,
+              -58.430726
+            ],
+            [
+              -34.567104,
+              -58.430496
+            ],
+            [
+              -34.567242,
+              -58.43023
+            ],
+            [
+              -34.567298,
+              -58.43012
+            ],
+            [
+              -34.567798,
+              -58.429313
+            ],
+            [
+              -34.568076,
+              -58.428818
+            ],
+            [
+              -34.568206,
+              -58.428601
+            ],
+            [
+              -34.568559,
+              -58.427975
+            ],
+            [
+              -34.569334,
+              -58.426645
+            ],
+            [
+              -34.569536,
+              -58.426298
+            ],
+            [
+              -34.569571,
+              -58.42624
+            ],
+            [
+              -34.570448,
+              -58.424705
+            ],
+            [
+              -34.570539,
+              -58.424531
+            ],
+            [
+              -34.570724,
+              -58.424152
+            ],
+            [
+              -34.570811,
+              -58.423971
+            ],
+            [
+              -34.571026,
+              -58.423478
+            ],
+            [
+              -34.571238,
+              -58.423267
+            ],
+            [
+              -34.571296,
+              -58.42309
+            ],
+            [
+              -34.571312,
+              -58.423048
+            ],
+            [
+              -34.571318,
+              -58.423033
+            ],
+            [
+              -34.571464,
+              -58.422668
+            ],
+            [
+              -34.571771,
+              -58.421936
+            ],
+            [
+              -34.571787,
+              -58.421895
+            ],
+            [
+              -34.571837,
+              -58.421775
+            ],
+            [
+              -34.572385,
+              -58.420563
+            ],
+            [
+              -34.572431,
+              -58.420456
+            ],
+            [
+              -34.572621,
+              -58.420045
+            ],
+            [
+              -34.572796,
+              -58.419658
+            ],
+            [
+              -34.572993,
+              -58.41923
+            ],
+            [
+              -34.573509,
+              -58.418135
+            ],
+            [
+              -34.573603,
+              -58.417938
+            ],
+            [
+              -34.573675,
+              -58.41779
+            ],
+            [
+              -34.574154,
+              -58.416802
+            ],
+            [
+              -34.574576,
+              -58.416059
+            ],
+            [
+              -34.574705,
+              -58.415852
+            ],
+            [
+              -34.574882,
+              -58.415602
+            ],
+            [
+              -34.574905,
+              -58.415572
+            ],
+            [
+              -34.574948,
+              -58.415513
+            ],
+            [
+              -34.575029,
+              -58.415404
+            ],
+            [
+              -34.575136,
+              -58.415296
+            ],
+            [
+              -34.575198,
+              -58.415196
+            ],
+            [
+              -34.575257,
+              -58.415061
+            ],
+            [
+              -34.575254,
+              -58.414979
+            ],
+            [
+              -34.575242,
+              -58.41488
+            ],
+            [
+              -34.575264,
+              -58.414705
+            ],
+            [
+              -34.575293,
+              -58.414576
+            ],
+            [
+              -34.575355,
+              -58.414382
+            ],
+            [
+              -34.575427,
+              -58.41418
+            ],
+            [
+              -34.575543,
+              -58.413712
+            ],
+            [
+              -34.575626,
+              -58.41353
+            ],
+            [
+              -34.575728,
+              -58.41331
+            ],
+            [
+              -34.575753,
+              -58.413256
+            ],
+            [
+              -34.575794,
+              -58.413167
+            ],
+            [
+              -34.575837,
+              -58.413068
+            ],
+            [
+              -34.575854,
+              -58.413034
+            ],
+            [
+              -34.576388,
+              -58.411852
+            ],
+            [
+              -34.576439,
+              -58.411742
+            ],
+            [
+              -34.576737,
+              -58.411072
+            ],
+            [
+              -34.576752,
+              -58.411037
+            ],
+            [
+              -34.576792,
+              -58.410948
+            ],
+            [
+              -34.576837,
+              -58.410846
+            ],
+            [
+              -34.576852,
+              -58.410812
+            ],
+            [
+              -34.57718,
+              -58.410083
+            ],
+            [
+              -34.577231,
+              -58.409967
+            ]
+          ]
+        }
+      ]
+    },
+    {
       "id": "qlokura-2026-11-12",
       "titulo": "Q'Lokura",
       "tipo": "recital",
@@ -404,6 +766,28 @@
       "notas": "Tiene más fechas en diciembre."
     },
     {
+      "id": "daniel-caesar-2026-12-05",
+      "titulo": "Daniel Caesar",
+      "tipo": "recital",
+      "lugar": "obras",
+      "inicio": "2026-12-05T19:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.ambito.com/espectaculos/daniel-caesar-llega-primera-vez-la-argentina-como-y-donde-comprar-las-entradas-el-show-n6306795",
+      "notas": "Son of Spergy Tour, primera vez en Argentina. También en Indie Hoy (19 h) y MDZ. Hora no oficial."
+    },
+    {
+      "id": "diego-torres-2026-12-06",
+      "titulo": "Diego Torres",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-12-06T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://indiehoy.com/agenda/diego-torres-movistar-arena-diciembre-2026/",
+      "notas": "Cierre de la gira Mi Norte & Mi Sur. También en Perfil y Crónica. 21 h según Indie Hoy."
+    },
+    {
       "id": "deep-purple-2026-12-10",
       "titulo": "Deep Purple",
       "tipo": "recital",
@@ -423,6 +807,17 @@
       "confirmado": false,
       "fuente": "https://www.timeout.com/es/buenos-aires/recitales-imperdibles-musica-shows",
       "notas": "Vivir Sin Aire Tour. Una agenda dice 11 de diciembre: fecha a confirmar."
+    },
+    {
+      "id": "slayer-2026-12-14",
+      "titulo": "Slayer + Kreator",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-12-14T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.ambito.com/espectaculos/slayer-vuelve-la-argentina-como-y-donde-comprar-las-entradas-n6283016",
+      "notas": "Reign in Blood 40 aniversario, único show en Argentina. También en Tiempo Argentino, Indie Hoy y Blabbermouth. 21 h según listados."
     },
     {
       "id": "dante-gebel-2026-12-18",
