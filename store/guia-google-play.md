@@ -250,12 +250,7 @@ poder publicarla para todos.
 4. **Crear versión** → subí `app-release.aab`.
    - 💡 Si aparecen **avisos amarillos** por "archivo de desofuscación" o "símbolos de depuración nativos", ignoralos: no son errores.
    - 💡 En la biblioteca la versión figura como **"1 (1.0)"**: el 1 es el número interno; la gente ve "1.0".
-   - Nombre de la versión: `1.0`. Notas de la versión:
-     ```
-     <es-419>
-     Primera versión: partidos, recitales, marchas y cortes programados en CABA, con mapa de calles cortadas, búsqueda por dirección, "Dónde estoy" y avisos.
-     </es-419>
-     ```
+   - Nombre de la versión y notas de la versión: copialos de [notas-version-1.0.md](notas-version-1.0.md).
 5. **Siguiente → Guardar** → andá a **Descripción general de la publicación** → **Enviar cambios para revisión**.
    💡 Si no tocás este botón, los cambios quedan guardados pero nadie los revisa. La primera revisión puede tardar de
    unas horas a 7 días.
