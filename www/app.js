@@ -79,8 +79,6 @@ async function traerJSON(nombre) {
 async function cargarDatos() {
   const [ev, lu] = await Promise.all([traerJSON("eventos-caba.json"), traerJSON("lugares.json")]);
   LUGARES = Object.fromEntries((lu.datos.lugares || []).map((l) => [l.id, l]));
-  const txt = { internet: "actualizado", guardado: "sin conexión, copia guardada", incluido: "sin conexión, datos de fábrica" };
-  $("#actualizado").textContent = `Eventos revisados el ${ev.datos.actualizado || "?"} (${txt[ev.origen]}).`;
   return ev.datos.eventos || [];
 }
 
@@ -177,6 +175,17 @@ function distanciaACasa(ev, casa) {
 }
 
 // ===================== Mapa =====================
+// Alto del mapa en el celular: se fija en píxeles al abrir y solo cambia si cambia el ancho
+// (al abrir el teclado cambia el alto de la ventana y no queremos que el mapa salte).
+let anchoPrevio = 0;
+function fijarAltoMapa() {
+  if (window.innerWidth === anchoPrevio) return;
+  anchoPrevio = window.innerWidth;
+  document.documentElement.style.setProperty("--alto-mapa", Math.round(Math.max(window.innerHeight, 500) * 0.5) + "px");
+}
+fijarAltoMapa();
+window.addEventListener("resize", fijarAltoMapa);
+
 const mapa = L.map("mapa", { zoomControl: true }).setView([CABA.lat, CABA.lon], 12);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
@@ -247,7 +256,8 @@ function dibujarCortes(ev, centrar) {
 // cambian la lista, el radio y el mapa, pero los avisos siempre se calculan con la casa.
 let referencia = null; // { tipo: "gps" | "direccion", lat, lon, nombre, precision }
 let marcadorRef = null;
-const NOMBRE_REF = { casa: "tu casa", gps: "donde estás", direccion: "esa dirección" };
+const NOMBRE_REF = { casa: "tu casa", gps: "donde estás", direccion: "esa dirección", zona: "ese punto" };
+const ICONO_REF = { gps: "📡", direccion: "🔎", zona: "👆" };
 
 function puntoActivo() {
   if (referencia) return { tipo: referencia.tipo, punto: [referencia.lat, referencia.lon] };
@@ -262,10 +272,11 @@ function fijarReferencia(ref) {
   $("#resultados").innerHTML = "";
   const chip = $("#referencia");
   chip.hidden = false;
-  chip.innerHTML = `${ref.tipo === "gps" ? "📡" : "🔎"} Cortes cerca de <b>${esc(ref.nombre)}</b>
+  chip.innerHTML = `${ICONO_REF[ref.tipo]} Cortes cerca de <b>${esc(ref.nombre)}</b>
     <button type="button" id="quitar-ref" aria-label="Quitar">✕</button>`;
   $("#quitar-ref").addEventListener("click", quitarReferencia);
-  mapa.setView([ref.lat, ref.lon], 15);
+  // Al mantener presionado no se mueve el mapa (el usuario ya está mirando esa zona).
+  if (ref.tipo !== "zona") mapa.setView([ref.lat, ref.lon], 15);
   refrescar();
 }
 
@@ -339,6 +350,7 @@ $("#buscador").addEventListener("submit", async (e) => {
   const texto = $("#direccion").value.trim();
   const ul = $("#resultados");
   if (!texto) return;
+  $("#direccion").blur(); // cierra el teclado
   ul.innerHTML = '<li class="vacio">Buscando…</li>';
   try {
     let res = await geocodificar(texto, true);
@@ -356,6 +368,28 @@ $("#buscador").addEventListener("submit", async (e) => {
   } catch {
     ul.innerHTML = '<li class="vacio">No se pudo buscar la dirección (¿sin internet?).</li>';
   }
+});
+
+// --- Mantener presionado el mapa: ver los cortes alrededor de ese punto ---
+// En el celular Leaflet convierte la pulsación larga en "contextmenu"; en la PC es el clic derecho.
+mapa.on("contextmenu", (e) => {
+  if (modoCasa) return;
+  if (navigator.vibrate) navigator.vibrate(30);
+  fijarReferencia({ tipo: "zona", lat: e.latlng.lat, lon: e.latlng.lng, nombre: "el punto marcado" });
+  // Se busca el nombre de la calle para mostrarlo (si falla, queda "el punto marcado").
+  const params = new URLSearchParams({ lat: e.latlng.lat, lon: e.latlng.lng, format: "json", zoom: "17", "accept-language": "es" });
+  fetch("https://nominatim.openstreetmap.org/reverse?" + params)
+    .then((r) => (r.ok ? r.json() : null))
+    .then((r) => {
+      if (!r?.address || referencia?.lat !== e.latlng.lat) return;
+      const a = r.address;
+      const calle = [a.road, a.house_number].filter(Boolean).join(" ");
+      const nombre = calle ? `${calle}${a.suburb ? ", " + a.suburb : ""}` : a.suburb || "";
+      if (!nombre) return;
+      referencia.nombre = nombre;
+      $("#referencia b").textContent = nombre;
+    })
+    .catch(() => {});
 });
 
 // ===================== Mi casa y radio =====================
@@ -417,7 +451,7 @@ function mostrarReferencia(eventos) {
 
   if (!activo) {
     info.classList.remove("afectada");
-    info.textContent = "Marcá tu casa, buscá una dirección o tocá 📡 en el mapa para ver lo que pasa cerca.";
+    info.textContent = "Marcá tu casa, buscá una dirección, tocá 📡 o mantené presionado el mapa para ver lo que pasa cerca.";
     return;
   }
   const nombre = NOMBRE_REF[activo.tipo];
