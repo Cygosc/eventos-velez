@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Colores de Cortes CABA (iguales a los de www/styles.css) -->
+    <color name="marca_violeta">#6D4AFF</color>
+    <color name="marca_lila">#A04BFF</color>
+    <color name="marca_rosa">#FF5CA8</color>
+    <color name="marca_fondo">#F5F3FF</color>
+</resources>

@@ -18,8 +18,11 @@ const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "cortes-arte-"));
 function captura(params, ancho, alto, destino) {
   const perfil = fs.mkdtempSync(path.join(tmp, "perfil-"));
   const salida = path.join(tmp, `c-${Date.now()}-${Math.random().toString(36).slice(2)}.png`);
-  execFileSync(EDGE, ["--headless=new", "--disable-gpu", "--hide-scrollbars", `--user-data-dir=${perfil}`,
+  execFileSync(EDGE, ["--headless=new", "--disable-gpu", "--hide-scrollbars", "--allow-file-access-from-files", "--virtual-time-budget=4000", `--user-data-dir=${perfil}`,
     `--window-size=${ancho},${alto}`, `--screenshot=${salida}`, `${html}?${new URLSearchParams(params)}`], { stdio: "ignore" });
+  // A veces Edge (por ejemplo mientras se actualiza) termina antes de escribir la captura: se espera hasta 30 s.
+  for (let i = 0; i < 60 && !fs.existsSync(salida); i++) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 500);
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 300);
   // Recorta al tamaño exacto y saca la transparencia (la Play Store no acepta PNG con canal alfa).
   execFileSync("python", ["-c", `
 import sys

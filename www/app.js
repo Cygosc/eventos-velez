@@ -18,11 +18,11 @@ const ANUNCIOS = {
 const CAFECITO_URL = "https://cafecito.app/xibo3d";
 
 const TIPOS = {
-  partido: { icono: "⚽", nombre: "Partidos", color: "#0a5aa6" },
-  recital: { icono: "🎤", nombre: "Recitales", color: "#8e44ad" },
-  marcha: { icono: "📣", nombre: "Marchas", color: "#c0392b" },
-  corte: { icono: "🚧", nombre: "Cortes y obras", color: "#e67e22" },
-  evento: { icono: "📌", nombre: "Otros eventos", color: "#16a085" },
+  partido: { icono: "⚽", nombre: "Partidos", color: "#3b82f6" },
+  recital: { icono: "🎤", nombre: "Recitales", color: "#a855f7" },
+  marcha: { icono: "📣", nombre: "Marchas", color: "#ff4d6d" },
+  corte: { icono: "🚧", nombre: "Cortes y obras", color: "#ff9f1c" },
+  evento: { icono: "📌", nombre: "Otros eventos", color: "#12b5a6" },
 };
 
 // ===================== Utilidades =====================
@@ -211,9 +211,9 @@ const leyenda = L.control({ position: "bottomleft" });
 leyenda.onAdd = () => {
   const div = L.DomUtil.create("div", "leyenda");
   div.innerHTML =
-    '<div><i style="border-top:5px solid #d7263d"></i>Calle cerrada</div>' +
-    '<div><i style="border-top:4px dashed #f08a24"></i>Corte parcial</div>' +
-    '<div><i style="border-top:4px dotted #d7263d"></i>Estimado (alrededor del lugar)</div>';
+    '<div><i style="border-top:5px solid #ef233c"></i>Calle cerrada</div>' +
+    '<div><i style="border-top:4px dashed #ff9f1c"></i>Corte parcial</div>' +
+    '<div><i style="border-top:4px dotted #ef233c"></i>Estimado (alrededor del lugar)</div>';
   return div;
 };
 leyenda.addTo(mapa);
@@ -247,7 +247,7 @@ function dibujarCortes(ev, centrar) {
     const total = c.tipo === "total";
     const estimado = c.tipo === "estimado";
     const l = L.polyline(c.coords, {
-      color: total || estimado ? "#d7263d" : "#f08a24",
+      color: total || estimado ? "#ef233c" : "#ff9f1c",
       weight: total ? 7 : 5,
       opacity: estimado ? 0.75 : 0.9,
       dashArray: total ? null : estimado ? "2 8" : "8 8",
@@ -444,7 +444,7 @@ function mostrarReferencia(eventos) {
 
   if (casa) {
     $("#btn-casa").textContent = "📍 Cambiar mi casa";
-    marcadorCasa = L.circleMarker(casa, { radius: 9, color: "#0a5aa6", fillColor: "#3d8ee0", fillOpacity: 1, weight: 3 })
+    marcadorCasa = L.circleMarker(casa, { radius: 9, color: "#ffffff", fillColor: "#6d4aff", fillOpacity: 1, weight: 3 })
       .addTo(mapa).bindTooltip("Mi casa");
   }
   if (referencia) {
@@ -458,7 +458,7 @@ function mostrarReferencia(eventos) {
     marcadorRef.addTo(mapa);
   }
   const r = radioActual();
-  if (activo && r) circuloRadio = L.circle(activo.punto, { radius: r, color: "#0a5aa6", weight: 1, fillOpacity: 0.04, interactive: false }).addTo(mapa);
+  if (activo && r) circuloRadio = L.circle(activo.punto, { radius: r, color: "#6d4aff", weight: 1.5, dashArray: "6 6", fillColor: "#a04bff", fillOpacity: 0.06, interactive: false }).addTo(mapa);
 
   if (!activo) {
     info.classList.remove("afectada");
@@ -483,7 +483,7 @@ function tiposActivos() {
 function dibujarFiltros() {
   const activos = tiposActivos();
   $("#tipos").innerHTML = Object.entries(TIPOS)
-    .map(([k, t]) => `<button data-tipo="${k}" class="chip-filtro ${activos.includes(k) ? "activo" : ""}">${t.icono} ${t.nombre}</button>`)
+    .map(([k, t]) => `<button data-tipo="${k}" style="--c:${t.color}" class="chip-filtro ${activos.includes(k) ? "activo" : ""}">${t.icono} ${t.nombre}</button>`)
     .join("");
   $("#tipos").querySelectorAll("button").forEach((b) =>
     b.addEventListener("click", () => {
@@ -627,15 +627,18 @@ function refrescar() {
   for (const ev of visibles) {
     const li = document.createElement("li");
     li.className = "evento";
-    li.style.borderLeftColor = TIPOS[ev.tipo].color;
+    li.style.setProperty("--c", TIPOS[ev.tipo].color);
     li.dataset.id = ev.id;
     li.innerHTML = `
-      <div class="t">${TIPOS[ev.tipo].icono} ${esc(ev.titulo)}
-        ${ev.confirmado === false ? '<span class="chip warn">a confirmar</span>' : ""}
-        ${!ev.horaConfirmada ? '<span class="chip">hora a definir</span>' : ""}</div>
-      <div class="f">${fmtDia.format(ev.inicio)}${ev.horaConfirmada ? " · " + fmtHora.format(ev.inicio) + " h" : ""}
-        ${ev.donde ? " · " + esc(ev.donde) : ""}${ev.dist !== null ? ` · <b>${textoDist(ev.dist)}</b>` : ""}</div>
-      <div class="c">${textoVentana(ev)}</div>`;
+      <div class="ico">${TIPOS[ev.tipo].icono}</div>
+      <div class="cuerpo">
+        <div class="t">${esc(ev.titulo)}
+          ${ev.confirmado === false ? '<span class="chip warn">a confirmar</span>' : ""}
+          ${!ev.horaConfirmada ? '<span class="chip">hora a definir</span>' : ""}</div>
+        <div class="f">${fmtDia.format(ev.inicio)}${ev.horaConfirmada ? " · " + fmtHora.format(ev.inicio) + " h" : ""}
+          ${ev.donde ? " · " + esc(ev.donde) : ""}${ev.dist !== null ? ` · <span class="dist">${textoDist(ev.dist)}</span>` : ""}</div>
+        <div class="c">${textoVentana(ev)}</div>
+      </div>`;
     li.addEventListener("click", () => {
       seleccionar(ev, true);
       // En el celular el mapa está arriba de la lista: subir para verlo.

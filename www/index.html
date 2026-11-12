@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <title>Cortes en CABA</title>
+  <title>Cortes CABA</title>
+  <meta name="theme-color" content="#6d4aff">
   <link rel="stylesheet" href="vendor/leaflet.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>¿Qué se corta en CABA?</h1>
+    <p class="kicker">🚧 Cortes CABA</p>
+    <h1>¿Qué se corta hoy?</h1>
     <div id="estado" class="estado">Buscando eventos…</div>
   </header>
 
@@ -41,7 +43,7 @@
 
     <section class="mapa-wrap">
       <form id="buscador" class="buscador" autocomplete="off">
-        <input id="direccion" type="search" placeholder="Buscar una dirección (ej.: Rivadavia 5000)" aria-label="Dirección">
+        <input id="direccion" type="search" placeholder="Buscá una calle o esquina" aria-label="Dirección">
         <button type="submit" aria-label="Buscar">🔎</button>
       </form>
       <ul id="resultados" class="resultados"></ul>
