@@ -11,8 +11,8 @@ const DATOS_URL = "https://raw.githubusercontent.com/Cygosc/eventos-velez/main/w
 // Para publicar: poner el ID real del bloque de anuncios, "prueba: false" y el ID de la app en
 // android/app/src/main/res/values/strings.xml (admob_app_id).
 const ANUNCIOS = {
-  prueba: true,
-  bannerId: "ca-app-pub-3940256099942544/9214589741", // ID de PRUEBA de Google (banner adaptable)
+  prueba: false,
+  bannerId: "ca-app-pub-7512587545135575/2905026519", // bloque "Banner inferior" de Cortes CABA
 };
 // Aportes voluntarios. Vacío = no se muestra el botón. Ej.: "https://cafecito.app/tu_usuario"
 const CAFECITO_URL = "https://cafecito.app/xibo3d";
@@ -679,10 +679,18 @@ function refrescar() {
 
 // ===================== Publicidad y aportes =====================
 const ADMOB = window.Capacitor?.isNativePlatform?.() ? window.Capacitor.Plugins.AdMob : null;
-let estadoBanner = "nada"; // nada | cargando | visible
+let estadoBanner = "nada"; // nada | cargando | visible | reintentar
 
 async function iniciarAnuncios() {
-  if (!ADMOB || estadoBanner !== "nada") return;
+  if (!ADMOB) return;
+  if (estadoBanner === "reintentar") {
+    estadoBanner = "visible";
+    try {
+      await ADMOB.showBanner({ adId: ANUNCIOS.bannerId, adSize: "ADAPTIVE_BANNER", position: "BOTTOM_CENTER", margin: 0, isTesting: ANUNCIOS.prueba });
+    } catch { estadoBanner = "reintentar"; }
+    return;
+  }
+  if (estadoBanner !== "nada") return;
   estadoBanner = "cargando";
   try {
     await ADMOB.initialize({ initializeForTesting: ANUNCIOS.prueba });
@@ -694,6 +702,13 @@ async function iniciarAnuncios() {
     // Se deja lugar abajo para que el banner no tape la lista.
     await ADMOB.addListener("bannerAdSizeChanged", (t) => {
       document.body.style.paddingBottom = Math.round(t?.height || 0) + "px";
+    });
+    // Si no hay anuncio para mostrar (por ejemplo "No fill" o sin internet), se libera el lugar
+    // y se vuelve a intentar la próxima vez que se abre o se actualiza la app.
+    await ADMOB.addListener("bannerAdFailedToLoad", async () => {
+      document.body.style.paddingBottom = "0px";
+      try { await ADMOB.removeBanner(); } catch {}
+      estadoBanner = "reintentar";
     });
     await ADMOB.showBanner({ adId: ANUNCIOS.bannerId, adSize: "ADAPTIVE_BANNER", position: "BOTTOM_CENTER", margin: 0, isTesting: ANUNCIOS.prueba });
     estadoBanner = "visible";

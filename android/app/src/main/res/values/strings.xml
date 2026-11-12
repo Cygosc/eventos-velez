@@ -4,6 +4,6 @@
     <string name="title_activity_main">Cortes CABA</string>
     <string name="package_name">ar.cygosc.eventosvelez</string>
     <string name="custom_url_scheme">ar.cygosc.eventosvelez</string>
-    <!-- AdMob: ID de la app. Ahora es el de PRUEBA de Google; reemplazar por el real (ca-app-pub-...~...) antes de publicar -->
-    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <!-- AdMob: ID real de la app Cortes CABA -->
+    <string name="admob_app_id">ca-app-pub-7512587545135575~8903458658</string>
 </resources>
