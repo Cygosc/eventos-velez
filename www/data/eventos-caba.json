@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-11",
+  "actualizado": "2026-11-12",
   "eventos": [
     {
       "id": "papa-recoleta-2026-11-07",
@@ -766,6 +766,17 @@
       "notas": "Tiene más fechas en diciembre."
     },
     {
+      "id": "babymetal-2026-12-01",
+      "titulo": "Babymetal",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-12-01T19:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": true,
+      "fuente": "https://www.eventworld.com/babymetal-buenos-aires-tickets-01-12-2026/event/409471",
+      "notas": "Gira mundial 2026. También en Indie Hoy. 19:00 según Eventworld; hora no oficial."
+    },
+    {
       "id": "daniel-caesar-2026-12-05",
       "titulo": "Daniel Caesar",
       "tipo": "recital",
@@ -804,9 +815,9 @@
       "lugar": "river",
       "inicio": "2026-12-10T21:00:00-03:00",
       "horaConfirmada": false,
-      "confirmado": false,
-      "fuente": "https://www.timeout.com/es/buenos-aires/recitales-imperdibles-musica-shows",
-      "notas": "Vivir Sin Aire Tour. Una agenda dice 11 de diciembre: fecha a confirmar."
+      "confirmado": true,
+      "fuente": "https://www.lanacion.com.ar/que-sale/mana-argentina-2026-precios-entradas-como-comprar-nid18062026/",
+      "notas": "Vivir Sin Aire Tour. La Nación y Los Andes confirman el 10 de diciembre. Hora no oficial."
     },
     {
       "id": "slayer-2026-12-14",
