@@ -349,11 +349,11 @@
         "lon": -58.4205
       },
       "inicio": "2026-11-11T00:00:00-03:00",
-      "fin": "2026-11-14T23:59:00-03:00",
+      "fin": "2026-11-16T06:00:00-03:00",
       "horaConfirmada": false,
-      "confirmado": false,
-      "fuente": "https://mdzol.com/sociedad/2026/10/22/el-mapa-de-los-cortes-por-la-visita-del-papa-leon-xiv-que-calles-de-caba-estaran-cerradas-y-desde-cu-1990104.html",
-      "notas": "Según MDZ, cortes totales progresivos en Av. del Libertador entre Olleros y Ugarteche por el desmonte de las estructuras de la visita papal, hasta el sábado 14. Horarios exactos sin confirmar; nota publicada antes de la visita.",
+      "confirmado": true,
+      "fuente": "https://buenosaires.gob.ar/cortespalermo",
+      "notas": "Cortes progresivos en Av. del Libertador (Olleros/Sucre a Ugarteche) por el desmonte de la visita papal. Perfil indica hasta el sáb 14; la página oficial de la Ciudad indica hasta el lunes 16 de noviembre. Horario exacto sin confirmar. Autopista Illia gratuita para livianos.",
       "tramos": [
         {
           "calle": "Av. del Libertador",
@@ -734,6 +734,50 @@
       "notas": "Entradas agotadas. Las fuentes dicen 19:00 o 20:00."
     },
     {
+      "id": "calamaro-2026-11-25",
+      "titulo": "Andrés Calamaro",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-11-25T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://www.cronista.com/clase/trendy/andres-calamaro-anuncio-nueva-fecha-en-buenos-aires-donde-comprar-las-entradas",
+      "notas": "Hora no oficial; fecha según agregador."
+    },
+    {
+      "id": "maria-becerra-2026-11-26",
+      "titulo": "María Becerra",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-11-26T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://indiehoy.com/agenda/maria-becerra-en-movistar-arena/",
+      "notas": "Hora no oficial."
+    },
+    {
+      "id": "calamaro-2026-11-26",
+      "titulo": "Andrés Calamaro",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-11-26T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://www.cronista.com/clase/trendy/andres-calamaro-anuncio-nueva-fecha-en-buenos-aires-donde-comprar-las-entradas",
+      "notas": "Hora no oficial; fecha según agregador."
+    },
+    {
+      "id": "maria-becerra-2026-11-27",
+      "titulo": "María Becerra",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-11-27T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://indiehoy.com/agenda/maria-becerra-en-movistar-arena/",
+      "notas": "Hora no oficial."
+    },
+    {
       "id": "eros-ramazzotti-2026-11-28",
       "titulo": "Eros Ramazzotti",
       "tipo": "recital",
@@ -742,6 +786,17 @@
       "horaConfirmada": false,
       "confirmado": true,
       "fuente": "https://www.timeout.com/es/buenos-aires/recitales-imperdibles-musica-shows"
+    },
+    {
+      "id": "calamaro-2026-11-28",
+      "titulo": "Andrés Calamaro",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-11-28T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://www.cronista.com/clase/trendy/andres-calamaro-anuncio-nueva-fecha-en-buenos-aires-donde-comprar-las-entradas",
+      "notas": "Hora no oficial; fecha según agregador."
     },
     {
       "id": "ed-sheeran-2026-11-29",
@@ -763,7 +818,7 @@
       "horaConfirmada": false,
       "confirmado": false,
       "fuente": "https://misconciertos.com.ar/conciertos",
-      "notas": "Tiene más fechas en diciembre."
+      "notas": "Otra agenda lista sus shows en Movistar Arena el 3 y 4 de diciembre (agotados); la fecha del 30/11 no se pudo reconfirmar."
     },
     {
       "id": "babymetal-2026-12-01",
@@ -799,6 +854,28 @@
       "notas": "Cierre de la gira Mi Norte & Mi Sur. También en Perfil y Crónica. 21 h según Indie Hoy."
     },
     {
+      "id": "angela-torres-2026-12-08",
+      "titulo": "Ángela Torres",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-12-08T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://www.songkick.com/es/concerts/43257705-angela-torres-at-movistar-arena",
+      "notas": "Hora no oficial."
+    },
+    {
+      "id": "angela-torres-2026-12-09",
+      "titulo": "Ángela Torres",
+      "tipo": "recital",
+      "lugar": "movistar",
+      "inicio": "2026-12-09T21:00:00-03:00",
+      "horaConfirmada": false,
+      "confirmado": false,
+      "fuente": "https://www.songkick.com/es/concerts/43257707-angela-torres-at-movistar-arena",
+      "notas": "Hora no oficial."
+    },
+    {
       "id": "deep-purple-2026-12-10",
       "titulo": "Deep Purple",
       "tipo": "recital",
@@ -817,7 +894,7 @@
       "horaConfirmada": false,
       "confirmado": true,
       "fuente": "https://www.lanacion.com.ar/que-sale/mana-argentina-2026-precios-entradas-como-comprar-nid18062026/",
-      "notas": "Vivir Sin Aire Tour. La Nación y Los Andes confirman el 10 de diciembre. Hora no oficial."
+      "notas": "Vivir Sin Aire Tour. La Nación y Los Andes confirman el 10 de diciembre. Hora no oficial. Indie Hoy dice 21 h; La Gaceta dice 20 h."
     },
     {
       "id": "slayer-2026-12-14",
