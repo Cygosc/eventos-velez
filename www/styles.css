@@ -158,6 +158,140 @@ button.activo {
 }
 @media (prefers-color-scheme: dark) { .info-casa.afectada { background: #3a1626; } }
 
+/* ============ Mis lugares ============ */
+.mis-lugares {
+  background: var(--card);
+  border-radius: var(--radio);
+  padding: 4px 14px 14px;
+  box-shadow: var(--sombra);
+  margin-bottom: 14px;
+}
+.titulo-lugares { margin: 12px 0 8px; }
+.lista-lugares { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.lugar {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 4px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.lugar:active { background: var(--suave); }
+.lugar-ico {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  background: var(--suave);
+}
+.lugar-texto { display: flex; flex-direction: column; min-width: 0; }
+.lugar-texto b { font-weight: 700; font-size: .98rem; }
+.lugar-texto small { color: var(--muted); font-size: .8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lugar-editar {
+  width: 38px; height: 38px;
+  padding: 0;
+  font-size: 16px;
+  box-shadow: none;
+  background: transparent;
+  border-color: var(--borde);
+}
+.vacio-lugar .lugar-ico { background: transparent; border: 2px dashed var(--borde); }
+.vacio-lugar .lugar-texto b { color: var(--primario); }
+@media (prefers-color-scheme: dark) { .vacio-lugar .lugar-texto b { color: #b9a6ff; } }
+.lugar-mas {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--degradado);
+  color: #fff;
+  font-weight: 800;
+}
+.agregar-lugar {
+  width: 100%;
+  margin-top: 8px;
+  border-style: dashed;
+  color: var(--primario);
+  box-shadow: none;
+}
+.agregar-lugar[hidden] { display: none; }
+.radio-lugares {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--borde);
+  font-size: .92rem;
+  font-weight: 600;
+}
+.pin-lugar { background: none; border: none; }
+.pin-lugar-in {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  background: #fff;
+  border: 3px solid #6d4aff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+}
+
+/* Aviso mientras se elige la ubicación de un lugar */
+.eligiendo {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 10px;
+  padding: 10px 8px 10px 14px;
+  border-radius: 16px;
+  background: var(--degradado);
+  color: #fff;
+  font-weight: 700;
+  font-size: .92rem;
+  box-shadow: var(--sombra);
+}
+.eligiendo[hidden] { display: none; }
+.eligiendo span { flex: 1; }
+.eligiendo button { padding: 6px 12px; box-shadow: none; }
+.eligiendo-mapa { cursor: crosshair; outline: 3px solid #a04bff; outline-offset: 2px; }
+
+/* Ventana para nombrar / editar un lugar */
+.dialogo {
+  position: fixed; inset: 0;
+  z-index: 2000;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(15, 13, 30, .45);
+  padding: 12px;
+}
+.dialogo[hidden] { display: none; }
+.dialogo-caja {
+  width: 100%; max-width: 440px;
+  background: var(--card);
+  color: var(--text);
+  border-radius: 24px;
+  padding: 18px;
+  box-shadow: var(--sombra-fuerte);
+  display: grid; gap: 12px;
+  margin-bottom: 70px; /* deja ver el banner de abajo */
+}
+.dialogo-caja h3 { margin: 0; font-size: 1.15rem; font-weight: 800; }
+.dialogo-direccion { margin: -4px 0 0; color: var(--muted); font-size: .88rem; }
+.dialogo-direccion:empty { display: none; }
+.dialogo-caja label { display: grid; gap: 6px; font-weight: 700; font-size: .9rem; }
+.dialogo-caja label[hidden], .sugerencias[hidden], .dialogo-caja button[hidden] { display: none; }
+.dialogo-caja input {
+  font: inherit;
+  padding: 11px 14px;
+  border-radius: 14px;
+  border: 1.5px solid var(--borde);
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+}
+.dialogo-caja input:focus { border-color: var(--primario); }
+.dialogo-caja input.falta { border-color: var(--rojo); }
+.sugerencias { display: flex; flex-wrap: wrap; gap: 6px; }
+.sugerencia { font-size: .82rem; padding: 6px 11px; box-shadow: none; }
+.dialogo-botones { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
+.dialogo-botones[hidden] { display: none; }
+.peligro { color: var(--rojo); border-color: #ffd0da; }
+
 /* ============ Filtros ============ */
 .filtros { margin-top: 16px; display: grid; gap: 10px; font-size: .92rem; font-weight: 600; }
 .filtros label { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }

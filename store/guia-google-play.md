@@ -204,13 +204,13 @@ QUÉ INCLUYE
 • Cortes programados por obras, carreras, actos y eventos en la vía pública.
 
 CERCA DE VOS
-• Marcá tu casa y elegí un radio de 1, 3 o 6 km para ver solo lo que te afecta.
+• Guardá tu casa y hasta 10 lugares frecuentes (trabajo, escuela, amigos…) y elegí un radio de 1, 3 o 6 km para ver solo lo que te afecta.
 • Tocá 📡 para ver los cortes cerca de donde estás.
 • Buscá una dirección o una esquina, o mantené presionado el mapa para ver lo que pasa en esa zona.
 • Filtrá por partidos, recitales, marchas, cortes y obras.
 
 AVISOS
-Recibí un aviso el día anterior a las 20:00 y otro dos horas antes de que empiecen los cortes cerca de tu casa.
+Recibí un aviso el día anterior a las 20:00 y otro dos horas antes de que empiecen los cortes cerca de tu casa o de tus lugares frecuentes.
 
 EN EL MAPA
 • Línea roja: calle cerrada según el operativo publicado.

@@ -10,6 +10,6 @@
   },
   "android": {
     "adjustMarginsForEdgeToEdge": "force",
-    "appendUserAgent": "CortesCABA/1.0 (+https://github.com/Cygosc/eventos-velez)"
+    "appendUserAgent": "CortesCABA/1.1 (+https://github.com/Cygosc/eventos-velez)"
   }
 }

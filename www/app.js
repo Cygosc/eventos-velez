@@ -178,11 +178,20 @@ function normalizar(ev) {
   return e;
 }
 
-// Distancia de mi casa al evento: al tramo cortado más cercano, o al lugar.
+// Distancia de un punto al evento: al tramo cortado más cercano, o al lugar.
 function distanciaACasa(ev, casa) {
   if (!casa) return null;
   if (ev.tramos.length) return corteMasCercano(casa, ev.tramos).d;
   return ev.punto ? metros(casa, ev.punto) : null;
+}
+// Distancia al más cercano de varios puntos ({ nombre, punto }). Devuelve { d, nombre } o null.
+function distanciaMinima(ev, puntos) {
+  let mejor = null;
+  for (const p of puntos || []) {
+    const d = distanciaACasa(ev, p.punto);
+    if (d !== null && (!mejor || d < mejor.d)) mejor = { d, nombre: p.nombre };
+  }
+  return mejor;
 }
 
 // ===================== Mapa =====================
@@ -205,7 +214,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 
 const capaMarcadores = L.layerGroup().addTo(mapa);
 const capaCortes = L.layerGroup().addTo(mapa);
-let marcadorCasa = null, circuloRadio = null;
 
 const leyenda = L.control({ position: "bottomleft" });
 leyenda.onAdd = () => {
@@ -262,18 +270,27 @@ function dibujarCortes(ev, centrar) {
   }
 }
 
-// ===================== Punto de referencia: mi casa, dónde estoy o una dirección =====================
-// La casa queda guardada en el dispositivo. "Dónde estoy" y una dirección buscada son temporales:
-// cambian la lista, el radio y el mapa, pero los avisos siempre se calculan con la casa.
-let referencia = null; // { tipo: "gps" | "direccion", lat, lon, nombre, precision }
+// ===================== Punto de referencia: mis lugares, dónde estoy o una dirección =====================
+// Mis lugares (casa y frecuentes) quedan guardados en el dispositivo. "Dónde estoy", una dirección buscada y
+// mantener presionado el mapa son temporales: cambian la lista, el radio y el mapa, pero los avisos siempre se
+// calculan con mis lugares.
+let referencia = null; // { tipo: "gps" | "direccion" | "zona", lat, lon, nombre, precision }
 let marcadorRef = null;
-const NOMBRE_REF = { casa: "tu casa", gps: "donde estás", direccion: "esa dirección", zona: "ese punto" };
+const NOMBRE_REF = {
+  gps: "donde estás", direccion: "esa dirección", zona: "ese punto",
+  get lugares() {
+    const l = misLugares();
+    if (l.length !== 1) return "tus lugares";
+    return l[0].id === "casa" ? "tu casa" : l[0].nombre;
+  },
+};
 const ICONO_REF = { gps: "📡", direccion: "🔎", zona: "👆" };
 
+// Puntos desde donde se miden las distancias: el temporal (si hay) o todos mis lugares.
 function puntoActivo() {
-  if (referencia) return { tipo: referencia.tipo, punto: [referencia.lat, referencia.lon] };
-  const casa = leer("casa", null);
-  return casa ? { tipo: "casa", punto: casa } : null;
+  if (referencia) return { tipo: referencia.tipo, puntos: [{ nombre: referencia.nombre, punto: [referencia.lat, referencia.lon] }] };
+  const l = misLugares();
+  return l.length ? { tipo: "lugares", puntos: l.map((x) => ({ nombre: x.nombre, punto: x.punto })) } : null;
 }
 
 function fijarReferencia(ref) {
@@ -295,8 +312,10 @@ function quitarReferencia() {
   referencia = null;
   $("#referencia").hidden = true;
   $("#direccion").value = "";
-  const casa = leer("casa", null);
-  if (casa) mapa.setView(casa, 14); else mapa.setView([CABA.lat, CABA.lon], 12);
+  const l = misLugares();
+  if (l.length === 1) mapa.setView(l[0].punto, 14);
+  else if (l.length) mapa.fitBounds(L.latLngBounds(l.map((x) => x.punto)).pad(0.3), { maxZoom: 14 });
+  else mapa.setView([CABA.lat, CABA.lon], 12);
   refrescar();
 }
 
@@ -367,7 +386,10 @@ $("#buscador").addEventListener("submit", async (e) => {
     let res = await geocodificar(texto, true);
     if (!res.length) res = await geocodificar(texto + ", Ciudad Autónoma de Buenos Aires", false);
     if (!res.length) { ul.innerHTML = '<li class="vacio">No encontré esa dirección. Probá con "calle número" o una esquina ("Corrientes y Callao").</li>'; return; }
-    const elegir = (r) => fijarReferencia({ tipo: "direccion", lat: Number(r.lat), lon: Number(r.lon), nombre: nombreCorto(r) });
+    // Si se está eligiendo la ubicación de un lugar, el resultado se usa para eso.
+    const elegir = (r) => (eligiendo
+      ? elegirPunto(Number(r.lat), Number(r.lon), nombreCorto(r))
+      : fijarReferencia({ tipo: "direccion", lat: Number(r.lat), lon: Number(r.lon), nombre: nombreCorto(r) }));
     if (res.length === 1) { elegir(res[0]); return; }
     ul.innerHTML = "";
     for (const r of res) {
@@ -384,7 +406,7 @@ $("#buscador").addEventListener("submit", async (e) => {
 // --- Mantener presionado el mapa: ver los cortes alrededor de ese punto ---
 // En el celular Leaflet convierte la pulsación larga en "contextmenu"; en la PC es el clic derecho.
 mapa.on("contextmenu", (e) => {
-  if (modoCasa) return;
+  if (eligiendo) { elegirPunto(e.latlng.lat, e.latlng.lng); return; }
   if (navigator.vibrate) navigator.vibrate(30);
   fijarReferencia({ tipo: "zona", lat: e.latlng.lat, lon: e.latlng.lng, nombre: "el punto marcado" });
   // Se busca el nombre de la calle para mostrarlo (si falla, queda "el punto marcado").
@@ -403,23 +425,216 @@ mapa.on("contextmenu", (e) => {
     .catch(() => {});
 });
 
-// ===================== Mi casa y radio =====================
-let modoCasa = false;
-$("#btn-casa").addEventListener("click", () => {
-  modoCasa = !modoCasa;
-  $("#btn-casa").classList.toggle("activo", modoCasa);
-  $("#btn-casa").textContent = modoCasa ? "Tocá tu casa en el mapa…" : leer("casa", null) ? "📍 Cambiar mi casa" : "📍 Marcar mi casa";
-  mapa.getContainer().style.cursor = modoCasa ? "crosshair" : "";
-});
-mapa.on("click", (e) => {
-  if (!modoCasa) return;
-  modoCasa = false;
-  $("#btn-casa").classList.remove("activo");
-  mapa.getContainer().style.cursor = "";
-  guardar("casa", [e.latlng.lat, e.latlng.lng]);
-  if (leer("radio", null) === null) { guardar("radio", 3000); $("#radio").value = "3000"; }
+// ===================== Mis lugares: casa y lugares frecuentes =====================
+// Todos se comportan igual: la lista muestra los eventos dentro del radio de cualquiera de ellos y los avisos
+// se calculan para todos. Se guardan solo en el teléfono ("casa" y "frecuentes" en localStorage).
+const MAX_FRECUENTES = 10;
+const SUGERENCIAS = ["Trabajo", "Escuela", "Facultad", "Amigos", "Familia", "Gimnasio", "Club"];
+
+function iconoLugar(nombre) {
+  const n = (nombre || "").toLowerCase();
+  if (/trabaj|oficina|laburo/.test(n)) return "💼";
+  if (/escuela|colegio|jard[ií]n/.test(n)) return "🏫";
+  if (/facu|universidad|uba|instituto/.test(n)) return "🎓";
+  if (/amig/.test(n)) return "🧑‍🤝‍🧑";
+  if (/famil|mam[aá]|pap[aá]|abuel|t[ií]a|t[ií]o|herman/.test(n)) return "👪";
+  if (/gim|club|deporte|f[uú]tbol/.test(n)) return "🏋️";
+  if (/novi|pareja/.test(n)) return "❤️";
+  if (/m[eé]dic|hospital|cl[ií]nica/.test(n)) return "🏥";
+  return "⭐";
+}
+
+const leerFrecuentes = () => leer("frecuentes", []);
+const guardarFrecuentes = (l) => guardar("frecuentes", l.slice(0, MAX_FRECUENTES));
+
+// Casa + frecuentes configurados, como puntos para calcular distancias.
+function misLugares() {
+  const casa = leer("casa", null);
+  const lista = casa ? [{ id: "casa", nombre: "Casa", icono: "🏠", punto: casa, direccion: leer("casaDireccion", "") }] : [];
+  for (const f of leerFrecuentes()) lista.push({ id: f.id, nombre: f.nombre, icono: iconoLugar(f.nombre), punto: [f.lat, f.lon], direccion: f.direccion || "" });
+  return lista;
+}
+
+// Nombre corto de una dirección a partir de la respuesta de Nominatim (búsqueda o "reverse").
+function direccionDe(r) {
+  const a = r?.address;
+  if (a) {
+    const calle = [a.road, a.house_number].filter(Boolean).join(" ");
+    const barrio = a.suburb || a.neighbourhood || a.city_district || "";
+    if (calle) return barrio ? `${calle}, ${barrio}` : calle;
+  }
+  return r?.display_name ? r.display_name.split(",").slice(0, 3).join(",").trim() : "";
+}
+async function direccionDelPunto(lat, lon) {
+  try {
+    const params = new URLSearchParams({ lat, lon, format: "json", zoom: "18", "accept-language": "es" });
+    const r = await fetch("https://nominatim.openstreetmap.org/reverse?" + params);
+    return r.ok ? direccionDe(await r.json()) : "";
+  } catch { return ""; }
+}
+
+// --- Elegir una ubicación: con el dedo en el mapa, manteniendo presionado o con el buscador ---
+let eligiendo = null; // { lugarId: "casa" | id | "nuevo", alElegir(lat, lon, direccion) }
+
+function empezarAElegir(lugarId, texto, alElegir) {
+  eligiendo = { lugarId, alElegir };
+  const aviso = $("#eligiendo");
+  aviso.hidden = false;
+  aviso.innerHTML = `<span>📍 ${esc(texto)}</span><button type="button" id="cancelar-eleccion">Cancelar</button>`;
+  $("#cancelar-eleccion").addEventListener("click", terminarDeElegir);
+  mapa.getContainer().classList.add("eligiendo-mapa");
+  if (window.innerWidth <= 820) $(".mapa-wrap").scrollIntoView({ behavior: "smooth" });
+}
+function terminarDeElegir() {
+  eligiendo = null;
+  $("#eligiendo").hidden = true;
+  mapa.getContainer().classList.remove("eligiendo-mapa");
+}
+async function elegirPunto(lat, lon, direccion) {
+  if (!eligiendo) return false;
+  const { alElegir } = eligiendo;
+  terminarDeElegir();
+  $("#resultados").innerHTML = "";
+  $("#direccion").value = "";
+  if (navigator.vibrate) navigator.vibrate(30);
+  await alElegir(lat, lon, direccion || (await direccionDelPunto(lat, lon)));
+  return true;
+}
+mapa.on("click", (e) => { if (eligiendo) elegirPunto(e.latlng.lat, e.latlng.lng); });
+
+// --- Ventana para nombrar / editar un lugar ---
+function abrirDialogo({ titulo, direccion, nombre, conNombre, puedeBorrar, puedeMover }) {
+  return new Promise((resolver) => {
+    const d = $("#dialogo");
+    $("#dialogo-titulo").textContent = titulo;
+    $("#dialogo-direccion").textContent = direccion ? "📍 " + direccion : "";
+    $("#dialogo-nombre-wrap").hidden = !conNombre;
+    $("#dialogo-sugerencias").hidden = !conNombre;
+    const input = $("#dialogo-nombre");
+    input.value = nombre || "";
+    $("#dialogo-sugerencias").innerHTML = SUGERENCIAS
+      .map((s) => `<button type="button" class="sugerencia">${iconoLugar(s)} ${s}</button>`).join("");
+    $("#dialogo-sugerencias").querySelectorAll("button").forEach((b, i) =>
+      b.addEventListener("click", () => { input.value = SUGERENCIAS[i]; }));
+    $("#dialogo-ubicacion").hidden = !puedeMover;
+    $("#dialogo-borrar").hidden = !puedeBorrar;
+    $("#dialogo-acciones").hidden = !puedeBorrar && !puedeMover;
+    d.hidden = false;
+    if (conNombre && !nombre) setTimeout(() => input.focus(), 50);
+
+    const cerrar = (resultado) => {
+      d.hidden = true;
+      $("#dialogo-form").onsubmit = $("#dialogo-cancelar").onclick = $("#dialogo-borrar").onclick = $("#dialogo-ubicacion").onclick = null;
+      input.blur();
+      resolver(resultado);
+    };
+    $("#dialogo-form").onsubmit = (e) => {
+      e.preventDefault();
+      const n = input.value.trim();
+      if (conNombre && !n) { input.focus(); input.classList.add("falta"); return; }
+      input.classList.remove("falta");
+      cerrar({ accion: "guardar", nombre: n });
+    };
+    $("#dialogo-cancelar").onclick = () => cerrar({ accion: "cancelar" });
+    $("#dialogo-ubicacion").onclick = () => cerrar({ accion: "mover", nombre: input.value.trim() });
+    $("#dialogo-borrar").onclick = () => {
+      if (confirm("¿Borrar este lugar?")) cerrar({ accion: "borrar" });
+    };
+  });
+}
+
+// --- Acciones sobre los lugares ---
+function agregarFrecuente() {
+  if (leerFrecuentes().length >= MAX_FRECUENTES) return;
+  empezarAElegir("nuevo", "Tocá el mapa o buscá la dirección del nuevo lugar", async (lat, lon, direccion) => {
+    const r = await abrirDialogo({ titulo: "¿Cómo se llama este lugar?", direccion, nombre: "", conNombre: true });
+    if (r.accion !== "guardar") return;
+    const lista = leerFrecuentes();
+    lista.push({ id: "f" + Date.now().toString(36), nombre: r.nombre, lat, lon, direccion });
+    guardarFrecuentes(lista);
+    alCambiarLugares();
+  });
+}
+
+function marcarCasa() {
+  empezarAElegir("casa", "Tocá tu casa en el mapa o buscá su dirección", (lat, lon, direccion) => {
+    guardar("casa", [lat, lon]);
+    guardar("casaDireccion", direccion || "");
+    alCambiarLugares();
+  });
+}
+
+async function editarLugar(id, cambios = {}) {
+  const esCasa = id === "casa";
+  const actual = misLugares().find((l) => l.id === id);
+  if (!actual) return;
+  const lat = cambios.lat ?? actual.punto[0], lon = cambios.lon ?? actual.punto[1];
+  const direccion = cambios.direccion ?? actual.direccion;
+  const r = await abrirDialogo({
+    titulo: esCasa ? "🏠 Casa" : "Editar lugar",
+    direccion, nombre: cambios.nombre ?? actual.nombre,
+    conNombre: !esCasa, puedeBorrar: true, puedeMover: true,
+  });
+  if (r.accion === "mover") {
+    empezarAElegir(id, `Tocá el mapa o buscá la nueva dirección de ${esCasa ? "tu casa" : actual.nombre}`,
+      (la, lo, dir) => editarLugar(id, { lat: la, lon: lo, direccion: dir, nombre: r.nombre || cambios.nombre }));
+    return;
+  }
+  if (r.accion === "borrar") {
+    if (esCasa) { localStorage.removeItem("casa"); localStorage.removeItem("casaDireccion"); }
+    else guardarFrecuentes(leerFrecuentes().filter((f) => f.id !== id));
+  } else if (r.accion === "guardar") {
+    if (esCasa) { guardar("casa", [lat, lon]); guardar("casaDireccion", direccion || ""); }
+    else guardarFrecuentes(leerFrecuentes().map((f) => (f.id === id ? { ...f, nombre: r.nombre, lat, lon, direccion } : f)));
+  } else return;
+  alCambiarLugares();
+}
+
+function alCambiarLugares() {
+  if (leer("radio", null) === null) guardar("radio", 3000);
+  dibujarLugares();
   refrescar();
-});
+}
+
+// --- Lista "Mis lugares" ---
+function dibujarLugares() {
+  const ul = $("#lista-lugares");
+  const casa = leer("casa", null);
+  const frecuentes = leerFrecuentes();
+  const fila = (id, icono, nombre, detalle, vacio) => `
+    <li class="lugar ${vacio ? "vacio-lugar" : ""}" data-id="${id}">
+      <span class="lugar-ico">${icono}</span>
+      <span class="lugar-texto"><b>${esc(nombre)}</b><small>${esc(detalle)}</small></span>
+      ${vacio ? '<span class="lugar-mas">＋</span>' : `<button type="button" class="lugar-editar" data-editar="${id}" aria-label="Editar ${esc(nombre)}">✏️</button>`}
+    </li>`;
+  let html = casa
+    ? fila("casa", "🏠", "Casa", leer("casaDireccion", "") || "Ubicación marcada en el mapa")
+    : fila("casa", "🏠", "Casa", "Tocá para marcarla en el mapa", true);
+  if (frecuentes.length) {
+    for (const f of frecuentes) html += fila(f.id, iconoLugar(f.nombre), f.nombre, f.direccion || "Ubicación marcada en el mapa");
+  } else {
+    // Por defecto se muestra un lugar frecuente vacío, listo para configurar.
+    html += fila("nuevo", "⭐", "Lugar frecuente", "Trabajo, escuela, amigos… Tocá para agregarlo", true);
+  }
+  ul.innerHTML = html;
+  const boton = $("#agregar-lugar");
+  boton.hidden = frecuentes.length === 0 || frecuentes.length >= MAX_FRECUENTES;
+  boton.textContent = `＋ Agregar lugar frecuente (${frecuentes.length}/${MAX_FRECUENTES})`;
+
+  ul.querySelectorAll(".lugar").forEach((li) => li.addEventListener("click", (e) => {
+    const id = li.dataset.id;
+    if (e.target.closest("[data-editar]")) { editarLugar(id); return; }
+    if (id === "nuevo") { agregarFrecuente(); return; }
+    if (id === "casa" && !casa) { marcarCasa(); return; }
+    // Lugar ya configurado: mostrarlo en el mapa.
+    const l = misLugares().find((x) => x.id === id);
+    if (l) {
+      mapa.setView(l.punto, 15);
+      if (window.innerWidth <= 820) $(".mapa-wrap").scrollIntoView({ behavior: "smooth" });
+    }
+  }));
+}
+$("#agregar-lugar").addEventListener("click", agregarFrecuente);
 
 function radioActual() {
   return puntoActivo() ? Number(leer("radio", 3000)) : 0;
@@ -429,23 +644,28 @@ $("#radio").addEventListener("change", (e) => {
   refrescar();
 });
 
+let marcadoresLugares = [], circulosRadio = [];
+
+function iconoMarcadorLugar(icono) {
+  return L.divIcon({ className: "pin-lugar", html: `<div class="pin-lugar-in">${icono}</div>`, iconSize: [32, 32], iconAnchor: [16, 16] });
+}
+
 function mostrarReferencia(eventos) {
-  const casa = leer("casa", null);
   const activo = puntoActivo();
   const info = $("#info-casa");
   const sel = $("#radio");
+  const nombreZona = NOMBRE_REF[activo?.tipo || "lugares"];
   sel.disabled = !activo;
-  sel.options[0].textContent = `a 1 km de ${NOMBRE_REF[activo?.tipo || "casa"]}`;
-  sel.options[1].textContent = `a 3 km de ${NOMBRE_REF[activo?.tipo || "casa"]}`;
-  sel.options[2].textContent = `a 6 km de ${NOMBRE_REF[activo?.tipo || "casa"]}`;
+  sel.options[0].textContent = `a 1 km de ${nombreZona}`;
+  sel.options[1].textContent = `a 3 km de ${nombreZona}`;
+  sel.options[2].textContent = `a 6 km de ${nombreZona}`;
   sel.value = String(radioActual());
-  for (const m of [marcadorCasa, circuloRadio, marcadorRef]) if (m) m.remove();
-  marcadorCasa = circuloRadio = marcadorRef = null;
+  for (const m of [...marcadoresLugares, ...circulosRadio, marcadorRef]) if (m) m.remove();
+  marcadoresLugares = []; circulosRadio = []; marcadorRef = null;
 
-  if (casa) {
-    $("#btn-casa").textContent = "📍 Cambiar mi casa";
-    marcadorCasa = L.circleMarker(casa, { radius: 9, color: "#ffffff", fillColor: "#6d4aff", fillOpacity: 1, weight: 3 })
-      .addTo(mapa).bindTooltip("Mi casa");
+  for (const l of misLugares()) {
+    marcadoresLugares.push(L.marker(l.punto, { icon: iconoMarcadorLugar(l.icono), zIndexOffset: 500 })
+      .bindTooltip(esc(l.nombre)).addTo(mapa));
   }
   if (referencia) {
     const p = [referencia.lat, referencia.lon];
@@ -458,22 +678,26 @@ function mostrarReferencia(eventos) {
     marcadorRef.addTo(mapa);
   }
   const r = radioActual();
-  if (activo && r) circuloRadio = L.circle(activo.punto, { radius: r, color: "#6d4aff", weight: 1.5, dashArray: "6 6", fillColor: "#a04bff", fillOpacity: 0.06, interactive: false }).addTo(mapa);
+  if (activo && r) {
+    for (const p of activo.puntos) {
+      circulosRadio.push(L.circle(p.punto, { radius: r, color: "#6d4aff", weight: 1.5, dashArray: "6 6", fillColor: "#a04bff", fillOpacity: 0.05, interactive: false }).addTo(mapa));
+    }
+  }
 
   if (!activo) {
     info.classList.remove("afectada");
-    info.textContent = "Marcá tu casa, buscá una dirección, tocá 📡 o mantené presionado el mapa para ver lo que pasa cerca.";
+    info.textContent = "Agregá tu casa o tus lugares frecuentes, buscá una dirección, tocá 📡 o mantené presionado el mapa para ver lo que pasa cerca.";
     return;
   }
-  const nombre = NOMBRE_REF[activo.tipo];
   const ahora = Date.now();
   const cerca = eventos.filter((e) => e.dist !== null && e.dist < 300);
   const ya = cerca.filter((e) => e.ventana.desde <= ahora);
+  const donde = (e) => (activo.tipo === "lugares" && activo.puntos.length > 1 ? ` · ${esc(e.distLugar)}` : "");
   info.classList.toggle("afectada", cerca.length > 0);
   info.innerHTML = cerca.length
-    ? `🚧 ${ya.length ? `Ahora hay cortes a menos de 300 m de ${nombre}: ` : `${cerca.length === 1 ? "Un evento va a cortar" : cerca.length + " eventos van a cortar"} calles a menos de 300 m de ${nombre}: `}` +
-      (ya.length ? ya : cerca).map((e) => `<b>${esc(e.titulo)}</b> (${fmtCorto.format(e.ventana.desde)})`).join(", ") + "."
-    : `Ningún evento próximo corta calles a menos de 300 m de ${nombre}.`;
+    ? `🚧 ${ya.length ? `Ahora hay cortes a menos de 300 m de ${nombreZona}: ` : `${cerca.length === 1 ? "Un evento va a cortar" : cerca.length + " eventos van a cortar"} calles a menos de 300 m de ${nombreZona}: `}` +
+      (ya.length ? ya : cerca).map((e) => `<b>${esc(e.titulo)}</b> (${fmtCorto.format(e.ventana.desde)}${donde(e)})`).join(", ") + "."
+    : `Ningún evento próximo corta calles a menos de 300 m de ${nombreZona}.`;
 }
 
 // ===================== Filtros por tipo =====================
@@ -528,7 +752,7 @@ function idAviso(texto) {
 }
 function textoAviso(ev) {
   const v = ev.ventana;
-  const lugar = ev.donde ? ` (${ev.donde})` : "";
+  const lugar = (ev.donde ? ` (${ev.donde})` : "") + (ev.lugarAviso ? `, cerca de ${ev.lugarAviso}` : "");
   return `${fmtDia.format(ev.inicio)}${lugar}. Cortes ${fmtCorto.format(v.desde)} a ${fmtCorto.format(v.hasta)}${v.estimado ? " (estimado)" : ""}.`;
 }
 
@@ -573,6 +797,17 @@ function textoVentana(ev) {
   const v = ev.ventana;
   return `${v.estimado ? "Cortes estimados" : "Cortes"}: ${fmtCorto.format(v.desde)} → ${fmtCorto.format(v.hasta)}`;
 }
+// Hay varios puntos de referencia (por ejemplo casa y trabajo): se aclara de cuál está cerca cada evento.
+function varios() {
+  const a = puntoActivo();
+  return a?.tipo === "lugares" && a.puntos.length > 1;
+}
+function textoCercaDe(ev) {
+  const a = puntoActivo();
+  if (!a) return "";
+  if (a.tipo === "lugares") return a.puntos.length > 1 ? ev.distLugar : NOMBRE_REF.lugares;
+  return NOMBRE_REF[a.tipo];
+}
 function textoDist(d) {
   if (d === null || d === undefined) return "";
   return d < 1000 ? `${Math.round(d / 10) * 10} m` : `${(d / 1000).toFixed(1).replace(".", ",")} km`;
@@ -593,7 +828,7 @@ function seleccionar(ev, centrar) {
     ${ev.donde ? esc(ev.donde) + (ev.barrio ? ` · ${esc(ev.barrio)}` : "") + "<br>" : ""}
     ${fmtDia.format(ev.inicio)}, ${ev.horaConfirmada ? fmtHora.format(ev.inicio) + " h" : "hora a confirmar"}<br>
     ${textoVentana(ev)}
-    ${ev.dist !== null ? `<br>A ${textoDist(ev.dist)} de ${NOMBRE_REF[puntoActivo()?.tipo || "casa"]}.` : ""}
+    ${ev.dist !== null ? `<br>A ${textoDist(ev.dist)} de ${esc(textoCercaDe(ev))}.` : ""}
     ${oficiales.length ? `<ul>${oficiales.map((c) => `<li><b>${esc(c.calle)}</b> ${esc(c.tramo)}${c.tipo === "parcial" ? " (parcial)" : ""}</li>`).join("")}</ul>` : ""}
     ${callesEst.length ? `<p class="estimado">Calles que probablemente se corten (alrededor del lugar): ${callesEst.map(esc).join(", ")}.</p>` : ""}
     ${!ev.tramos.length ? "<p class='estimado'>Todavía no hay calles publicadas para este evento.</p>" : ""}
@@ -606,18 +841,25 @@ function refrescar() {
   const radio = radioActual();
   const tipos = tiposActivos();
   const zona = radio ? `cerca de ${NOMBRE_REF[activo.tipo]}` : "en CABA";
-  for (const e of todos) e.dist = distanciaACasa(e, activo?.punto || null);
+  for (const e of todos) {
+    const m = distanciaMinima(e, activo?.puntos);
+    e.dist = m ? m.d : null;
+    e.distLugar = m ? m.nombre : "";
+  }
   visibles = todos.filter((e) => tipos.includes(e.tipo) && (!radio || (e.dist !== null && e.dist <= radio)));
   mostrarReferencia(visibles);
 
-  // Los avisos siempre se calculan con la casa (no con "dónde estoy" ni una dirección buscada).
-  const casa = leer("casa", null);
-  const radioCasa = casa ? Number(leer("radio", 3000)) : 0;
+  // Los avisos siempre se calculan con mis lugares (no con "dónde estoy" ni una dirección buscada).
+  const lugares = misLugares().map((l) => ({ nombre: l.nombre, punto: l.punto }));
+  const radioLugares = lugares.length ? Number(leer("radio", 3000)) : 0;
   avisables = todos.filter((e) => {
     if (!tipos.includes(e.tipo)) return false;
-    if (!radioCasa) return true;
-    const d = distanciaACasa(e, casa);
-    return d !== null && d <= radioCasa;
+    e.lugarAviso = "";
+    if (!radioLugares) return true;
+    const m = distanciaMinima(e, lugares);
+    if (!m || m.d > radioLugares) return false;
+    if (lugares.length > 1) e.lugarAviso = m.nombre;
+    return true;
   });
 
   const lista = $("#lista");
@@ -636,7 +878,7 @@ function refrescar() {
           ${ev.confirmado === false ? '<span class="chip warn">a confirmar</span>' : ""}
           ${!ev.horaConfirmada ? '<span class="chip">hora a definir</span>' : ""}</div>
         <div class="f">${fmtDia.format(ev.inicio)}${ev.horaConfirmada ? " · " + fmtHora.format(ev.inicio) + " h" : ""}
-          ${ev.donde ? " · " + esc(ev.donde) : ""}${ev.dist !== null ? ` · <span class="dist">${textoDist(ev.dist)}</span>` : ""}</div>
+          ${ev.donde ? " · " + esc(ev.donde) : ""}${ev.dist !== null ? ` · <span class="dist">${textoDist(ev.dist)}${varios() ? " de " + esc(ev.distLugar) : ""}</span>` : ""}</div>
         <div class="c">${textoVentana(ev)}</div>
       </div>`;
     li.addEventListener("click", () => {
@@ -741,6 +983,7 @@ if (CAFECITO_URL) {
 
 async function iniciar() {
   actualizarBotonAvisos();
+  dibujarLugares();
   iniciarAnuncios();
   dibujarFiltros();
   const manuales = await cargarDatos();

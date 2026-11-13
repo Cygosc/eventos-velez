@@ -17,21 +17,26 @@
 
   <main>
     <section class="panel">
+      <div class="mis-lugares">
+        <h2 class="titulo-lugares">Mis lugares</h2>
+        <ul id="lista-lugares" class="lista-lugares"></ul>
+        <button id="agregar-lugar" class="agregar-lugar" type="button" hidden>＋ Agregar lugar frecuente</button>
+        <label class="radio-lugares">Mostrar
+          <select id="radio">
+            <option value="1000">a 1 km de mis lugares</option>
+            <option value="3000">a 3 km de mis lugares</option>
+            <option value="6000">a 6 km de mis lugares</option>
+            <option value="0">en toda CABA</option>
+          </select>
+        </label>
+      </div>
+
       <div class="acciones">
-        <button id="btn-casa">📍 Marcar mi casa</button>
         <button id="btn-avisos">🔔 Activar avisos</button>
       </div>
       <div id="info-casa" class="info-casa"></div>
 
       <div class="filtros">
-        <label>Mostrar
-          <select id="radio">
-            <option value="1000">a 1 km de mi casa</option>
-            <option value="3000">a 3 km de mi casa</option>
-            <option value="6000">a 6 km de mi casa</option>
-            <option value="0">en toda CABA</option>
-          </select>
-        </label>
         <div id="tipos" class="tipos"></div>
       </div>
 
@@ -47,11 +52,32 @@
         <button type="submit" aria-label="Buscar">🔎</button>
       </form>
       <ul id="resultados" class="resultados"></ul>
+      <div id="eligiendo" class="eligiendo" hidden></div>
       <div id="referencia" class="referencia" hidden></div>
       <div id="mapa"></div>
       <div id="detalle" class="detalle"></div>
     </section>
   </main>
+
+  <!-- Ventana para nombrar y editar un lugar -->
+  <div id="dialogo" class="dialogo" hidden>
+    <form id="dialogo-form" class="dialogo-caja" autocomplete="off">
+      <h3 id="dialogo-titulo"></h3>
+      <p id="dialogo-direccion" class="dialogo-direccion"></p>
+      <label id="dialogo-nombre-wrap">Nombre
+        <input id="dialogo-nombre" maxlength="24" placeholder="Ej.: Trabajo">
+      </label>
+      <div id="dialogo-sugerencias" class="sugerencias"></div>
+      <div class="dialogo-botones" id="dialogo-acciones">
+        <button type="button" id="dialogo-ubicacion">📍 Cambiar ubicación</button>
+        <button type="button" id="dialogo-borrar" class="peligro">🗑 Borrar</button>
+      </div>
+      <div class="dialogo-botones">
+        <button type="button" id="dialogo-cancelar">Cancelar</button>
+        <button type="submit" id="dialogo-guardar" class="activo">Guardar</button>
+      </div>
+    </form>
+  </div>
 
   <script src="vendor/leaflet.js"></script>
   <script src="app.js"></script>
