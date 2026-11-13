@@ -18,11 +18,11 @@ const ANUNCIOS = {
 const CAFECITO_URL = "https://cafecito.app/xibo3d";
 
 const TIPOS = {
-  partido: { icono: "⚽", nombre: "Partidos", color: "#3b82f6" },
-  recital: { icono: "🎤", nombre: "Recitales", color: "#a855f7" },
-  marcha: { icono: "📣", nombre: "Marchas", color: "#ff4d6d" },
-  corte: { icono: "🚧", nombre: "Cortes y obras", color: "#ff9f1c" },
-  evento: { icono: "📌", nombre: "Otros eventos", color: "#12b5a6" },
+  partido: { icono: "⚽", nombre: "Partidos", color: "#2f6fd1" },
+  recital: { icono: "🎤", nombre: "Recitales", color: "#6b63c9" },
+  marcha: { icono: "📣", nombre: "Marchas", color: "#d9455a" },
+  corte: { icono: "🚧", nombre: "Cortes y obras", color: "#e08a1e" },
+  evento: { icono: "📌", nombre: "Otros eventos", color: "#1b9a8c" },
 };
 
 // ===================== Utilidades =====================
@@ -219,9 +219,9 @@ const leyenda = L.control({ position: "bottomleft" });
 leyenda.onAdd = () => {
   const div = L.DomUtil.create("div", "leyenda");
   div.innerHTML =
-    '<div><i style="border-top:5px solid #ef233c"></i>Calle cerrada</div>' +
-    '<div><i style="border-top:4px dashed #ff9f1c"></i>Corte parcial</div>' +
-    '<div><i style="border-top:4px dotted #ef233c"></i>Estimado (alrededor del lugar)</div>';
+    '<div><i style="border-top:5px solid #d62839"></i>Calle cerrada</div>' +
+    '<div><i style="border-top:4px dashed #e08a1e"></i>Corte parcial</div>' +
+    '<div><i style="border-top:4px dotted #d62839"></i>Estimado (alrededor del lugar)</div>';
   return div;
 };
 leyenda.addTo(mapa);
@@ -255,7 +255,7 @@ function dibujarCortes(ev, centrar) {
     const total = c.tipo === "total";
     const estimado = c.tipo === "estimado";
     const l = L.polyline(c.coords, {
-      color: total || estimado ? "#ef233c" : "#ff9f1c",
+      color: total || estimado ? "#d62839" : "#e08a1e",
       weight: total ? 7 : 5,
       opacity: estimado ? 0.75 : 0.9,
       dashArray: total ? null : estimado ? "2 8" : "8 8",
@@ -680,7 +680,7 @@ function mostrarReferencia(eventos) {
   const r = radioActual();
   if (activo && r) {
     for (const p of activo.puntos) {
-      circulosRadio.push(L.circle(p.punto, { radius: r, color: "#6d4aff", weight: 1.5, dashArray: "6 6", fillColor: "#a04bff", fillOpacity: 0.05, interactive: false }).addTo(mapa));
+      circulosRadio.push(L.circle(p.punto, { radius: r, color: "#1d5fbf", weight: 1.5, dashArray: "6 6", fillColor: "#3d8fd6", fillOpacity: 0.05, interactive: false }).addTo(mapa));
     }
   }
 

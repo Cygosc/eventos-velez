@@ -42,11 +42,24 @@ fs.mkdirSync(path.join(raiz, "store"), { recursive: true });
 captura({ que: "icono", tam: 512 }, 512, 512, path.join(raiz, "store", "icon-512.png"));
 captura({ que: "destacado" }, 1024, 500, path.join(raiz, "store", "feature-graphic.png"));
 
-// Íconos clásicos (Android 7, sin íconos adaptables)
+// Íconos clásicos (Android 7, sin íconos adaptables): se achica el de 512 px (Edge no dibuja ventanas tan chicas).
 const densidades = { mdpi: 48, hdpi: 72, xhdpi: 96, xxhdpi: 144, xxxhdpi: 192 };
 for (const [d, t] of Object.entries(densidades)) {
   for (const nombre of ["ic_launcher.png", "ic_launcher_round.png"]) {
-    captura({ que: "icono", tam: t }, t, t, path.join(res, `mipmap-${d}`, nombre));
+    const destino = path.join(res, `mipmap-${d}`, nombre);
+    execFileSync("python", ["-c", `
+import sys
+from PIL import Image, ImageDraw
+t = int(sys.argv[3])
+im = Image.open(sys.argv[1]).convert("RGB").resize((t, t), Image.LANCZOS)
+if sys.argv[4] == "redondo":
+    m = Image.new("L", (t * 4, t * 4), 0)
+    ImageDraw.Draw(m).ellipse((0, 0, t * 4 - 1, t * 4 - 1), fill=255)
+    m = m.resize((t, t), Image.LANCZOS)
+    out = Image.new("RGBA", (t, t), (0, 0, 0, 0)); out.paste(im, (0, 0), m); im = out
+im.save(sys.argv[2])
+`, path.join(raiz, "store", "icon-512.png"), destino, String(t), nombre.includes("_round") ? "redondo" : "no"]);
+    console.log("ok", path.relative(raiz, destino), `${t}x${t}`);
   }
 }
 

@@ -190,12 +190,17 @@ Cortes CABA: calles cortadas
 
 **Descripción breve** (78/80):
 ```
-Partidos, recitales, marchas y obras que cortan calles en CABA, en un mapa
+Cortes de calle en CABA cerca de tu casa, tu trabajo y tus lugares, en un mapa
 ```
 
-**Descripción completa:**
+**Descripción completa** (2086/4000):
 ```
-¿Hay partido, recital o marcha cerca de tu casa? Cortes CABA te muestra en un mapa qué calles se cortan en la Ciudad de Buenos Aires y en qué horario.
+¿Hay partido, recital o marcha cerca de tu casa o de tu trabajo? Cortes CABA te muestra en un mapa qué calles se cortan en la Ciudad de Buenos Aires y en qué horario.
+
+MIS LUGARES
+• Guardá tu casa y hasta 10 lugares frecuentes: trabajo, escuela, facultad, amigos, familia, gimnasio…
+• Agregalos tocando el mapa o buscando la dirección, ponele un nombre a cada uno y editalos o borralos cuando quieras.
+• Elegí un radio de 1, 3 o 6 km y mirá solo los cortes que te afectan. La app te dice de cuál de tus lugares está cerca cada uno ("220 m de Trabajo").
 
 QUÉ INCLUYE
 • Partidos de local de River, Boca, Vélez, Huracán, San Lorenzo, Argentinos, Ferro, Atlanta y más equipos porteños.
@@ -203,21 +208,20 @@ QUÉ INCLUYE
 • Marchas y manifestaciones anunciadas en Congreso, Plaza de Mayo, el Obelisco y otros puntos.
 • Cortes programados por obras, carreras, actos y eventos en la vía pública.
 
-CERCA DE VOS
-• Guardá tu casa y hasta 10 lugares frecuentes (trabajo, escuela, amigos…) y elegí un radio de 1, 3 o 6 km para ver solo lo que te afecta.
+DONDE ESTÉS
 • Tocá 📡 para ver los cortes cerca de donde estás.
 • Buscá una dirección o una esquina, o mantené presionado el mapa para ver lo que pasa en esa zona.
 • Filtrá por partidos, recitales, marchas, cortes y obras.
 
 AVISOS
-Recibí un aviso el día anterior a las 20:00 y otro dos horas antes de que empiecen los cortes cerca de tu casa o de tus lugares frecuentes.
+Recibí un aviso el día anterior a las 20:00 y otro dos horas antes de que empiecen los cortes cerca de cualquiera de tus lugares.
 
 EN EL MAPA
 • Línea roja: calle cerrada según el operativo publicado.
 • Línea naranja a rayas: corte parcial.
 • Línea punteada: calles que rodean el lugar del evento, cuando todavía no se publicó el operativo.
 
-La información se actualiza todos los martes y jueves. Sin registro. Solo un banner chico abajo, sin anuncios que interrumpan.
+La información se actualiza todos los martes y jueves. Sin registro: tus lugares se guardan solo en tu teléfono. Solo un banner chico abajo, sin anuncios que interrumpan.
 
 AVISO: Cortes CABA no es una app oficial y no está afiliada al Gobierno de la Ciudad de Buenos Aires ni a ningún club u organismo. Los eventos y cortes se recopilan de fuentes públicas, como los avisos de tránsito de buenosaires.gob.ar, agendas de espectáculos y medios de prensa. Ante cualquier duda, consultá la información oficial en https://buenosaires.gob.ar
 ```
