@@ -1,0 +1,86 @@
+# Manda un mail con el resultado de la tarea en la nube que actualiza los eventos (martes, jueves y domingo).
+# - Cuando la tarea sube tareas/estado.json: mail "terminó bien" o el detalle del error.
+# - A las 11:30 de Argentina de esos días revisa que la tarea haya corrido; si no subió el estado de hoy, avisa.
+# Secretos del repositorio (Settings → Secrets and variables → Actions):
+#   MAIL_USUARIO  cuenta de Gmail que envía el mail
+#   MAIL_CLAVE    contraseña de aplicación de esa cuenta (no la contraseña normal)
+#   MAIL_DESTINO  dirección que recibe los avisos
+name: Aviso por mail
+
+on:
+  push:
+    branches: [main]
+    paths: [tareas/estado.json]
+  schedule:
+    - cron: "30 14 * * 0,2,4"
+  workflow_dispatch:
+
+jobs:
+  aviso:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Armar el mensaje
+        id: msg
+        run: |
+          hoy=$(TZ=America/Argentina/Buenos_Aires date +%F)
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          rutina="https://claude.ai/code/routines/trig_01V7BJYTjMoA7Diitia9djeV"
+          enviar=true
+          if [ -f tareas/estado.json ] && jq -e . tareas/estado.json >/dev/null 2>&1; then
+            fecha=$(jq -r '.fecha // ""' tareas/estado.json)
+            resultado=$(jq -r '.resultado // ""' tareas/estado.json)
+            eventos=$(jq -r '.eventos // "?"' tareas/estado.json)
+            resumen=$(jq -r '.resumen // ""' tareas/estado.json)
+            detalle=$(jq -r '.detalle // ""' tareas/estado.json)
+          else
+            fecha=""; resultado="ilegible"; eventos="?"; resumen=""; detalle="tareas/estado.json no existe o no es JSON válido."
+          fi
+
+          if [ "$GITHUB_EVENT_NAME" = "schedule" ]; then
+            if [ "$fecha" = "$hoy" ]; then
+              enviar=false   # ya se mandó el mail cuando la tarea subió el estado
+            else
+              asunto="Cortes CABA: la actualización del $hoy no corrió"
+              cuerpo="La tarea en la nube no subió su resultado hoy ($hoy). El último resultado es del ${fecha:-(sin fecha)}.
+
+          Puede que la rutina no haya arrancado, que se haya cortado a mitad de camino o que el push haya fallado.
+          Revisá las ejecuciones de la rutina: $rutina"
+            fi
+          elif [ "$resultado" = "ok" ]; then
+            asunto="Cortes CABA: actualización del $fecha terminó bien"
+            cuerpo="La actualización de eventos del $fecha terminó bien ($eventos eventos cargados)."
+          else
+            asunto="Cortes CABA: ERROR en la actualización del ${fecha:-$hoy}"
+            cuerpo="La actualización de eventos del ${fecha:-$hoy} terminó con error.
+
+          Resultado: $resultado
+          Resumen: ${resumen:-(sin resumen)}
+
+          Detalle del error:
+          ${detalle:-(la tarea no dejó detalle)}
+
+          Ejecuciones de la rutina: $rutina
+          Commit: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
+          fi
+
+          echo "enviar=$enviar" >> "$GITHUB_OUTPUT"
+          if [ "$enviar" = true ]; then
+            d="FIN_$(date +%s%N)"
+            { echo "asunto=$asunto"; echo "cuerpo<<$d"; echo "$cuerpo" | sed 's/^          //'; echo; echo "($run_url)"; echo "$d"; } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Enviar el mail
+        if: steps.msg.outputs.enviar == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USUARIO }}
+          password: ${{ secrets.MAIL_CLAVE }}
+          from: Cortes CABA <${{ secrets.MAIL_USUARIO }}>
+          to: ${{ secrets.MAIL_DESTINO }}
+          subject: ${{ steps.msg.outputs.asunto }}
+          body: ${{ steps.msg.outputs.cuerpo }}

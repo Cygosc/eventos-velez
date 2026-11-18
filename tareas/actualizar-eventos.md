@@ -1,6 +1,6 @@
 # Tarea: actualizar los eventos de "Cortes CABA"
 
-Instrucciones para la tarea programada (corre martes y jueves). Las rutas son relativas a la raíz del repositorio.
+Instrucciones para la tarea programada (corre martes, jueves y domingo). Las rutas son relativas a la raíz del repositorio.
 
 La app "Cortes CABA" (web + Android) descarga `www/data/eventos-caba.json` y `www/data/lugares.json` desde
 https://raw.githubusercontent.com/Cygosc/eventos-velez/main/www/data/ cada vez que se abre, así que los cambios
@@ -70,9 +70,23 @@ en arena o teatro de 3 h antes a 4 h después; marcha de 1 h antes hasta `fin` (
 5. Si aparece un lugar de CABA que no está en `lugares.json` y va a tener eventos seguido, usá `ubicacion` en el
    evento y mencionalo en el resumen (no regeneres `lugares.json`: tarda mucho).
 6. Validá: `python3 -c "import json; json.load(open('www/data/eventos-caba.json', encoding='utf-8'))"`
-7. Publicá directamente en **main** (no abras PR ni uses otra rama):
-   `git checkout main && git pull`, `git add www/data/eventos-caba.json`,
-   `git commit -m "Eventos actualizados AAAA-MM-DD"` y `git push origin main`.
-   Hacé el commit aunque solo cambie `actualizado`. No toques `www/data/eventos.json` ni otros archivos.
-8. Terminá con un resumen corto en español: qué agregaste o cambiaste (con fuentes), si el push salió bien y qué
+7. Escribí el resultado en `tareas/estado.json` (JSON válido, UTF-8). Con este archivo una acción de GitHub le
+   manda un mail al dueño de la app, así que tiene que quedar escrito y subido **siempre**, también si algo falló:
+   ```json
+   {"fecha": "AAAA-MM-DD", "resultado": "ok", "eventos": 0, "resumen": "...", "detalle": ""}
+   ```
+   - `fecha`: hoy en hora de Argentina. `eventos`: cantidad de eventos que quedaron en `eventos-caba.json`.
+   - `resultado`: `"ok"` si se completaron todos los pasos; `"error"` si alguno falló (por ejemplo JSON inválido que
+     no pudiste arreglar, ninguna búsqueda funcionó, no se pudo leer un archivo). Que WebFetch o overpass no abran
+     un sitio no es un error si igual pudiste actualizar con WebSearch.
+   - `resumen`: dos o tres frases con lo que cambió.
+   - `detalle`: vacío si salió bien; si falló, el paso que falló, el comando y el mensaje de error completo.
+   - Si hubo error y `eventos-caba.json` quedó roto, volvelo a como estaba (`git checkout -- www/data/eventos-caba.json`)
+     y subí solo `tareas/estado.json`.
+8. Publicá directamente en **main** (no abras PR ni uses otra rama):
+   `git checkout main && git pull`, `git add www/data/eventos-caba.json tareas/estado.json`,
+   `git commit -m "Eventos actualizados AAAA-MM-DD"` (o `"Error al actualizar eventos AAAA-MM-DD"`) y
+   `git push origin main`. Hacé el commit aunque solo cambie `actualizado`. Si el push es rechazado, hacé
+   `git pull --rebase` y probá de nuevo. No toques `www/data/eventos.json` ni otros archivos.
+9. Terminá con un resumen corto en español: qué agregaste o cambiaste (con fuentes), si el push salió bien y qué
    debería revisar a mano el dueño de la app.

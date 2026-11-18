@@ -221,7 +221,7 @@ EN EL MAPA
 • Línea naranja a rayas: corte parcial.
 • Línea punteada: calles que rodean el lugar del evento, cuando todavía no se publicó el operativo.
 
-La información se actualiza todos los martes y jueves. Sin registro: tus lugares se guardan solo en tu teléfono. Solo un banner chico abajo, sin anuncios que interrumpan.
+La información se actualiza todos los martes, jueves y domingos. Sin registro: tus lugares se guardan solo en tu teléfono. Solo un banner chico abajo, sin anuncios que interrumpan.
 
 AVISO: Cortes CABA no es una app oficial y no está afiliada al Gobierno de la Ciudad de Buenos Aires ni a ningún club u organismo. Los eventos y cortes se recopilan de fuentes públicas, como los avisos de tránsito de buenosaires.gob.ar, agendas de espectáculos y medios de prensa. Ante cualquier duda, consultá la información oficial en https://buenosaires.gob.ar
 ```
@@ -296,6 +296,6 @@ que AdMob diga "configuración incompleta" y que haya pocos anuncios o ninguno.
 
 ## Paso 10 — Actualizaciones
 
-- **Eventos nuevos:** no hace falta hacer nada. La tarea en la nube los carga martes y jueves y la app los descarga sola.
+- **Eventos nuevos:** no hace falta hacer nada. La tarea en la nube los carga martes, jueves y domingos y la app los descarga sola.
 - **Cambios en la app:** subo `versionCode` (1 → 2 → 3…) y `versionName` (1.0 → 1.1…), generás el AAB con **la misma
   clave `.jks`**, y lo subís en **Producción → Crear versión → Enviar cambios para revisión**.
