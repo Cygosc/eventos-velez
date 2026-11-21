@@ -34,7 +34,8 @@ const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "
 const TZ = "America/Argentina/Buenos_Aires";
 const fmtDia = new Intl.DateTimeFormat("es-AR", { weekday: "long", day: "numeric", month: "long", timeZone: TZ });
 const fmtHora = new Intl.DateTimeFormat("es-AR", { hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: TZ });
-const fmtCorto = new Intl.DateTimeFormat("es-AR", { weekday: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: TZ });
+const fmtDiaNumero = new Intl.DateTimeFormat("es-AR", { weekday: "long", day: "numeric", timeZone: TZ });
+const fmtCorto =new Intl.DateTimeFormat("es-AR", { weekday: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hourCycle: "h23", timeZone: TZ });
 
 // Medianoche de Buenos Aires (UTC-3 fijo, sin horario de verano).
 function inicioDiaBA(fecha) {
@@ -762,18 +763,37 @@ async function programarAvisosNativos(eventos) {
   if (pendientes.notifications.length) await LN.cancel({ notifications: pendientes.notifications.map((n) => ({ id: n.id })) });
   const ahora = Date.now();
   const lista = [];
+  const fin = {}; // id del aviso → cuándo terminan los cortes (para borrar los avisos viejos de la bandeja)
   for (const ev of eventos) {
     const v = ev.ventana;
     // El día anterior a las 20:00 y 2 horas antes de que empiecen los cortes.
+    // Los títulos dicen el día y la hora, nunca "mañana" u "hoy": si el teléfono se reinicia o Android demora la
+    // alarma, el plugin muestra juntos los avisos atrasados y un "Mañana" llegaría el mismo día del evento.
     const diaAntes = new Date(inicioDiaBA(v.desde).getTime() - horas(4));
-    for (const [cuando, titulo] of [[diaAntes, `Mañana: ${ev.titulo}`], [new Date(v.desde - horas(2)), `Hoy cortan calles: ${ev.titulo}`]]) {
+    const avisos = [
+      [diaAntes, `El ${fmtDiaNumero.format(v.desde)} cortan calles: ${ev.titulo}`],
+      [new Date(v.desde - horas(2)), `Desde las ${fmtHora.format(v.desde)} cortan calles: ${ev.titulo}`],
+    ];
+    for (const [cuando, titulo] of avisos) {
       if (cuando.getTime() <= ahora) continue;
-      lista.push({ id: idAviso(ev.id + cuando.toISOString()), title: titulo, body: textoAviso(ev), schedule: { at: cuando, allowWhileIdle: true } });
+      const id = idAviso(ev.id + cuando.toISOString());
+      fin[id] = v.hasta.getTime();
+      lista.push({ id, title: titulo, body: textoAviso(ev), schedule: { at: cuando, allowWhileIdle: true } });
     }
   }
   // Android limita la cantidad de alarmas por app: se programan las 40 más próximas.
   lista.sort((a, b) => a.schedule.at - b.schedule.at);
   if (lista.length) await LN.schedule({ notifications: lista.slice(0, 40) });
+  await limpiarAvisosViejos({ ...leer("avisosFin", {}), ...fin }, ahora);
+}
+
+// Saca de la bandeja los avisos de eventos cuyos cortes ya terminaron.
+async function limpiarAvisosViejos(fin, ahora) {
+  const vigentes = Object.fromEntries(Object.entries(fin).filter(([, hasta]) => hasta > ahora - horas(24)));
+  guardar("avisosFin", vigentes);
+  const { notifications: entregados } = await LN.getDeliveredNotifications();
+  const viejos = entregados.filter((n) => fin[n.id] && fin[n.id] < ahora);
+  if (viejos.length) await LN.removeDeliveredNotifications({ notifications: viejos });
 }
 
 function avisar(eventos) {
