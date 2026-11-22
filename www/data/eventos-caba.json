@@ -1,39 +1,6 @@
 {
-  "actualizado": "2026-11-19",
+  "actualizado": "2026-11-22",
   "eventos": [
-    {
-      "id": "maria-becerra-2026-11-17",
-      "titulo": "María Becerra",
-      "tipo": "recital",
-      "lugar": "movistar",
-      "inicio": "2026-11-17T21:00:00-03:00",
-      "horaConfirmada": false,
-      "confirmado": true,
-      "fuente": "https://www.basket-mag.com/es/concierto-maria-becerra-buenos-aires-2027-entradas-precios-fechas/",
-      "notas": "Quimera Tour 360°, serie de 8 fechas en noviembre (agotadas según Basket Mag y Seatpick). Hora no oficial."
-    },
-    {
-      "id": "maria-becerra-2026-11-18",
-      "titulo": "María Becerra",
-      "tipo": "recital",
-      "lugar": "movistar",
-      "inicio": "2026-11-18T21:00:00-03:00",
-      "horaConfirmada": false,
-      "confirmado": true,
-      "fuente": "https://www.basket-mag.com/es/concierto-maria-becerra-buenos-aires-2027-entradas-precios-fechas/",
-      "notas": "Quimera Tour 360°, serie de 8 fechas en noviembre (agotadas según Basket Mag y Seatpick). Hora no oficial."
-    },
-    {
-      "id": "maria-becerra-2026-11-19",
-      "titulo": "María Becerra",
-      "tipo": "recital",
-      "lugar": "movistar",
-      "inicio": "2026-11-19T21:00:00-03:00",
-      "horaConfirmada": false,
-      "confirmado": true,
-      "fuente": "https://www.basket-mag.com/es/concierto-maria-becerra-buenos-aires-2027-entradas-precios-fechas/",
-      "notas": "Quimera Tour 360°, serie de 8 fechas en noviembre (agotadas según Basket Mag y Seatpick). Hora no oficial."
-    },
     {
       "id": "maria-becerra-2026-11-26",
       "titulo": "María Becerra",
@@ -204,10 +171,10 @@
       "tipo": "recital",
       "lugar": "river",
       "inicio": "2026-12-10T21:00:00-03:00",
-      "horaConfirmada": false,
+      "horaConfirmada": true,
       "confirmado": true,
-      "fuente": "https://www.lanacion.com.ar/que-sale/mana-argentina-2026-precios-entradas-como-comprar-nid18062026/",
-      "notas": "Vivir Sin Aire Tour. La Nación y Los Andes confirman el 10 de diciembre. Hora no oficial. Indie Hoy dice 21 h; La Gaceta dice 20 h."
+      "fuente": "https://indiehoy.com/agenda/mana-argentina-river-2026-entradas/",
+      "notas": "Vivir Sin Aire Tour, única fecha en Argentina. 21 h según AllAccess (ticketera oficial), vía Indie Hoy y Rio Times. También La Nación."
     },
     {
       "id": "slayer-2026-12-14",
@@ -228,8 +195,8 @@
       "inicio": "2026-12-18T21:00:00-03:00",
       "horaConfirmada": false,
       "confirmado": false,
-      "fuente": "https://www.quehacemos.com.ar/venues/estadio-velez-sarsfield",
-      "notas": "Acto religioso por los 30 años del Superclásico de la Juventud, según Letra P. Sin comunicado oficial; falta confirmación."
+      "fuente": "https://www.letrap.com.ar/politica/un-acto-fe-olor-politica-dante-gebel-prepara-un-show-masivo-el-estadio-velez-n5426406/amp",
+      "notas": "Superclásico de la Juventud (30 años), acto religioso; entradas a $20.000 (campo) a beneficio, según Letra P. Sin comunicado oficial ni horario."
     }
   ]
 }
