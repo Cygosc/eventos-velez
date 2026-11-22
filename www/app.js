@@ -738,10 +738,16 @@ async function actualizarBotonAvisos() {
   b.classList.toggle("activo", p === "granted");
   if (p === "no") { b.disabled = true; b.textContent = "Avisos no disponibles"; }
   else if (p === "granted") b.textContent = "🔔 Avisos activados";
-  else if (p === "denied") b.textContent = "🔕 Avisos bloqueados";
+  else if (p === "denied") b.textContent = LN ? "🔕 Avisos bloqueados: activalos en Ajustes" : "🔕 Avisos bloqueados";
   else b.textContent = "🔔 Activar avisos";
 }
 $("#btn-avisos").addEventListener("click", async () => {
+  // Si ya se rechazaron, Android no vuelve a mostrar el cartel de permiso: se abren los ajustes de notificaciones
+  // de la app. Al volver, "visibilitychange" vuelve a iniciar y actualiza el botón y los avisos.
+  if (LN && (await permisoAvisos()) === "denied") {
+    try { await window.Capacitor.Plugins.Ajustes.abrirAvisos(); } catch {}
+    return;
+  }
   if (LN) await LN.requestPermissions();
   else if ("Notification" in window) await Notification.requestPermission();
   await actualizarBotonAvisos();
