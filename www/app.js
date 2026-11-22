@@ -348,6 +348,7 @@ controlUbicacion.onAdd = () => {
     b.classList.add("buscando");
     try {
       const pos = await obtenerPosicion();
+      guardarUbicacion(pos.coords.latitude, pos.coords.longitude);
       fijarReferencia({ tipo: "gps", lat: pos.coords.latitude, lon: pos.coords.longitude, nombre: "donde estás", precision: pos.coords.accuracy });
     } catch (e) {
       alert(e.message === "permiso"
@@ -595,6 +596,7 @@ function alCambiarLugares() {
   if (leer("radio", null) === null) guardar("radio", 3000);
   dibujarLugares();
   refrescar();
+  avisarAlertas(); // el runner necesita los lugares nuevos para revisar en segundo plano
 }
 
 // --- Lista "Mis lugares" ---
@@ -744,6 +746,7 @@ $("#btn-avisos").addEventListener("click", async () => {
   else if ("Notification" in window) await Notification.requestPermission();
   await actualizarBotonAvisos();
   avisar(avisables);
+  avisarAlertas();
 });
 
 function idAviso(texto) {
@@ -808,6 +811,120 @@ function avisar(eventos) {
     yaAvisados.push(ev.id);
   }
   guardar("avisados", yaAvisados.slice(-100));
+}
+
+// ===================== Alertas meteorológicas del SMN =====================
+// Una acción de GitHub (scripts/alertas.mjs) baja cada 10 minutos las alertas del SMN que tocan CABA a
+// www/data/alertas.json. La app muestra y avisa las que cubren alguno de mis lugares o el último lugar donde estuve.
+// En Android, www/runners/alertas.js (plugin Background Runner) las revisa cada 15 minutos con la app cerrada.
+const BR = window.Capacitor?.isNativePlatform?.() ? window.Capacitor.Plugins.CapacitorBackgroundRunner : null;
+const RUNNER = "ar.cygosc.cortescaba.alertas";
+const NIVEL_ALERTA = { amarillo: { texto: "amarilla", color: "#e0b100" }, naranja: { texto: "naranja", color: "#e8730c" }, rojo: { texto: "roja", color: "#d62839" } };
+const capaAlertas = L.layerGroup().addTo(mapa);
+let alertasSMN = [];
+
+function dentroPoligono([lat, lon], poli) {
+  let adentro = false;
+  for (let i = 0, j = poli.length - 1; i < poli.length; j = i++) {
+    const [yi, xi] = poli[i], [yj, xj] = poli[j];
+    if ((yi > lat) !== (yj > lat) && lon < ((xj - xi) * (lat - yi)) / (yj - yi) + xi) adentro = !adentro;
+  }
+  return adentro;
+}
+
+// Dónde estoy: la última ubicación que vio la app sirve para las alertas durante 6 horas.
+function guardarUbicacion(lat, lon) {
+  guardar("ultimaUbicacion", { lat, lon, t: Date.now() });
+}
+async function ubicacionSinPreguntar() {
+  // Solo si el permiso ya está dado: nunca muestra el cartel de permiso al abrir la app.
+  try {
+    if (GEO) {
+      const p = await GEO.checkPermissions();
+      if (p.location !== "granted" && p.coarseLocation !== "granted") return;
+      const pos = await GEO.getCurrentPosition({ enableHighAccuracy: false, timeout: 10000, maximumAge: 15 * 60e3 });
+      guardarUbicacion(pos.coords.latitude, pos.coords.longitude);
+    } else if (navigator.permissions && navigator.geolocation) {
+      if ((await navigator.permissions.query({ name: "geolocation" })).state !== "granted") return;
+      navigator.geolocation.getCurrentPosition((pos) => { guardarUbicacion(pos.coords.latitude, pos.coords.longitude); dibujarAlertas(); },
+        () => {}, { enableHighAccuracy: false, timeout: 10000, maximumAge: 15 * 60e3 });
+    }
+  } catch {}
+}
+
+// Puntos que cuentan para las alertas: mis lugares y dónde estuve hace poco.
+function puntosAlertas() {
+  const puntos = misLugares().map((l) => ({ nombre: l.nombre, lat: l.punto[0], lon: l.punto[1] }));
+  const u = leer("ultimaUbicacion", null);
+  if (u && Date.now() - u.t < horas(6)) puntos.push({ nombre: "donde estás", lat: u.lat, lon: u.lon, hasta: u.t + horas(6) });
+  return puntos;
+}
+
+function alertasVigentes(puntos) {
+  const ahora = Date.now();
+  return alertasSMN
+    .filter((a) => !a.hasta || Date.parse(a.hasta) > ahora)
+    .map((a) => ({ ...a, afecta: [...new Set(puntos.filter((p) => a.poligonos.some((poli) => dentroPoligono([p.lat, p.lon], poli))).map((p) => p.nombre))] }))
+    .filter((a) => !puntos.length || a.afecta.length);
+}
+
+// "Alerta" es femenino y "aviso" (corto plazo) masculino: "alerta amarilla", "aviso amarillo".
+const tituloAlerta = (a) => `${a.corto ? `⚠️ Aviso ${a.nivel}` : `⛈️ Alerta ${NIVEL_ALERTA[a.nivel].texto}`} por ${a.evento.toLowerCase()}`;
+const enumerar = (l) => (l.length <= 1 ? l.join("") : `${l.slice(0, -1).join(", ")} y ${l.at(-1)}`);
+
+function dibujarAlertas() {
+  const puntos = puntosAlertas();
+  // Una dirección buscada o un punto del mapa también muestran sus alertas (pero no generan avisos).
+  if (referencia) puntos.push({ nombre: referencia.nombre, lat: referencia.lat, lon: referencia.lon });
+  const vigentes = alertasVigentes(puntos);
+  const caja = $("#alertas");
+  caja.hidden = !vigentes.length;
+  caja.innerHTML = vigentes.map((a) => `
+    <details class="alerta-smn ${a.nivel}">
+      <summary>${esc(tituloAlerta(a))}
+        <small>${a.desde && Date.parse(a.desde) > Date.now() ? `Desde ${fmtCorto.format(new Date(a.desde))} · ` : ""}Hasta ${fmtCorto.format(new Date(a.hasta))} · ${a.afecta.length ? `cerca de ${esc(enumerar(a.afecta))}` : "en CABA"}</small>
+      </summary>
+      ${a.descripcion ? `<p>${esc(a.descripcion)}</p>` : ""}
+      ${a.instruccion ? `<p><b>Qué hacer:</b> ${esc(a.instruccion)}</p>` : ""}
+      <p><a href="${esc(a.web)}" target="_blank" rel="noopener">Ver en el Servicio Meteorológico Nacional</a></p>
+    </details>`).join("");
+  capaAlertas.clearLayers();
+  for (const a of vigentes) {
+    const c = NIVEL_ALERTA[a.nivel].color;
+    L.polygon(a.poligonos, { color: c, weight: 1.5, fillColor: c, fillOpacity: 0.12, dashArray: a.corto ? "4 4" : null })
+      .bindTooltip(esc(tituloAlerta(a))).addTo(capaAlertas).bringToBack();
+  }
+}
+
+async function cargarAlertas() {
+  try {
+    const { datos } = await traerJSON("alertas.json");
+    alertasSMN = datos.alertas || [];
+  } catch { alertasSMN = []; }
+  dibujarAlertas();
+  avisarAlertas();
+}
+
+async function avisarAlertas() {
+  const puntos = puntosAlertas();
+  if (BR) {
+    // El runner guarda los lugares para revisar en segundo plano y no repite avisos que ya mandó.
+    const avisos = (await permisoAvisos()) === "granted";
+    try { await BR.dispatchEvent({ label: RUNNER, event: "revisarAlertas", details: { puntos, avisos, alertas: alertasSMN } }); }
+    catch (e) { console.warn("Alertas en segundo plano", e); }
+    return;
+  }
+  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  const avisadas = leer("alertasAvisadas", {});
+  const ahora = Date.now();
+  for (const a of alertasVigentes(puntos)) {
+    const clave = [a.evento, a.nivel, a.corto ? "acp" : "al"].join("|");
+    if (avisadas[clave] && ahora - avisadas[clave] < horas(a.corto ? 1 : 6)) continue;
+    avisadas[clave] = ahora;
+    new Notification(tituloAlerta(a), { body: `${a.afecta.length ? `Cerca de ${enumerar(a.afecta)}. ` : ""}Hasta ${fmtCorto.format(new Date(a.hasta))}.`, tag: clave });
+  }
+  for (const c in avisadas) if (ahora - avisadas[c] > horas(48)) delete avisadas[c];
+  guardar("alertasAvisadas", avisadas);
 }
 
 // ===================== Render =====================
@@ -940,6 +1057,7 @@ function refrescar() {
   const sigue = seleccionado && visibles.find((e) => e.id === seleccionado.id);
   seleccionar(sigue || activos[0] || visibles[0] || null, false);
   avisar(avisables);
+  dibujarAlertas();
 }
 
 // ===================== Publicidad y aportes =====================
@@ -1003,6 +1121,7 @@ if (CAFECITO_URL) {
 
 async function iniciar() {
   actualizarBotonAvisos();
+  ubicacionSinPreguntar().finally(cargarAlertas);
   dibujarLugares();
   iniciarAnuncios();
   dibujarFiltros();
@@ -1021,4 +1140,6 @@ async function iniciar() {
 iniciar();
 // Re-chequear cada 30 minutos si la página queda abierta, y al volver a la app.
 setInterval(iniciar, 30 * 60e3);
+// Las alertas cambian más rápido que los eventos: con la app abierta se revisan cada 10 minutos.
+setInterval(cargarAlertas, 10 * 60e3);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) iniciar(); });

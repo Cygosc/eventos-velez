@@ -118,7 +118,13 @@ main {
   gap: 20px;
   padding: 18px;
   height: calc(100vh - 130px);
+  /* Columna izquierda: alertas del SMN (si hay) arriba del panel; el mapa ocupa toda la derecha. */
+  grid-template-rows: auto minmax(0, 1fr);
+  row-gap: 0;
 }
+.alertas { grid-column: 1; grid-row: 1; }
+.panel { grid-column: 1; grid-row: 2; }
+.mapa-wrap { grid-column: 2; grid-row: 1 / span 2; }
 .panel { overflow-y: auto; padding: 2px 4px 2px 2px; }
 
 /* ============ Botones ============ */
@@ -157,6 +163,32 @@ button.activo {
   border-radius: 12px;
 }
 @media (prefers-color-scheme: dark) { .info-casa.afectada { background: #3a1a22; } }
+
+/* ============ Alertas meteorológicas del SMN ============ */
+.alertas { display: grid; gap: 10px; margin-bottom: 14px; }
+.alertas[hidden] { display: none; }
+.alerta-smn {
+  --nivel: #e0b100;
+  --nivel-fondo: #fff8dc;
+  background: var(--nivel-fondo);
+  border-left: 5px solid var(--nivel);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 10px 14px;
+  color: #3a2a00;
+}
+.alerta-smn.naranja { --nivel: #e8730c; --nivel-fondo: #ffeedd; color: #4a2200; }
+.alerta-smn.rojo { --nivel: #d62839; --nivel-fondo: #fdeced; color: #4a0d14; }
+.alerta-smn summary { cursor: pointer; list-style: none; font-weight: 700; line-height: 1.35; }
+.alerta-smn summary::-webkit-details-marker { display: none; }
+.alerta-smn summary small { display: block; font-weight: 500; font-size: .85rem; opacity: .85; margin-top: 2px; }
+.alerta-smn p { margin: 8px 0 0; font-size: .9rem; line-height: 1.45; }
+.alerta-smn a { color: inherit; font-weight: 600; }
+@media (prefers-color-scheme: dark) {
+  .alerta-smn { --nivel-fondo: #3a3110; color: #fbefc4; }
+  .alerta-smn.naranja { --nivel-fondo: #42260e; color: #ffd9b8; }
+  .alerta-smn.rojo { --nivel-fondo: #3a1a22; color: #ffd0d5; }
+}
 
 /* ============ Mis lugares ============ */
 .mis-lugares {
@@ -533,6 +565,8 @@ select:disabled { opacity: .55; }
 /* ============ Celular ============ */
 @media (max-width: 820px) {
   main { grid-template-columns: minmax(0, 1fr); height: auto; padding: 14px; gap: 6px; }
+  .alertas, .panel, .mapa-wrap { grid-column: auto; grid-row: auto; }
+  .alertas { order: -2; margin-bottom: 8px; }
   .mapa-wrap { order: -1; }
   /* Alto fijo en píxeles (lo calcula app.js al abrir): el teclado no lo achica ni lo agranda. */
   #mapa { height: var(--alto-mapa, 50vh); flex: none; }

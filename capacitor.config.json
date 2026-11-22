@@ -6,6 +6,14 @@
     "LocalNotifications": {
       "smallIcon": "ic_stat_notify",
       "iconColor": "#1D5FBF"
+    },
+    "BackgroundRunner": {
+      "label": "ar.cygosc.cortescaba.alertas",
+      "src": "runners/alertas.js",
+      "event": "revisarAlertas",
+      "repeat": true,
+      "interval": 15,
+      "autoStart": true
     }
   },
   "android": {

@@ -1,0 +1,39 @@
+# Cada 10 minutos baja las alertas meteorológicas del SMN que tocan CABA y, si cambiaron, actualiza
+# www/data/alertas.json en main. La app lo descarga desde raw.githubusercontent.com. No usa Claude.
+name: Alertas del SMN
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: alertas
+  cancel-in-progress: false
+
+jobs:
+  alertas:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Bajar las alertas del SMN
+        run: node scripts/alertas.mjs www/data/alertas.json
+
+      - name: Subir si cambiaron
+        run: |
+          if git diff --quiet -- www/data/alertas.json; then echo "Sin cambios"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add www/data/alertas.json
+          git commit -m "Alertas del SMN $(TZ=America/Argentina/Buenos_Aires date '+%F %H:%M')"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin main && exit 0; sleep 5; done
+          exit 1
