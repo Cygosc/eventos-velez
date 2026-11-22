@@ -1,13 +1,13 @@
-# Versión 1.2 (versionCode 7) — notas para Play Console
+# Versión 1.2 (versionCode 6) — notas para Play Console
 
 > El primer AAB 1.2 (versionCode 3) lo rechazó la revisión previa de Play Console: la orientación vertical obligatoria
 > (`android.hardware.screen.portrait`) dejaba afuera tablets, computadoras y Android XR. Ahora está declarada como
 > opcional. Después se sumaron las alertas meteorológicas (versionCode 5), pero el plugin que las revisa con la app
 > cerrada (Background Runner) agregaba el permiso `ACCESS_BACKGROUND_LOCATION` y Play pidió declararlo. La app no usa
 > la ubicación en segundo plano (el aviso usa la última ubicación que guardó la app abierta), así que el permiso se
-> quita en el manifiesto. El AAB final es el **versionCode 7** (el nombre sigue siendo 1.2; Play no deja reusar un
-> versionCode ya subido y acepta saltos). En la versión borrador quitá el AAB que hayas subido (3 a 6) y subí el 7. El 6 se reemplazó porque el botón "Activar avisos" no hacía nada si los avisos ya estaban rechazados.
-> **No completes el formulario de ubicación en segundo plano:** al cambiar el AAB por el 7 ese pedido desaparece.
+> quita en el manifiesto. El AAB final es el **versionCode 6** (el nombre sigue siendo 1.2; Play no deja reusar un
+> versionCode ya subido y acepta saltos). En la versión borrador quitá el AAB que hayas subido (3, 4 o 5) y subí el 6.
+> **No completes el formulario de ubicación en segundo plano:** al cambiar el AAB por el 6 ese pedido desaparece.
 
 - **Alertas meteorológicas del SMN:** las alertas (amarilla, naranja, roja) y los avisos a corto plazo del Servicio
   Meteorológico Nacional que cubren alguno de tus lugares o el lugar donde estás aparecen arriba de todo y en el mapa
@@ -20,9 +20,6 @@
 - **Avisos con el día correcto:** si el teléfono se reiniciaba o Android demoraba la alarma, el aviso del día anterior
   ("Mañana: …") podía llegar el mismo día del evento, junto con el de "Hoy". Ahora los títulos dicen el día y la hora
   ("El viernes 20 cortan calles: …", "Desde las 17:00 cortan calles: …"), así que siempre son correctos.
-- **Botón "Activar avisos":** si los avisos ya estaban rechazados, Android no vuelve a mostrar el cartel de permiso y
-  el botón no hacía nada. Ahora dice "Avisos bloqueados: activalos en Ajustes" y abre los ajustes de notificaciones
-  de la app; al volver, el botón y los avisos se actualizan solos.
 - Al abrir la app se borran de la bandeja los avisos de eventos que ya terminaron.
 - La app se puede instalar también en tablets, Chromebooks y Android XR (antes Play la ocultaba).
 - Los eventos se actualizan también los domingos (martes, jueves y domingos). Cambió la leyenda de la app.
@@ -108,7 +105,6 @@ AVISO: Cortes CABA no es una app oficial y no está afiliada al Gobierno de la C
 <es-419>
 • Los avisos ahora dicen el día y la hora del corte, así nunca llega un "mañana" el mismo día.
 • Se borran solos los avisos de eventos que ya pasaron.
-• Si bloqueaste los avisos, el botón te lleva a los ajustes para activarlos.
 • Nuevo: alertas meteorológicas del SMN para tus lugares y la zona donde estás, con aviso aunque la app esté cerrada.
 • Los eventos se actualizan también los domingos.
 </es-419>
