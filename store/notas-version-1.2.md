@@ -1,10 +1,13 @@
-# Versión 1.2 (versionCode 5) — notas para Play Console
+# Versión 1.2 (versionCode 6) — notas para Play Console
 
 > El primer AAB 1.2 (versionCode 3) lo rechazó la revisión previa de Play Console: la orientación vertical obligatoria
 > (`android.hardware.screen.portrait`) dejaba afuera tablets, computadoras y Android XR. Ahora está declarada como
-> opcional. Después se sumaron las alertas meteorológicas, así que el AAB final es el **versionCode 5** (el nombre
-> sigue siendo 1.2; Play no deja reusar un versionCode ya subido y acepta saltos). En la versión borrador quitá el
-> AAB que hayas subido (3 o 4) y subí el 5.
+> opcional. Después se sumaron las alertas meteorológicas (versionCode 5), pero el plugin que las revisa con la app
+> cerrada (Background Runner) agregaba el permiso `ACCESS_BACKGROUND_LOCATION` y Play pidió declararlo. La app no usa
+> la ubicación en segundo plano (el aviso usa la última ubicación que guardó la app abierta), así que el permiso se
+> quita en el manifiesto. El AAB final es el **versionCode 6** (el nombre sigue siendo 1.2; Play no deja reusar un
+> versionCode ya subido y acepta saltos). En la versión borrador quitá el AAB que hayas subido (3, 4 o 5) y subí el 6.
+> **No completes el formulario de ubicación en segundo plano:** al cambiar el AAB por el 6 ese pedido desaparece.
 
 - **Alertas meteorológicas del SMN:** las alertas (amarilla, naranja, roja) y los avisos a corto plazo del Servicio
   Meteorológico Nacional que cubren alguno de tus lugares o el lugar donde estás aparecen arriba de todo y en el mapa

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
         android:allowBackup="true"
@@ -49,6 +50,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+    <!-- El plugin Background Runner declara ubicación en segundo plano, pero las alertas usan la última ubicación que
+         guardó la app abierta: se quita para que Play no pida la declaración de ubicación en segundo plano -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" tools:node="remove" />
     <!-- La app se usa en vertical, pero no exige pantalla vertical: así Play no la oculta en tablets, Chromebooks ni Android XR -->
     <uses-feature android:name="android.hardware.screen.portrait" android:required="false" />
 </manifest>
