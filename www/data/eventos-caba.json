@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-11-22",
+  "actualizado": "2026-11-24",
   "eventos": [
     {
       "id": "maria-becerra-2026-11-26",
@@ -163,7 +163,8 @@
       "inicio": "2026-12-10T21:00:00-03:00",
       "horaConfirmada": false,
       "confirmado": true,
-      "fuente": "https://www.timeout.com/es/buenos-aires/recitales-imperdibles-musica-shows"
+      "fuente": "https://indiehoy.com/agenda/deep-purple-en-argentina/",
+      "notas": "Confirmado en Eventworld, Indie Hoy y Karlobag. 21 h según Eventworld (otro listado dice 20 h); hora no oficial."
     },
     {
       "id": "mana-2026-12-10",
