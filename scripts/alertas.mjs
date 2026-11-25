@@ -1,12 +1,24 @@
 // Baja las alertas y avisos a corto plazo del Servicio Meteorológico Nacional (feed CAP público) y deja en
 // www/data/alertas.json solo las que tocan la Ciudad de Buenos Aires, con sus polígonos.
 // Lo corre la acción de GitHub .github/workflows/alertas.yml cada 10 minutos (no usa Claude).
-// Uso: node scripts/alertas.mjs [salida.json]
+// Uso: node scripts/alertas.mjs [salida.json] [estado.json]
 import fs from "node:fs";
 
 const FEED = "https://ssl.smn.gob.ar/CAP/AR.php";
 const SALIDA = process.argv[2] || "www/data/alertas.json";
-const UA = "CortesCABA/1.2 (+https://github.com/Cygosc/eventos-velez)";
+// Cuántas corridas seguidas el SMN no respondió. La acción manda un mail cuando llega a 2 y otro cuando vuelve.
+const ESTADO = process.argv[3] || "tareas/smn-estado.json";
+const AVISAR_CON = 2;
+const UA = "CortesCABA/1.4 (+https://github.com/Cygosc/eventos-velez)";
+
+let estado = { fallasSeguidas: 0 };
+try { estado = JSON.parse(fs.readFileSync(ESTADO, "utf8")); } catch {}
+const guardarEstado = (e) => fs.writeFileSync(ESTADO, JSON.stringify(e, null, 2) + "\n");
+// Le pasa a la acción qué mail mandar ("caido" o "volvio") y los datos para armarlo.
+function salidaAccion(datos) {
+  if (!process.env.GITHUB_OUTPUT) return;
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, Object.entries(datos).map(([k, v]) => `${k}=${String(v).replace(/\s+/g, " ")}\n`).join(""));
+}
 // Rectángulo que contiene a CABA (con un margen chico).
 const CABA = { latMin: -34.71, latMax: -34.52, lonMin: -58.54, lonMax: -58.33 };
 
@@ -18,7 +30,7 @@ async function traer(url, intentos = 3) {
       return await r.text();
     } catch (e) {
       if (i >= intentos) throw new Error(`${url}: ${e.message}`);
-      await new Promise((ok) => setTimeout(ok, 2000 * i));
+      await new Promise((ok) => setTimeout(ok, 5000 * i)); // 5, 10, 15 y 20 segundos
     }
   }
 }
@@ -86,8 +98,25 @@ function leerCap(xml, url) {
   };
 }
 
-const feed = await traer(FEED);
-const links = [...new Set(todas(feed, "link").map(decodificar).filter((l) => /\/feeds\/CAP\/.+\.xml$/.test(l)))];
+// El SMN a veces no responde (HTTP 503) por un rato. Si después de varios intentos sigue caído, se dejan las alertas
+// que ya había y la acción termina con una advertencia en lugar de un error: la próxima corrida vuelve a probar. Las
+// caídas se cuentan en ESTADO; a la segunda seguida la acción manda un mail (y otro cuando el SMN vuelve).
+let feed, links;
+try {
+  feed = await traer(FEED, 5);
+  links = [...new Set(todas(feed, "link").map(decodificar).filter((l) => /\/feeds\/CAP\/.+\.xml$/.test(l)))];
+  if (!feed.includes("<rss") && !feed.includes("<feed")) throw new Error("la respuesta no es el feed de alertas");
+} catch (e) {
+  const n = (estado.fallasSeguidas || 0) + 1;
+  guardarEstado({ fallasSeguidas: n, desde: estado.desde || new Date().toISOString(), error: e.message });
+  console.log(`::warning::El SMN no respondió (${e.message}), ${n} ${n === 1 ? "vez" : "veces seguidas"}. Quedan las alertas de la corrida anterior.`);
+  if (n === AVISAR_CON) salidaAccion({ aviso: "caido", fallas: n, desde: estado.desde || "", error: e.message });
+  process.exit(0);
+}
+if (estado.fallasSeguidas) {
+  if (estado.fallasSeguidas >= AVISAR_CON) salidaAccion({ aviso: "volvio", fallas: estado.fallasSeguidas, desde: estado.desde || "" });
+  guardarEstado({ fallasSeguidas: 0 });
+}
 const ahora = Date.now();
 const encontradas = [];
 // De a 6 por vez para no cargar al servidor del SMN.

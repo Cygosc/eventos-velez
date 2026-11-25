@@ -1,10 +1,13 @@
 # Cada 10 minutos baja las alertas meteorológicas del SMN que tocan CABA y, si cambiaron, actualiza
 # www/data/alertas.json en main. La app lo descarga desde raw.githubusercontent.com. No usa Claude.
+# Si el SMN no responde 2 veces seguidas manda un mail, y otro cuando vuelve (mismos secretos que aviso-mail.yml).
 name: Alertas del SMN
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    # Minutos poco usados (no en punto ni múltiplos de 5): GitHub demora o saltea las tareas programadas en las horas
+    # cargadas, sobre todo las de los minutos redondos.
+    - cron: "4,14,24,34,44,54 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -26,14 +29,54 @@ jobs:
           node-version: 22
 
       - name: Bajar las alertas del SMN
-        run: node scripts/alertas.mjs www/data/alertas.json
+        id: smn
+        run: node scripts/alertas.mjs www/data/alertas.json tareas/smn-estado.json
 
       - name: Subir si cambiaron
         run: |
-          if git diff --quiet -- www/data/alertas.json; then echo "Sin cambios"; exit 0; fi
+          git add www/data/alertas.json tareas/smn-estado.json
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add www/data/alertas.json
-          git commit -m "Alertas del SMN $(TZ=America/Argentina/Buenos_Aires date '+%F %H:%M')"
+          if git diff --cached --quiet -- www/data/alertas.json; then mensaje="Estado del SMN"; else mensaje="Alertas del SMN"; fi
+          git commit -m "$mensaje $(TZ=America/Argentina/Buenos_Aires date '+%F %H:%M')"
           for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin main && exit 0; sleep 5; done
           exit 1
+
+      - name: Armar el mail
+        id: msg
+        if: steps.smn.outputs.aviso != ''
+        env:
+          AVISO: ${{ steps.smn.outputs.aviso }}
+          FALLAS: ${{ steps.smn.outputs.fallas }}
+          DESDE: ${{ steps.smn.outputs.desde }}
+          ERROR: ${{ steps.smn.outputs.error }}
+        run: |
+          desde=$([ -n "$DESDE" ] && TZ=America/Argentina/Buenos_Aires date -d "$DESDE" '+%d/%m %H:%M' || echo "?")
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ "$AVISO" = caido ]; then
+            asunto="Cortes CABA: el SMN no responde"
+            cuerpo="El servicio de alertas del SMN (https://ssl.smn.gob.ar/CAP/AR.php) no respondió $FALLAS veces seguidas, desde el $desde.
+          Error: $ERROR
+
+          La app sigue mostrando las últimas alertas que se bajaron. La acción vuelve a probar sola y te aviso cuando el SMN responda."
+          else
+            asunto="Cortes CABA: el SMN volvió a responder"
+            cuerpo="El servicio de alertas del SMN volvió a responder después de $FALLAS corridas sin respuesta (desde el $desde). Las alertas ya se actualizan normalmente."
+          fi
+          d="FIN_$(date +%s%N)"
+          { echo "asunto=$asunto"; echo "cuerpo<<$d"; echo "$cuerpo" | sed 's/^          //'; echo; echo "($run_url)"; echo "$d"; } >> "$GITHUB_OUTPUT"
+
+      - name: Enviar el mail
+        if: steps.smn.outputs.aviso != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          username: ${{ secrets.MAIL_USUARIO }}
+          password: ${{ secrets.MAIL_CLAVE }}
+          from: Cortes CABA <${{ secrets.MAIL_USUARIO }}>
+          to: ${{ secrets.MAIL_DESTINO }}
+          subject: ${{ steps.msg.outputs.asunto }}
+          body: ${{ steps.msg.outputs.cuerpo }}
