@@ -732,12 +732,17 @@ async function permisoAvisos() {
   if (!("Notification" in window)) return "no";
   return Notification.permission;
 }
+// Con el permiso dado, el botón prende y apaga los avisos de la app (sin tocar el permiso de Android).
+const avisosApagados = () => leer("avisosApagados", false);
+async function avisosActivos() {
+  return !avisosApagados() && (await permisoAvisos()) === "granted";
+}
 async function actualizarBotonAvisos() {
   const b = $("#btn-avisos");
   const p = await permisoAvisos();
-  b.classList.toggle("activo", p === "granted");
+  b.classList.toggle("activo", p === "granted" && !avisosApagados());
   if (p === "no") { b.disabled = true; b.textContent = "Avisos no disponibles"; }
-  else if (p === "granted") b.textContent = "🔔 Avisos activados";
+  else if (p === "granted") b.textContent = avisosApagados() ? "🔕 Avisos desactivados" : "🔔 Avisos activados";
   else if (p === "denied") b.textContent = LN ? "🔕 Avisos bloqueados: activalos en Ajustes" : "🔕 Avisos bloqueados";
   else b.textContent = "🔔 Activar avisos";
 }
@@ -748,8 +753,12 @@ $("#btn-avisos").addEventListener("click", async () => {
     try { await window.Capacitor.Plugins.Ajustes.abrirAvisos(); } catch {}
     return;
   }
-  if (LN) await LN.requestPermissions();
-  else if ("Notification" in window) await Notification.requestPermission();
+  if ((await permisoAvisos()) === "granted") guardar("avisosApagados", !avisosApagados());
+  else {
+    if (LN) await LN.requestPermissions();
+    else if ("Notification" in window) await Notification.requestPermission();
+    guardar("avisosApagados", false);
+  }
   await actualizarBotonAvisos();
   avisar(avisables);
   avisarAlertas();
@@ -770,6 +779,7 @@ async function programarAvisosNativos(eventos) {
   if ((await LN.checkPermissions()).display !== "granted") return;
   const pendientes = await LN.getPending();
   if (pendientes.notifications.length) await LN.cancel({ notifications: pendientes.notifications.map((n) => ({ id: n.id })) });
+  if (avisosApagados()) return;
   const ahora = Date.now();
   const lista = [];
   const fin = {}; // id del aviso → cuándo terminan los cortes (para borrar los avisos viejos de la bandeja)
@@ -807,7 +817,7 @@ async function limpiarAvisosViejos(fin, ahora) {
 
 function avisar(eventos) {
   if (LN) { programarAvisosNativos(eventos).catch(console.error); return; }
-  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  if (!("Notification" in window) || Notification.permission !== "granted" || avisosApagados()) return;
   const yaAvisados = leer("avisados", []);
   const ahora = Date.now();
   for (const ev of eventos) {
@@ -915,12 +925,12 @@ async function avisarAlertas() {
   const puntos = puntosAlertas();
   if (BR) {
     // El runner guarda los lugares para revisar en segundo plano y no repite avisos que ya mandó.
-    const avisos = (await permisoAvisos()) === "granted";
+    const avisos = await avisosActivos();
     try { await BR.dispatchEvent({ label: RUNNER, event: "revisarAlertas", details: { puntos, avisos, alertas: alertasSMN } }); }
     catch (e) { console.warn("Alertas en segundo plano", e); }
     return;
   }
-  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  if (!("Notification" in window) || Notification.permission !== "granted" || avisosApagados()) return;
   const avisadas = leer("alertasAvisadas", {});
   const ahora = Date.now();
   for (const a of alertasVigentes(puntos)) {
