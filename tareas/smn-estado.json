@@ -1,3 +1,5 @@
 {
-  "fallasSeguidas": 0
+  "fallasSeguidas": 1,
+  "desde": "2026-11-27T11:12:04.047Z",
+  "error": "la respuesta no es el feed de alertas"
 }
